@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this formalization, please cite it using the metadata below."
+title: "Closure–Residue P3 Lean Formalization"
+type: software
+authors:
+  - family-names: "Tagawa"
+    given-names: "Katsuya"
+    orcid: "https://orcid.org/0009-0008-1844-4175"
+version: "1.0.0"
+license: MIT
