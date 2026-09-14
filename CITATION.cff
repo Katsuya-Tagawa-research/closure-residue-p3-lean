@@ -5,6 +5,22 @@ type: software
 authors:
   - family-names: "Tagawa"
     given-names: "Katsuya"
+    affiliation: "Independent Researcher, Japan"
     orcid: "https://orcid.org/0009-0008-1844-4175"
+abstract: >-
+  Lean formalization of the finite-dimensional closure–residue core
+  associated with the third paper of the Generative Map research program.
+  The development formalizes observational closure, hidden sectors,
+  quadratic return, residue formation, graph saturation, QDMR, and the
+  Incidence Rank Theorem under the saturation hypothesis.
+keywords:
+  - Lean
+  - formal verification
+  - operator algebras
+  - quantum dynamics
+  - non-Markovianity
+  - closure-residue
+  - graph incidence
+  - QDMR
 version: "1.0.0"
 license: MIT
