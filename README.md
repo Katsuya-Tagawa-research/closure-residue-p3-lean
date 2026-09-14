@@ -1,4 +1,5 @@
 # Closure–Residue P3 Lean Formalization
+**DOI:** [10.5281/zenodo.22750828](https://doi.org/10.5281/zenodo.22750828)
 
 Lean formalization of the finite closure–residue core developed in the third paper of the Generative Map research program.
 
