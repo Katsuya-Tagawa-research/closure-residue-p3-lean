@@ -37,7 +37,6 @@ inductive WalkWithin (H : A V) : ℕ → V → V → Prop where
       WalkWithin H n x z → coupled H z y → WalkWithin H (n + 1) x y
 
 /-- A bounded walk remains bounded by every larger number of steps. -/
-omit [Fintype V] [DecidableEq V] in
 theorem walkWithin_mono (H : A V) {n m : ℕ} {x y : V}
     (hnm : n ≤ m) (h : WalkWithin H n x y) :
     WalkWithin H m x y := by
