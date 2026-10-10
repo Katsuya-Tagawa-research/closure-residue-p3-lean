@@ -1,0 +1,17 @@
+name: P3 SupportDepth Lean CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  support-depth-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Check new support-depth module explicitly
+        run: lake env lean P3/SupportDepth.lean
