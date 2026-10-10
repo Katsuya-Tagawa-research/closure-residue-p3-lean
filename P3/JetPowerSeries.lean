@@ -81,7 +81,13 @@ theorem mem_jetIdeal_iff
 theorem mem_jetIdeal_iff_order
     (f : PowerSeries ℂ) (r : ℕ) :
     f ∈ jetIdeal r ↔ (r : ℕ∞) ≤ f.order := by
-  rw [mem_jetIdeal_iff, PowerSeries.nat_le_order_iff]
+  rw [mem_jetIdeal_iff]
+  constructor
+  · intro h
+    exact PowerSeries.nat_le_order f r h
+  · intro h n hn
+    have hnr : (n : ℕ∞) < (r : ℕ∞) := by exact_mod_cast hn
+    exact PowerSeries.coeff_of_lt_order n (lt_of_lt_of_le hnr h)
 
 /-- Exact doubling gives a sharp order bound, hence membership in I_(2r). -/
 theorem jetSelfFlow_mem_doubled_ideal
@@ -89,7 +95,6 @@ theorem jetSelfFlow_mem_doubled_ideal
     (hf : f.order = (r : ℕ∞)) :
     f * jetConjugate f ∈ jetIdeal (2 * r) := by
   rw [mem_jetIdeal_iff_order, jetSelfFlow_order_double f r hf]
-  exact le_refl _
 
 /-- The self-flow does not lie in the next jet ideal (sharpness). -/
 theorem jetSelfFlow_not_mem_next_ideal
