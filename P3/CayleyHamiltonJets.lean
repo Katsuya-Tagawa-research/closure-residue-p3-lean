@@ -71,7 +71,7 @@ theorem p3Dynamics_iterate_finite_reconstruction
           rw [Polynomial.aeval_eq_sum_range' hlt]
     _ = ∑ i ∈ Finset.range (p3AlgebraDimension (V := V)),
           (((Polynomial.X ^ n) %ₘ φ.charpoly).coeff i) • ((φ ^ i) d.1) := by
-          rfl
+          simp only [LinearMap.sum_apply, LinearMap.smul_apply]
 
 /-- The same finite reconstruction holds after P3's original hidden
 off-diagonal projection Q. -/
