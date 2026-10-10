@@ -8,7 +8,7 @@ It uses bounded walks in the *symmetric support* of the matrix H, avoiding
 unnecessary connectivity/finite-distance assumptions.
 
 IMPORTANT: The current execution environment has no Lean/lake compiler.
-This file has NOT been typechecked. No unfinished proof terms are used.
+This module is checked by GitHub Actions; avoid treating it as verified before CI passes.
 The final section includes the universal support-halving identity.
 -/
 
@@ -84,7 +84,7 @@ def commutatorDynamics (H : A V) : Dynamics V where
     ring
   map_smul' c X := by
     ext x y
-    simp [Matrix.mul_apply, Finset.mul_sum, mul_assoc, mul_left_comm, mul_comm]
+    simp [Matrix.mul_apply, Finset.mul_sum, mul_sub, mul_assoc, mul_left_comm, mul_comm]
 
 /-- One commutator increases the maximum support distance by at most one. -/
 theorem commutator_step_local (H : A V) (n : ℕ)
@@ -186,7 +186,7 @@ theorem commutator_flow_local (H : A V) (k : ℕ)
         (commutator_hidden_local H j hw) x y hjFar
       simp [hwx]
   have hz : flowCoordinate x y hxy f = 0 := hker hf
-  simpa [flowCoordinate, edgeMatrix, hxy] using hz
+  simpa only [flowCoordinate_apply, edgeMatrix_offdiag (V := V) f hxy] using hz
 
 /-- Exact P3 support implies a bounded walk in at least one orientation. -/
 theorem commutator_support_depth (H : A V) (k : ℕ) {x y : V}
@@ -243,7 +243,7 @@ theorem flowActive_iff_defectActive (φ : Dynamics V) (k : ℕ)
         simp [hw']
     have hfzero : flowCoordinate x y hxy f = 0 := hker hf
     apply hfne
-    simpa [flowCoordinate, edgeMatrix, hxy] using hfzero
+    simpa only [flowCoordinate_apply, edgeMatrix_offdiag (V := V) f hxy] using hfzero
   · rintro ⟨hxy, z, hz, hzxy⟩
     let zOff : OffDiag (V := V) :=
       ⟨z, (hidden_le_OffDiag φ (k / 2)) hz⟩
@@ -263,14 +263,14 @@ theorem flowActive_iff_defectActive (φ : Dynamics V) (k : ℕ)
 /-- Undirected support of the hidden defect subspace at a fixed depth. -/
 def defectSupportGraph (φ : Dynamics V) (d : ℕ) : SimpleGraph V where
   Adj x y := defectActive φ d x y ∨ defectActive φ d y x
-  symm := by
+  symm := ⟨by
     intro x y h
-    exact h.symm
-  loopless := by
+    exact h.symm⟩
+  loopless := ⟨by
     intro x h
     rcases h with h | h
     · exact h.1 rfl
-    · exact h.1 rfl
+    · exact h.1 rfl⟩
 
 /-- Exact graph identity: P3's flow support at total depth k is precisely
  the defect-coordinate support at depth floor(k/2). No graph-saturation
@@ -278,7 +278,8 @@ def defectSupportGraph (φ : Dynamics V) (d : ℕ) : SimpleGraph V where
 theorem supportGraph_eq_defectSupportGraph (φ : Dynamics V) (k : ℕ) :
     supportGraph φ k = defectSupportGraph φ (k / 2) := by
   apply SimpleGraph.ext
-  intro x y
+  funext x y
+  apply propext
   change (flowActive φ k x y ∨ flowActive φ k y x) ↔
     (defectActive φ (k / 2) x y ∨ defectActive φ (k / 2) y x)
   constructor
