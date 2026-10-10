@@ -1,0 +1,26 @@
+name: P3 Cayley-Hamilton Jet CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  cayley-hamilton-jets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile Cayley-Hamilton jet module
+        run: lake build P3.CayleyHamiltonJets
+      - name: Audit Cayley-Hamilton theorem axioms
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/CayleyHamiltonJetsAxiomAudit.lean | tee cayley_hamilton_axioms.log
+          if grep -q 'sorryAx' cayley_hamilton_axioms.log; then
+            echo 'FAILED: sorryAx in theorem dependencies'
+            exit 1
+          fi
