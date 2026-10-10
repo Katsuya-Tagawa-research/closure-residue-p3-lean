@@ -1,15 +1,14 @@
 import P3.Support
 
 /-!
-# P3 support-depth bridge (draft, Lean 4 / Mathlib)
+# P3 support-depth bridge (Lean 4 / Mathlib)
 
 This module is additive: it leaves the frozen P3 definitions unchanged.
 It uses bounded walks in the *symmetric support* of the matrix H, avoiding
 unnecessary connectivity/finite-distance assumptions.
 
-IMPORTANT: The current execution environment has no Lean/lake compiler.
-This module is checked by GitHub Actions; avoid treating it as verified before CI passes.
-The final section includes the universal support-halving identity.
+This module has passed a GitHub Actions Lean typecheck. The final section
+includes the universal support-halving identity. Axiom audit is separate.
 -/
 
 noncomputable section
@@ -38,6 +37,7 @@ inductive WalkWithin (H : A V) : ℕ → V → V → Prop where
       WalkWithin H n x z → coupled H z y → WalkWithin H (n + 1) x y
 
 /-- A bounded walk remains bounded by every larger number of steps. -/
+omit [Fintype V] [DecidableEq V] in
 theorem walkWithin_mono (H : A V) {n m : ℕ} {x y : V}
     (hnm : n ≤ m) (h : WalkWithin H n x y) :
     WalkWithin H m x y := by
@@ -80,11 +80,11 @@ def commutatorDynamics (H : A V) : Dynamics V where
   toFun X := H * X - X * H
   map_add' X Y := by
     ext x y
-    simp [Matrix.mul_apply, Finset.sum_add_distrib, mul_add, add_mul]
+    simp [Matrix.mul_apply, mul_add, add_mul]
     ring
   map_smul' c X := by
     ext x y
-    simp [Matrix.mul_apply, Finset.mul_sum, mul_sub, mul_assoc, mul_left_comm, mul_comm]
+    simp [Matrix.mul_apply, Finset.mul_sum, mul_sub, mul_comm]
 
 /-- One commutator increases the maximum support distance by at most one. -/
 theorem commutator_step_local (H : A V) (n : ℕ)
@@ -148,8 +148,8 @@ theorem commutator_hidden_local (H : A V) (n : ℕ) :
 def flowCoordinate (x y : V) (hxy : x ≠ y) :
     EdgeSpace V →ₗ[ℂ] ℂ where
   toFun f := f.ofLp ⟨(x, y), hxy⟩
-  map_add' f g := rfl
-  map_smul' c f := rfl
+  map_add' _ _ := rfl
+  map_smul' _ _ := rfl
 
 @[simp]
 theorem flowCoordinate_apply (x y : V) (hxy : x ≠ y)
