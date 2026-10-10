@@ -1,0 +1,26 @@
+name: P3 Coordinate Jet Ideals CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  coordinate-jet-ideals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile coordinate jet ideals
+        run: lake build P3.CoordinateJetIdeals
+      - name: Audit coordinate-ideal theorem axioms
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/CoordinateJetIdealsAxiomAudit.lean | tee coordinate_jet_axioms.log
+          if grep -q 'sorryAx' coordinate_jet_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
