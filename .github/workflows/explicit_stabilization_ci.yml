@@ -1,0 +1,28 @@
+name: P3 Explicit Stabilization CI
+
+on:
+  push:
+    branches:
+      - research/p3-explicit-stabilization-20261011
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  explicit-stabilization:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile explicit stabilization
+        run: lake build P3.ExplicitStabilization
+      - name: Audit theorem axioms
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/ExplicitStabilizationAxiomAudit.lean | tee stabilization_axioms.log
+          if grep -q 'sorryAx' stabilization_axioms.log; then
+            echo 'FAILED: sorryAx in theorem dependencies'
+            exit 1
+          fi
