@@ -1,0 +1,26 @@
+name: P3 Jet PowerSeries CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  jet-power-series:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile jet power series module
+        run: lake build P3.JetPowerSeries
+      - name: Audit foundational axioms
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/JetPowerSeriesAxiomAudit.lean | tee jet_power_series_axioms.log
+          if grep -q 'sorryAx' jet_power_series_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
