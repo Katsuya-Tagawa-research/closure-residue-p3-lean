@@ -1,0 +1,26 @@
+name: P3 Hidden Jet Bridge CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  hidden-jet-bridge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile hidden-jet bridge
+        run: lake build P3.HiddenJetBridge
+      - name: Audit hidden-jet bridge axioms
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/HiddenJetBridgeAxiomAudit.lean | tee hidden_jet_axioms.log
+          if grep -q 'sorryAx' hidden_jet_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
