@@ -1,0 +1,26 @@
+name: P3 Jet Support CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  jet-support:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile jet support module
+        run: lake build P3.JetSupport
+      - name: Audit jet support axioms
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/JetSupportAxiomAudit.lean | tee jet_support_axioms.log
+          if grep -q 'sorryAx' jet_support_axioms.log; then
+            echo 'FAILED: sorryAx in theorem dependencies'
+            exit 1
+          fi
