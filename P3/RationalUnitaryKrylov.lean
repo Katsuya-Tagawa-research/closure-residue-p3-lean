@@ -55,7 +55,9 @@ theorem p3RationalReflectionOrbitQ_cast
   induction j with
   | zero =>
       ext x y
-      simp [p3RationalReflectionOrbitQ, Matrix.single_apply]
+      by_cases h : a = x ∧ a = y
+      · simp [p3RationalReflectionOrbitQ, Matrix.single_apply, h]
+      · simp [p3RationalReflectionOrbitQ, Matrix.single_apply, h]
   | succ n ih =>
       calc
         (p3RationalReflectionOrbitQ a (n + 1)).map (Rat.castHom ℂ) =
