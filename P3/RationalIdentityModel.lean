@@ -20,11 +20,13 @@ section RationalIdentityModel
 
 variable {V : Type*} [Fintype V] [DecidableEq V]
 
-/-- Fully rational, finite and directly evaluable diagonal-seed orbit
-matrix of the identity channel on a finite matrix algebra.
+/-- Fully rational, finite diagonal-seed orbit matrix of the identity
+channel on a finite matrix algebra. The generic Fin-indexing uses a
+noncomputable choice of enumeration; for fully executable inputs one
+must additionally supply a concrete finite enumeration.
 Each column corresponding to (j,a) is the rational matrix unit E_aa,
 regardless of j. -/
-def p3IdentityRationalKrylov (k : ℕ) :
+noncomputable def p3IdentityRationalKrylov (k : ℕ) :
     Matrix (Fin (Fintype.card (V × V)))
       (Fin (Fintype.card (Fin (k + 1) × V))) ℚ :=
   fun row col =>
@@ -46,7 +48,8 @@ theorem p3IdentityRationalKrylov_exact (k : ℕ) :
       ((Fintype.equivFin (Fin (k + 1) × V)).symm col) =
     (Rat.castHom ℂ) (p3IdentityRationalKrylov (V := V) k row col)
   rw [p3CanonicalKrylovMatrix_entry]
-  simp [p3IdentityRationalKrylov]
+  dsimp [p3IdentityRationalKrylov]
+  split_ifs <;> simp_all [Matrix.single_apply]
 
 /-- Fully verified executable stopping depth for the finite
 identity-dynamics P3 model, with no externally supplied hQ. -/
