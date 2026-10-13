@@ -54,6 +54,36 @@ theorem p3MatrixUnitKrylovMatrix_entry
   simp [p3MatrixUnitKrylovMatrix, LinearMap.toMatrix_apply,
     p3FiniteKrylovColumnMap, Finsupp.coe_basisSingleOne]
 
+/-- The standard matrix-unit coordinates are exactly the raw
+matrix entries: the E_xy coefficient of M is M[x,y]. -/
+theorem p3MatrixUnitBasis_repr_entry
+    (M : A V) (x y : V) :
+    ((p3MatrixUnitBasis (V := V)).repr M) (x, y) = M x y := by
+  refine (p3MatrixUnitBasis (V := V)).repr_apply_eq
+    (fun N ij => N ij.1 ij.2) ?_ ?_ ?_ M (x, y)
+  · intro N N'
+    funext ⟨a, b⟩
+    simp
+  · intro c N
+    funext ⟨a, b⟩
+    simp
+  · intro ⟨i, j⟩
+    funext ⟨a, b⟩
+    simp [p3MatrixUnitBasis_apply, Matrix.single_apply,
+      Finsupp.single_apply, Prod.mk.injEq]
+
+/-- Every Krylov-matrix entry is the actual (x,y) matrix coefficient
+of the corresponding P3 diagonal-seed orbit vector. -/
+theorem p3MatrixUnitKrylovMatrix_entry_raw
+    (φ : Dynamics V) (k : ℕ)
+    (x y : V)
+    (j : Fin (k + 1) × Fin (Module.finrank ℂ
+      (diagonalSubmodule (V := V)))) :
+    p3MatrixUnitKrylovMatrix φ k (x, y) j =
+      (p3FiniteKrylovColumn φ k j) x y := by
+  rw [p3MatrixUnitKrylovMatrix_entry,
+    p3MatrixUnitBasis_repr_entry]
+
 /-- Matrix-unit coordinate rank is the exact original P3 closure rank. -/
 theorem p3MatrixUnitKrylovMatrix_rank_eq
     (φ : Dynamics V) (k : ℕ) :
