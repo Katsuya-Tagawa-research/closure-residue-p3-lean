@@ -1,0 +1,28 @@
+name: P3 Executable Observable Depth CI
+
+on:
+  push:
+    branches:
+      - research/p3-executable-observable-depth-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  executable-depth:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile bounded rational observable stopping depth
+        run: lake build P3.ExecutableObservableDepth P3.ExecutableObservableDepthExamples
+      - name: Audit stopping-depth theorems
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/ExecutableObservableDepthAxiomAudit.lean | tee executable_depth_axioms.log
+          if grep -q 'sorryAx' executable_depth_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
