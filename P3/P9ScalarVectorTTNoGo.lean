@@ -38,7 +38,11 @@ def p9ScalarVectorQuarterTurnPlusOneInvQ : Matrix (Fin 4) (Fin 4) ℚ :=
 theorem p9ScalarVectorQuarterTurn_plus_one_right_inverse :
     (p9ScalarVectorQuarterTurnQ + 1) *
       p9ScalarVectorQuarterTurnPlusOneInvQ = 1 := by
-  kernel_decide
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    norm_num [p9ScalarVectorQuarterTurnQ,
+      p9ScalarVectorQuarterTurnPlusOneInvQ,
+      Matrix.mul_apply, Matrix.add_apply, Fin.sum_univ_succ]
 
 /-- A spin-two TT output intertwining the quarter-turn with
 the scalar+vector input must vanish exactly. In particular
