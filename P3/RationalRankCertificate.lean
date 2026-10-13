@@ -65,7 +65,10 @@ example : p3RatRankCertificateAccepted
     (fun i => i) (fun i => i)
     (1 : Matrix (Fin 2) (Fin 2) ℚ)
     (1 : Matrix (Fin 2) (Fin 2) ℚ) = true := by
-  simp [p3RatRankCertificateAccepted]
+  change decide
+    (((1 : Matrix (Fin 2) (Fin 2) ℚ).det ≠ 0) ∧
+      (1 : Matrix (Fin 2) (Fin 2) ℚ) = 1 * 1) = true
+  simp
 
 /-- Proof of the rank attached to the concrete computed certificate. -/
 example : (1 : Matrix (Fin 2) (Fin 2) ℚ).rank = 2 := by
@@ -73,14 +76,18 @@ example : (1 : Matrix (Fin 2) (Fin 2) ℚ).rank = 2 := by
     (1 : Matrix (Fin 2) (Fin 2) ℚ) 2
     (fun i => i) (fun i => i)
     (1 : Matrix (Fin 2) (Fin 2) ℚ)
-    (1 : Matrix (Fin 2) (Fin 2) ℚ) (by simp [p3RatRankCertificateAccepted])
+    (1 : Matrix (Fin 2) (Fin 2) ℚ) (by
+      change decide
+        (((1 : Matrix (Fin 2) (Fin 2) ℚ).det ≠ 0) ∧
+          (1 : Matrix (Fin 2) (Fin 2) ℚ) = 1 * 1) = true
+      simp)
 
 end RationalRankCertificate
 
 end P3
 
-/-- Runtime smoke-test of the rational certificate checker. -/
-#eval p3RatRankCertificateAccepted
+/- Runtime smoke-test of the rational certificate checker. -/
+#eval P3.p3RatRankCertificateAccepted
   (1 : Matrix (Fin 2) (Fin 2) ℚ) 2
   (fun i => i) (fun i => i)
   (1 : Matrix (Fin 2) (Fin 2) ℚ)
