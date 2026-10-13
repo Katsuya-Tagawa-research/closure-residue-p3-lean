@@ -1,0 +1,28 @@
+name: P3 Two-Vertex First Residue CI
+
+on:
+  push:
+    branches:
+      - research/p3-two-vertex-first-residue-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  two-vertex-first-residue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile two-vertex first-residue witness
+        run: lake build P3.TwoVertexFirstResidue
+      - name: Audit first-residue depth-one theorem
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/TwoVertexFirstResidueAxiomAudit.lean | tee two_vertex_first_residue_axioms.log
+          if grep -q 'sorryAx' two_vertex_first_residue_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
