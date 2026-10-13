@@ -45,10 +45,11 @@ theorem p3RatRankCertificate_complex_sound
     have hf := congrArg (fun X : Matrix (Fin m) (Fin n) ℚ =>
       X.map (Rat.castHom ℂ)) hfactor
     simpa only [Matrix.map_mul] using hf
+  have hminorRank : ((A.map (Rat.castHom ℂ)).submatrix rows cols).rank = r := by
+    simpa using Matrix.rank_of_det_ne_zero hminor
   have hlow : r ≤ (A.map (Rat.castHom ℂ)).rank := by
     calc
-      r = ((A.map (Rat.castHom ℂ)).submatrix rows cols).rank := by
-        exact (by simpa using (Matrix.rank_of_det_ne_zero hminor)).symm
+      r = ((A.map (Rat.castHom ℂ)).submatrix rows cols).rank := hminorRank.symm
       _ ≤ (A.map (Rat.castHom ℂ)).rank :=
         Matrix.rank_submatrix_le _ rows cols
   have hupp : (A.map (Rat.castHom ℂ)).rank ≤ r := by
@@ -61,14 +62,12 @@ theorem p3RatRankCertificate_complex_sound
       _ = r := Fintype.card_fin r
   exact Nat.le_antisymm hupp hlow
 
-/-- A returned result from the executable finite pivot search
-certifies the rank even when the matrix is treated as complex. -/
-theorem p3RatAutoRank_complex_sound
-    (A : Matrix (Fin m) (Fin n) ℚ) (r : ℕ)
-    (h : p3RatAutoRank A = some r) :
+/-- For any finite search fuel, a returned rational rank certificate
+also certifies the complex-cast rank. -/
+theorem p3RatAutoRankFuel_complex_sound
+    (A : Matrix (Fin m) (Fin n) ℚ) (fuel r : ℕ)
+    (h : p3RatAutoRankFuel A fuel = some r) :
     (A.map (Rat.castHom ℂ)).rank = r := by
-  unfold p3RatAutoRank at h
-  generalize hf : min m n = fuel at h
   induction fuel with
   | zero =>
       unfold p3RatAutoRankFuel at h
@@ -91,6 +90,14 @@ theorem p3RatAutoRank_complex_sound
         exact p3RatRankCertificate_complex_sound A (fuel+1) rows cols
           (p3RatPivotLeft A cols) (p3RatPivotRight A rows cols) hp
       · exact ih h
+
+/-- A returned result from the executable finite pivot search
+certifies the rank even when the matrix is treated as complex. -/
+theorem p3RatAutoRank_complex_sound
+    (A : Matrix (Fin m) (Fin n) ℚ) (r : ℕ)
+    (h : p3RatAutoRank A = some r) :
+    (A.map (Rat.castHom ℂ)).rank = r :=
+  p3RatAutoRankFuel_complex_sound A (min m n) r h
 
 end RationalComplexRank
 end P3
