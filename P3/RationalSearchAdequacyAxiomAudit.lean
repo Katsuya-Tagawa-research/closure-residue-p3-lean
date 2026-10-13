@@ -1,0 +1,7 @@
+import P3.RationalSearchAdequacy
+
+#print axioms P3.p3RatAutoRankAt_of_accepted
+#print axioms P3.p3RatAutoRankFuel_exists_of_accepted_rank
+#print axioms P3.p3RatAutoRank_exists_of_pivot
+#print axioms P3.p3RatAutoRank_eq_some_of_pivot
+#print axioms P3.p3RatAutoRank_eq_some_complex_of_pivot
