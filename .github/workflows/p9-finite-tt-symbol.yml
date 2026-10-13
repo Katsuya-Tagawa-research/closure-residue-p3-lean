@@ -1,0 +1,28 @@
+name: P9 Independent Finite TT Symbol CI
+
+on:
+  push:
+    branches:
+      - research/p9-tt-symbol-rank-20261014
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-tt-symbol:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile exact rational TT symbol rank certificate
+        run: lake build P3.P9TTFiniteSymbol
+      - name: Audit two finite TT lemmas
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/P9TTFiniteSymbolAxiomAudit.lean | tee p9_tt_symbol_axioms.log
+          if grep -q 'sorryAx' p9_tt_symbol_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
