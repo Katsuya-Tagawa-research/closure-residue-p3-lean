@@ -74,7 +74,7 @@ theorem p3ObservableKrylovDepth_eq_of_rank_certificate
   have hle : p3ObservableKrylovDepth φ ≤ s := by
     by_contra hnot
     have hlt : s < p3ObservableKrylovDepth φ := Nat.lt_of_not_ge hnot
-    exact (ne_of_lt (p3KrylovRank_strict_before φ s hlt)) hstop
+    exact (ne_of_lt (p3KrylovRank_strict_before φ s hlt)) hstop.symm
   have hnot : ¬ p3ObservableKrylovDepth φ < s := by
     intro hlt
     have hstrict := hearlier _ hlt
