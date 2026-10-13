@@ -1,0 +1,6 @@
+import P3.ObservableThreePlusOne
+
+#print axioms P3.p3ReflectionSymmetricK_observable
+#print axioms P3.p3Reflection_observable_eq_symmetric
+#print axioms P3.p3Reflection_observed_plus_skew
+#print axioms P3.p3Reflection_skew_scalar_only_zero
