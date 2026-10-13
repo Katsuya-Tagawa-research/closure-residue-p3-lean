@@ -1,0 +1,28 @@
+name: P3 Rational Unitary First Residue CI
+
+on:
+  push:
+    branches:
+      - research/p3-unitary-first-residue-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  unitary-first-residue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile unitary first-residue and depth-one theorem
+        run: lake build P3.RationalUnitaryFirstResidue
+      - name: Audit unitary hidden-defect and depth-one proofs
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/RationalUnitaryFirstResidueAxiomAudit.lean | tee unitary_residue_axioms.log
+          if grep -q 'sorryAx' unitary_residue_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi

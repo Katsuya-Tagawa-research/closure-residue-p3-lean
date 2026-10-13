@@ -1,0 +1,7 @@
+import P3.RationalUnitaryFirstResidue
+
+#print axioms P3.p3RationalReflectionChannel_E00_offdiag
+#print axioms P3.p3RationalReflectionChannel_noninvariant
+#print axioms P3.p3RationalReflectionChannel_hidden_one_ne_bot
+#print axioms P3.p3RationalReflectionChannel_closure_two_eq_one
+#print axioms P3.p3RationalReflectionChannel_depth_one
