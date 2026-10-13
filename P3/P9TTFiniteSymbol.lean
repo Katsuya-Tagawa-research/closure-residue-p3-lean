@@ -49,7 +49,7 @@ theorem p9TTFiniteSymbol_rank_two :
       (p9TTFiniteSymbol.submatrix
         (fun i : Fin 2 => i)
         (fun i : Fin 2 => if i = 0 then 0 else 3)).det ≠ 0 := by
-    norm_num [p9TTFiniteSymbol, Matrix.det_fin_two, Matrix.submatrix]
+    norm_num [p9TTFiniteSymbol, Matrix.det_fin_two, Matrix.submatrix] <;> decide
   simp [hdet]
 
 /-- In the xi=e3 frame, the gauge/conformal map is
