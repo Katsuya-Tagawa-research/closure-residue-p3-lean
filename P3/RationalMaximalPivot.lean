@@ -74,10 +74,10 @@ theorem p3Rat_exists_nonsingular_pivot_of_factorization
         _ = (B * C).rank := congrArg Matrix.rank hfactor
         _ ≤ C.rank := Matrix.rank_mul_le_right B C
   obtain ⟨rows, hrows⟩ := p3Rat_exists_nonsingular_row_submatrix B hB
-  have hCT : (Cᵀ).rank = r := by simpa using hC
-  obtain ⟨cols, hcolsT⟩ := p3Rat_exists_nonsingular_row_submatrix Cᵀ hCT
+  have hCT : ((Matrix.transpose C)).rank = r := by simpa using hC
+  obtain ⟨cols, hcolsT⟩ := p3Rat_exists_nonsingular_row_submatrix (Matrix.transpose C) hCT
   have htranspose :
-      (Cᵀ.submatrix cols id) = (C.submatrix id cols)ᵀ := by
+      ((Matrix.transpose C).submatrix cols id) = (C.submatrix id cols)ᵀ := by
     ext i j
     rfl
   have hcols : (C.submatrix id cols).det ≠ 0 := by
