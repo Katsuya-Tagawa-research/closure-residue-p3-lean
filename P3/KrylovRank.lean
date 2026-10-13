@@ -40,7 +40,9 @@ theorem p3KrylovRank_eq_succ_iff_closure_plateau
     exact Submodule.eq_of_le_of_finrank_eq
       (closure_mono φ (Nat.le_succ k)) h.symm |>.symm
   · intro h
-    simp [p3KrylovRank, h]
+    change Module.finrank ℂ (closure φ (k + 1)) =
+      Module.finrank ℂ (closure φ k)
+    rw [h]
 
 /-- Before the first P3 Krylov plateau, every new depth raises rank. -/
 theorem p3KrylovRank_strict_before
@@ -57,8 +59,9 @@ theorem p3KrylovRank_constant_after
     (hk : p3ObservableKrylovDepth φ ≤ k) :
     p3KrylovRank φ k =
       p3KrylovRank φ (p3ObservableKrylovDepth φ) := by
-  simp [p3KrylovRank,
-    p3Closure_stabilizes_at_observableKrylovDepth φ k hk]
+  change Module.finrank ℂ (closure φ k) =
+    Module.finrank ℂ (closure φ (p3ObservableKrylovDepth φ))
+  rw [p3Closure_stabilizes_at_observableKrylovDepth φ k hk]
 
 /-- A finite rank certificate pinpoints the *exact* first stationary
 depth: no earlier adjacent ranks can be equal. -/
@@ -85,7 +88,7 @@ theorem p3ObservableKrylovDepth_eq_of_rank_certificate
 
 /-- The chosen standard finite basis of the P3 diagonal seed space. -/
 def p3FiniteDiagonalBasis :
-    Basis (Fin (Module.finrank ℂ (diagonalSubmodule (V := V))))
+    Module.Basis (Fin (Module.finrank ℂ (diagonalSubmodule (V := V))))
       ℂ (diagonalSubmodule (V := V)) :=
   Module.finBasis ℂ (diagonalSubmodule (V := V))
 
@@ -138,7 +141,10 @@ theorem p3FiniteKrylovColumnMap_rank_eq
     (φ : Dynamics V) (k : ℕ) :
     Module.finrank ℂ (LinearMap.range
       (p3FiniteKrylovColumnMap φ k)) = p3KrylovRank φ k := by
-  simp [p3KrylovRank, p3FiniteKrylovColumnMap_range_eq_closure]
+  change Module.finrank ℂ (LinearMap.range
+    (p3FiniteKrylovColumnMap φ k)) =
+      Module.finrank ℂ (closure φ k)
+  rw [p3FiniteKrylovColumnMap_range_eq_closure]
 
 /-- An exact rank certificate using the explicitly finite-dimensional
 column operators, not abstract equality of submodules. -/
