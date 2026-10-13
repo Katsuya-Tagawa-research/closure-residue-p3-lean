@@ -48,24 +48,24 @@ theorem p3RatPivot_reconstruct_of_factorization
   have hmiddle : Y * P⁻¹ * X = 1 := by
     calc
       Y * P⁻¹ * X = (X⁻¹ * X) * (Y * P⁻¹ * X) := by
-        rw [Matrix.nonsing_inv_mul hPX, Matrix.one_mul]
+        rw [Matrix.nonsing_inv_mul X hPX, Matrix.one_mul]
       _ = X⁻¹ * (X * Y) * P⁻¹ * X := by
         simp only [Matrix.mul_assoc]
-      _ = X⁻¹ * (P * P⁻¹) * X := by rw [← hP]
+      _ = X⁻¹ * (P * P⁻¹) * X := by rw [← hP]; simp only [Matrix.mul_assoc]
       _ = 1 := by
-        rw [Matrix.mul_nonsing_inv hPP]
-        simp [Matrix.nonsing_inv_mul hPX]
+        rw [Matrix.mul_nonsing_inv P hPP]
+        simp [Matrix.nonsing_inv_mul X hPX]
   have hC : p3RatPivotRight A rows cols =
       P⁻¹ * (A.submatrix rows id) := by
     simp only [p3RatPivotRight, P]
-    rw [Matrix.inv_def]
+    rw [Matrix.inv_def, Ring.inverse_eq_inv]
   calc
     A = B * C := hfactor
     _ = B * ((Y * P⁻¹ * X) * C) := by rw [hmiddle, Matrix.one_mul]
     _ = (B * Y) * (P⁻¹ * (X * C)) := by
       simp only [Matrix.mul_assoc]
     _ = p3RatPivotLeft A cols * p3RatPivotRight A rows cols := by
-      rw [hL, hR, hC]
+      rw [hL, hC, hR]
 
 /-- The generated pivot certificate is automatically accepted
 when an r-dimensional factorization and a nonzero pivot exist. -/
