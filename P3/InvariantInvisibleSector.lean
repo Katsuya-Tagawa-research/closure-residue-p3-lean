@@ -53,7 +53,8 @@ theorem p3Reflection_symmetric_invariant
   change (p3RationalReflectionChannel M) 0 1 =
     (p3RationalReflectionChannel M) 1 0
   rw [p3RationalReflectionChannel_apply]
-  simp [Matrix.mul_apply, Fin.sum_univ_two, p3RationalReflectionU, hM]
+  simp [Matrix.mul_apply, Matrix.vecMul, dotProduct,
+    Fin.sum_univ_two, p3RationalReflectionU, hM]
   <;> ring
 
 /-- Every diagonal-seed orbit lies in the symmetric subspace. -/
