@@ -1,0 +1,28 @@
+name: P3 Minpoly Stabilization CI
+
+on:
+  push:
+    branches:
+      - research/p3-minpoly-stabilization-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  minpoly-stabilization:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile minimal polynomial stabilization
+        run: lake build P3.MinpolyStabilization
+      - name: Audit theorem axiom dependencies
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/MinpolyStabilizationAxiomAudit.lean | tee minpoly_axioms.log
+          if grep -q 'sorryAx' minpoly_axioms.log; then
+            echo 'FAILED: sorryAx in theorem dependencies'
+            exit 1
+          fi
