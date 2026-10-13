@@ -34,11 +34,23 @@ and checks the complete matrix reconstruction, not a floating-point
 approximation or a Boolean-only runtime assertion. -/
 theorem p9TTFiniteSymbol_rank_two :
     p9TTFiniteSymbol.rank = 2 := by
-  exact p3RatPivotAccepted_sound
+  apply p3RatRankCertificate_sound
     p9TTFiniteSymbol 2
     (fun i : Fin 2 => i)
     (fun i : Fin 2 => if i = 0 then 0 else 3)
-    (by kernel_decide)
+    (1 : Matrix (Fin 2) (Fin 2) ℚ) p9TTFiniteSymbol
+  change decide
+    (((p9TTFiniteSymbol.submatrix
+      (fun i : Fin 2 => i)
+      (fun i : Fin 2 => if i = 0 then 0 else 3)).det ≠ 0) ∧
+      p9TTFiniteSymbol =
+        (1 : Matrix (Fin 2) (Fin 2) ℚ) * p9TTFiniteSymbol) = true
+  have hdet :
+      (p9TTFiniteSymbol.submatrix
+        (fun i : Fin 2 => i)
+        (fun i : Fin 2 => if i = 0 then 0 else 3)).det ≠ 0 := by
+    norm_num [p9TTFiniteSymbol, Matrix.det_fin_two]
+  simp [hdet]
 
 /-- In the xi=e3 frame, the gauge/conformal map is
     (v1,v2,v3,f) -> (2f,2f,2v3+2f,0,v1,v2). -/
@@ -53,6 +65,9 @@ def p9ConformalGaugeSymbol : Matrix (Fin 6) (Fin 4) ℚ :=
 /-- TT annihilates all gauge and conformal perturbations. -/
 theorem p9TTFiniteSymbol_mul_gauge_zero :
     p9TTFiniteSymbol * p9ConformalGaugeSymbol = 0 := by
-  kernel_decide
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    norm_num [p9TTFiniteSymbol, p9ConformalGaugeSymbol,
+      Matrix.mul_apply, Fin.sum_univ_succ]
 
 end P3
