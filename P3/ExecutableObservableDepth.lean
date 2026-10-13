@@ -75,13 +75,26 @@ theorem p3FirstEqualRankAux_complete (r : ℕ → ℕ) :
         obtain ⟨s, hs⟩ := ih (start + 1) witness hnext (by omega) hw
         exact ⟨s, by simp [p3FirstEqualRankAux, hnow, hs]⟩
 
+/-- A computational spelling of the rational rank reporter.
+The earlier report lives in a noncomputable theorem section; this
+definition is independent of that declaration's compilation status. -/
+def p3RatComputableRank {m n : ℕ}
+    (Q : Matrix (Fin m) (Fin n) ℚ) : ℕ :=
+  (p3RatAutoRank Q).getD 0
+
+/-- The computational spelling is definitionally equal to the audited
+rational report used by the complex P3 bridge. -/
+theorem p3RatComputableRank_eq_report {m n : ℕ}
+    (Q : Matrix (Fin m) (Fin n) ℚ) :
+    p3RatComputableRank Q = p3RatKrylovReport Q := rfl
+
 /-- The executable stopping-depth search. It queries exact rational
 matrices at depths 0 through `bound+1`. -/
 def p3RatFirstStoppingDepth {V : Type*} [Fintype V] (bound : ℕ)
     (Q : (k : ℕ) → Matrix (Fin (Fintype.card (V × V)))
       (Fin (Fintype.card (Fin (k + 1) × V))) ℚ) :
     Option ℕ :=
-  p3FirstEqualRankAux (fun k => p3RatKrylovReport (Q k)) 0 (bound + 1)
+  p3FirstEqualRankAux (fun k => p3RatComputableRank (Q k)) 0 (bound + 1)
 
 noncomputable section
 
@@ -145,9 +158,12 @@ theorem p3RatFirstStoppingDepth_eq_observable
     (hbound : p3ObservableKrylovDepth φ ≤ bound) :
     p3RatFirstStoppingDepth bound Q =
       some (p3ObservableKrylovDepth φ) := by
-  let r : ℕ → ℕ := fun k => p3RatKrylovReport (Q k)
+  let r : ℕ → ℕ := fun k => p3RatComputableRank (Q k)
   let depth := p3ObservableKrylovDepth φ
   have hplateau : r (depth + 1) = r depth := by
+    change p3RatComputableRank (Q (depth + 1)) =
+      p3RatComputableRank (Q depth)
+    rw [p3RatComputableRank_eq_report, p3RatComputableRank_eq_report]
     apply (p3RatKrylovReport_stop_iff φ depth
       (Q depth) (Q (depth + 1))
       (hQ depth (by omega))
@@ -159,9 +175,12 @@ theorem p3RatFirstStoppingDepth_eq_observable
   obtain ⟨_, hsBound, hsStop, hsMinimal⟩ :=
     p3FirstEqualRankAux_sound r (bound + 1) 0 s hs
   have hsP3 : closure φ (s + 1) = closure φ s := by
+    have hsStop' : p3RatKrylovReport (Q (s + 1)) =
+        p3RatKrylovReport (Q s) := by
+      simpa only [r, p3RatComputableRank_eq_report] using hsStop
     exact (p3RatKrylovReport_stop_iff φ s
       (Q s) (Q (s + 1))
-      (hQ s (by omega)) (hQ (s + 1) (by omega))).mp hsStop
+      (hQ s (by omega)) (hQ (s + 1) (by omega))).mp hsStop'
   have hsEq : s = depth := by
     apply Nat.le_antisymm
     · by_contra hnot
