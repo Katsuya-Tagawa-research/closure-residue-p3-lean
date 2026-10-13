@@ -1,0 +1,28 @@
+name: P3 Two-Vertex Rational Orbit CI
+
+on:
+  push:
+    branches:
+      - research/p3-two-vertex-rational-orbit-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  rational-orbit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile two-vertex rational Krylov bridge and runtime guard
+        run: lake build P3.TwoVertexRationalOrbit
+      - name: Audit exact rational bridge theorems
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/TwoVertexRationalOrbitAxiomAudit.lean | tee two_vertex_rational_axioms.log
+          if grep -q 'sorryAx' two_vertex_rational_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
