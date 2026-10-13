@@ -1,0 +1,4 @@
+import P3.RationalRankFactorization
+
+#print axioms P3.p3Rat_exists_rank_factorization
+#print axioms P3.p3Rat_exists_factorization_with_rank
