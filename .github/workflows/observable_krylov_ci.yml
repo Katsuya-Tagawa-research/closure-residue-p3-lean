@@ -1,0 +1,28 @@
+name: P3 Observable Krylov CI
+
+on:
+  push:
+    branches:
+      - research/p3-observable-krylov-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  observable-krylov:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile observable Krylov theorems
+        run: lake build P3.ObservableKrylov
+      - name: Audit theorem axioms
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/ObservableKrylovAxiomAudit.lean | tee observable_krylov_axioms.log
+          if grep -q 'sorryAx' observable_krylov_axioms.log; then
+            echo 'FAILED: sorryAx in theorem dependencies'
+            exit 1
+          fi
