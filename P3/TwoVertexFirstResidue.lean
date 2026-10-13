@@ -28,12 +28,12 @@ def p3TwoVertexFirstResidue : Dynamics (Fin 2) where
     ext x y
     by_cases h : x = (0 : Fin 2) ∧ y = (1 : Fin 2)
     · simp [h, Pi.add_apply]
-    · simp [h, Matrix.add_apply]
+    · simp [h, Pi.add_apply]
   map_smul' c M := by
     ext x y
     by_cases h : x = (0 : Fin 2) ∧ y = (1 : Fin 2)
     · simp [h, Pi.smul_apply]
-    · simp [h, Matrix.smul_apply]
+    · simp [h, Pi.smul_apply]
 
 /-- Applying the map twice annihilates every matrix. -/
 theorem p3TwoVertexFirstResidue_square_zero (M : A (Fin 2)) :
