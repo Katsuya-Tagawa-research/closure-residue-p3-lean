@@ -61,6 +61,39 @@ theorem p3IdentityRationalKrylov_stopping_depth :
   intro k hk
   exact p3IdentityRationalKrylov_exact (V := V) k
 
+/-- Identity dynamics preserves the P3 diagonal seed space, so the
+original observable closure plateaus already at depth zero for ANY
+finite vertex set, not only the one-vertex example. -/
+theorem p3IdentityObservableDepth_zero :
+    p3ObservableKrylovDepth (LinearMap.id : Dynamics V) = 0 := by
+  have hpres : PreservesDiagonal (V := V)
+      (LinearMap.id : Dynamics V) := by
+    intro d
+    simpa only [LinearMap.id_apply] using d.property
+  have hplateau :
+      closure (LinearMap.id : Dynamics V) 1 =
+        closure (LinearMap.id : Dynamics V) 0 := by
+    calc
+      closure (LinearMap.id : Dynamics V) 1 =
+          diagonalSubmodule (V := V) :=
+        closure_one_eq_diagonal_of_preservesDiagonal _ hpres
+      _ = closure (LinearMap.id : Dynamics V) 0 :=
+        (closure_zero _).symm
+  apply p3ObservableKrylovDepth_eq_of_rank_certificate
+    (LinearMap.id : Dynamics V) 0
+  · exact (p3KrylovRank_eq_succ_iff_closure_plateau _ 0).mpr hplateau
+  · intro k hk
+    omega
+
+/-- The exact-rank algorithm returns the FIRST plateau, depth zero,
+for every finite identity-dynamics input with its rational presentation. -/
+theorem p3IdentityRationalKrylov_stopping_depth_zero :
+    p3RatFirstStoppingDepth
+      (p3AlgebraDimension (V := V) - Fintype.card V)
+      (p3IdentityRationalKrylov (V := V)) = some 0 := by
+  rw [p3IdentityRationalKrylov_stopping_depth,
+    p3IdentityObservableDepth_zero]
+
 /-- A concrete one-vertex physical dynamical input is completely
 certified by the rational matrix calculation and the exact Lean bridge.
 This equality is kernel-checked, unlike a standalone #guard. -/
