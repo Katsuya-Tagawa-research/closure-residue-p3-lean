@@ -97,7 +97,6 @@ theorem p3RatAutoRankFuel_sound {m n : ℕ}
       split_ifs at h with hc
       · cases h
         exact p3RatAutoRankAt_sound A 0 (by simpa using hc)
-      · cases h
   | succ fuel ih =>
       unfold p3RatAutoRankFuel at h
       split_ifs at h with hc
