@@ -120,7 +120,7 @@ theorem p3ObservableKrylovDepth_le_seed_gap (φ : Dynamics V) :
     induction k with
     | zero =>
         intro _
-        simpa using (p3KrylovRank_zero_card φ).ge
+        simpa [p3KrylovRank_zero_card φ]
     | succ k ih =>
         intro hk
         have hlt : k < s := by omega
