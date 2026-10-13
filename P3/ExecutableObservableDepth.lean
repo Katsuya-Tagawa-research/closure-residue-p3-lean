@@ -106,7 +106,9 @@ variable {V : Type*} [Fintype V] [DecidableEq V]
 of diagonal seeds, including the empty vertex-set case. -/
 theorem p3KrylovRank_zero_card (φ : Dynamics V) :
     p3KrylovRank φ 0 = Fintype.card V := by
-  simp [p3KrylovRank, closure_zero, diagonalSubmodule_finrank]
+  change Module.finrank ℂ (closure φ 0) = Fintype.card V
+  rw [closure_zero]
+  exact diagonalSubmodule_finrank (V := V)
 
 /-- The exact first plateau consumes at least one new rank per depth,
 so it lies within the ambient-dimension minus seed-dimension budget. -/
