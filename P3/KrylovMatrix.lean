@@ -59,8 +59,8 @@ theorem p3FiniteKrylovMatrix_rank_eq
     (p3FiniteKrylovMatrix φ k).rank = p3KrylovRank φ k := by
   rw [Matrix.rank_eq_finrank_range_toLin
     (p3FiniteKrylovMatrix φ k)
-    (Finsupp.basisSingleOne)
-    (p3FiniteAmbientBasis (V := V))]
+    (p3FiniteAmbientBasis (V := V))
+    (Finsupp.basisSingleOne)]
   rw [p3FiniteKrylovMatrix, Matrix.toLin_toMatrix]
   exact p3FiniteKrylovColumnMap_rank_eq φ k
 
