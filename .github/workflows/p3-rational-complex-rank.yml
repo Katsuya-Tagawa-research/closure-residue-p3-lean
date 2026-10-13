@@ -1,0 +1,28 @@
+name: P3 Rational Complex Rank CI
+
+on:
+  push:
+    branches:
+      - research/p3-rat-complex-cert-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  rational-complex-rank:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Build exact rational-to-complex rank transfer
+        run: lake build P3.RationalComplexRank
+      - name: Audit rank transfer theorem axioms
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/RationalComplexRankAxiomAudit.lean | tee rat_complex_axioms.log
+          if grep -q 'sorryAx' rat_complex_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
