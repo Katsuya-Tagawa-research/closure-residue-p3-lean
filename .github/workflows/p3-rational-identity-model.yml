@@ -1,0 +1,28 @@
+name: P3 Rational Identity Model CI
+
+on:
+  push:
+    branches:
+      - research/p3-exact-rational-identity-model-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  rational-identity-model:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile unconditional identity-model Krylov presentation
+        run: lake build P3.RationalIdentityModel
+      - name: Audit rational identity-model proofs
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/RationalIdentityModelAxiomAudit.lean | tee rational_identity_axioms.log
+          if grep -q 'sorryAx' rational_identity_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
