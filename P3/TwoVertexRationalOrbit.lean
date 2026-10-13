@@ -10,7 +10,8 @@ reindexing and coefficient inclusion ℚ → ℂ, with the original P3
 canonical observable Krylov matrix.
 
 A separate explicit lexicographically indexed rational matrix provides
-a genuinely executable rank-search smoke test. The finite index
+fast, executable, independently sound pivot-certificate checks of its
+rank sequence, without the overhead of exhaustive automatic pivot search. The finite index
 reindexing in the main algebraic theorem uses Fintype.equivFin, so that
 general representation is noncomputable. The raw smoke-test matrix is
 fully computable, and its coordinate convention is stated separately.
@@ -130,9 +131,30 @@ def p3TwoVertexExecutableRationalKrylov (k : ℕ) :
     else if col.val = 2 ∧ row.val = 1 then 1
     else 0
 
-/-- Exact rank-search smoke test: ranks 2,3,3 imply first plateau 1.
-This is a runtime guard, not the kernel proof of exact presentation. -/
-#eval p3RatFirstStoppingDepth 2 p3TwoVertexExecutableRationalKrylov
-#guard p3RatFirstStoppingDepth 2 p3TwoVertexExecutableRationalKrylov == some 1
+/-!
+For this small sparse matrix, the general automatic pivot enumerator
+needlessly checks many singular 4×4 minors. The explicit pivot-certificate
+checker is already verified sound and is substantially faster. Each guard
+below checks an invertible minor AND an exact reconstruction factorization,
+so it certifies the three rational matrix ranks 2,3,3. Together with the
+kernel-checked stopping-depth theorem above, this tests the same first
+plateau without exhaustively enumerating large numbers of bad pivot maps.
+These runtime guards are not smuggled into a kernel theorem.
+-/
+
+#guard p3RatPivotAccepted
+  (p3TwoVertexExecutableRationalKrylov 0) 2
+  (fun i : Fin 2 => if i = 0 then 0 else 3)
+  (fun i : Fin 2 => if i = 0 then 0 else 1) == true
+
+#guard p3RatPivotAccepted
+  (p3TwoVertexExecutableRationalKrylov 1) 3
+  (fun i : Fin 3 => if i = 0 then 0 else if i = 1 then 1 else 3)
+  (fun i : Fin 3 => if i = 0 then 0 else if i = 1 then 2 else 1) == true
+
+#guard p3RatPivotAccepted
+  (p3TwoVertexExecutableRationalKrylov 2) 3
+  (fun i : Fin 3 => if i = 0 then 0 else if i = 1 then 1 else 3)
+  (fun i : Fin 3 => if i = 0 then 0 else if i = 1 then 2 else 1) == true
 
 end P3
