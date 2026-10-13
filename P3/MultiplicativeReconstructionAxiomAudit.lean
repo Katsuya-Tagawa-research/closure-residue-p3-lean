@@ -1,0 +1,11 @@
+import P3.MultiplicativeReconstruction
+
+#print axioms P3.p3ReflectionPauliZ_observable
+#print axioms P3.p3ReflectionSkewJ_eq_pauli_product
+#print axioms P3.p3ReflectionChannel_mul
+#print axioms P3.p3Reflection_linear_reconstruction
+#print axioms P3.p3Reflection_multiplicative_reconstruction
+#print axioms P3.p3ReflectionTranspose_fixes_observed
+#print axioms P3.p3ReflectionTransposedExtension_agrees
+#print axioms P3.p3ReflectionTranspose_skew
+#print axioms P3.p3ReflectionTransposedExtension_ne
