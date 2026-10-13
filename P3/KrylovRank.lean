@@ -38,7 +38,7 @@ theorem p3KrylovRank_eq_succ_iff_closure_plateau
   constructor
   · intro h
     exact Submodule.eq_of_le_of_finrank_eq
-      (closure_mono φ (Nat.le_succ k)) h.symm
+      (closure_mono φ (Nat.le_succ k)) h.symm |>.symm
   · intro h
     simp [p3KrylovRank, h]
 
@@ -49,7 +49,7 @@ theorem p3KrylovRank_strict_before
     p3KrylovRank φ k < p3KrylovRank φ (k + 1) := by
   exact Submodule.finrank_lt_finrank_of_lt
     (lt_of_le_of_ne (closure_mono φ (Nat.le_succ k))
-      (p3ObservableKrylovDepth_strict_before φ k hk))
+      (p3ObservableKrylovDepth_strict_before φ k hk).symm)
 
 /-- Beyond the optimal observable depth, the Krylov rank stays fixed. -/
 theorem p3KrylovRank_constant_after
@@ -68,9 +68,10 @@ theorem p3ObservableKrylovDepth_eq_of_rank_certificate
     (hearlier : ∀ k < s,
       p3KrylovRank φ k < p3KrylovRank φ (k + 1)) :
     p3ObservableKrylovDepth φ = s := by
-  have hle : p3ObservableKrylovDepth φ ≤ s :=
-    Nat.find_min' (p3ExistsStationary φ)
-      ((p3KrylovRank_eq_succ_iff_closure_plateau φ s).mp hstop)
+  have hle : p3ObservableKrylovDepth φ ≤ s := by
+    by_contra hnot
+    have hlt : s < p3ObservableKrylovDepth φ := Nat.lt_of_not_ge hnot
+    exact (ne_of_lt (p3KrylovRank_strict_before φ s hlt)) hstop
   have hnot : ¬ p3ObservableKrylovDepth φ < s := by
     intro hlt
     have hstrict := hearlier _ hlt
