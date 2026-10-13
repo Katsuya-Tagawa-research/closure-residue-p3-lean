@@ -47,7 +47,7 @@ theorem p3ReflectionSymmetricK_observable :
     simpa [E1, p3CanonicalDiagonalBasis_apply] using hd
   have hstep : p3RationalReflectionChannel E0 ∈
       p3ObservableKrylovSpace p3RationalReflectionChannel :=
-    p3ObservableKrylovSpace_invariant p3RationalReflectionChannel h0
+    p3ObservableKrylovSpace_invariant p3RationalReflectionChannel E0 h0
   have hEq :
       p3ReflectionSymmetricK =
         (25 / 12 : ℂ) •
