@@ -32,9 +32,9 @@ theorem p3SingleVertexRationalOrbit_stops_at_zero :
 /-- In a one-vertex P3 model the original observable closure is already
 the full matrix algebra at depth zero. -/
 theorem p3SingleVertexObservableDepth_zero :
-    p3ObservableKrylovDepth (0 : Dynamics (Fin 1)) = 0 := by
+    p3ObservableKrylovDepth (LinearMap.id : Dynamics (Fin 1)) = 0 := by
   have h := p3ObservableKrylovDepth_le_quadratic_gap
-    (0 : Dynamics (Fin 1))
+    (LinearMap.id : Dynamics (Fin 1))
   norm_num at h
   exact Nat.eq_zero_of_le_zero h
 
@@ -42,7 +42,7 @@ theorem p3SingleVertexObservableDepth_zero :
 depth agree in this concrete one-vertex test. -/
 theorem p3SingleVertex_report_agrees :
     p3RatFirstStoppingDepth 0 p3SingleVertexRationalOrbit =
-      some (p3ObservableKrylovDepth (0 : Dynamics (Fin 1))) := by
+      some (p3ObservableKrylovDepth (LinearMap.id : Dynamics (Fin 1))) := by
   rw [p3SingleVertexObservableDepth_zero]
   exact p3SingleVertexRationalOrbit_stops_at_zero
 
