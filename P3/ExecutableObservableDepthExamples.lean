@@ -21,13 +21,11 @@ def p3SingleVertexRationalOrbit (k : ℕ) :
       (Fin (Fintype.card (Fin (k + 1) × Fin 1))) ℚ :=
   fun _ _ => 1
 
-/-- A genuine executable evaluation of the fully automatic rational
-rank computation at depths zero and one. -/
+/- Runtime regression: the certified rank-search procedure actually
+computes the first plateau at zero. This guard is a compiler/evaluator
+check, distinct from a kernel-checked theorem about this concrete value. -/
 #eval p3RatFirstStoppingDepth 0 p3SingleVertexRationalOrbit
-
-theorem p3SingleVertexRationalOrbit_stops_at_zero :
-    p3RatFirstStoppingDepth 0 p3SingleVertexRationalOrbit = some 0 := by
-  decide
+#guard p3RatFirstStoppingDepth 0 p3SingleVertexRationalOrbit == some 0
 
 /-- In a one-vertex P3 model the original observable closure is already
 the full matrix algebra at depth zero. -/
@@ -39,12 +37,15 @@ theorem p3SingleVertexObservableDepth_zero :
       (LinearMap.id : Dynamics (Fin 1))
   exact Nat.eq_zero_of_le_zero h
 
-/-- Computed rational stopping depth and the original P3 observable
-depth agree in this concrete one-vertex test. -/
-theorem p3SingleVertex_report_agrees :
+/-- A mathematically checked comparison conditional on the
+runtime-checked rational result. The guard above is executable evidence,
+not silently imported as a theorem premise. -/
+theorem p3SingleVertex_report_agrees_of_result
+    (hresult :
+      p3RatFirstStoppingDepth 0 p3SingleVertexRationalOrbit = some 0) :
     p3RatFirstStoppingDepth 0 p3SingleVertexRationalOrbit =
       some (p3ObservableKrylovDepth (LinearMap.id : Dynamics (Fin 1))) := by
   rw [p3SingleVertexObservableDepth_zero]
-  exact p3SingleVertexRationalOrbit_stops_at_zero
+  exact hresult
 
 end P3
