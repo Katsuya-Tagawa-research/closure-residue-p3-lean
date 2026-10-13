@@ -29,7 +29,7 @@ theorem p3RationalReflectionChannel_E00_offdiag :
         (12 / 25 : ℂ) := by
   rw [p3RationalReflectionChannel_apply]
   norm_num [p3RationalReflectionU, Matrix.mul_apply,
-    Fin.sum_univ_two, Matrix.single_apply]
+    Matrix.vecMul, dotProduct, Fin.sum_univ_two, Matrix.single_apply]
 
 /-- A physically valid unitary channel need not preserve the finite
 diagonal observation subspace. -/
