@@ -1,0 +1,28 @@
+name: P3 Invariant Invisible Sector CI
+
+on:
+  push:
+    branches:
+      - research/p3-invariant-invisible-sector-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  invariant-invisible-sector:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile Phase 6.A invariant-invisible finite sector
+        run: lake build P3.InvariantInvisibleSector
+      - name: Audit all new Phase 6.A theorems
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/InvariantInvisibleSectorAxiomAudit.lean | tee p3_phase6a_axioms.log
+          if grep -q 'sorryAx' p3_phase6a_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
