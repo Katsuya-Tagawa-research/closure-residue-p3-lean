@@ -33,9 +33,10 @@ theorem p3SingleVertexRationalOrbit_stops_at_zero :
 the full matrix algebra at depth zero. -/
 theorem p3SingleVertexObservableDepth_zero :
     p3ObservableKrylovDepth (LinearMap.id : Dynamics (Fin 1)) = 0 := by
-  have h := p3ObservableKrylovDepth_le_quadratic_gap
-    (LinearMap.id : Dynamics (Fin 1))
-  norm_num at h
+  have h : p3ObservableKrylovDepth
+      (LinearMap.id : Dynamics (Fin 1)) ≤ 0 := by
+    simpa using p3ObservableKrylovDepth_le_quadratic_gap
+      (LinearMap.id : Dynamics (Fin 1))
   exact Nat.eq_zero_of_le_zero h
 
 /-- Computed rational stopping depth and the original P3 observable
