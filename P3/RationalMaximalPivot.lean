@@ -74,7 +74,7 @@ theorem p3Rat_exists_nonsingular_pivot_of_factorization
         _ = (B * C).rank := congrArg Matrix.rank hfactor
         _ ≤ C.rank := Matrix.rank_mul_le_right B C
   obtain ⟨rows, hrows⟩ := p3Rat_exists_nonsingular_row_submatrix B hB
-  have hCT : Cᵀ.rank = r := by simpa using hC
+  have hCT : (Cᵀ).rank = r := by simpa using hC
   obtain ⟨cols, hcolsT⟩ := p3Rat_exists_nonsingular_row_submatrix Cᵀ hCT
   have htranspose :
       (Cᵀ.submatrix cols id) = (C.submatrix id cols)ᵀ := by
@@ -111,9 +111,8 @@ theorem p3RatAutoRank_complete {m n : ℕ}
   obtain ⟨rows, cols, hdet⟩ :=
     p3Rat_exists_nonsingular_pivot_of_factorization A B C hfactor rfl
   have hbound : A.rank ≤ min m n := by
-    apply Nat.le_min
-    · simpa using Matrix.rank_le_card_height A
-    · simpa using Matrix.rank_le_card_width A
+    exact (Nat.le_min).2 ⟨by simpa using Matrix.rank_le_card_height A,
+      by simpa using Matrix.rank_le_card_width A⟩
   exact p3RatAutoRank_eq_some_of_factorization A B C rows cols
     hbound hfactor hdet
 
@@ -121,8 +120,7 @@ theorem p3RatAutoRank_complete {m n : ℕ}
 theorem p3RatAutoRank_ne_none {m n : ℕ}
     (A : Matrix (Fin m) (Fin n) ℚ) :
     p3RatAutoRank A ≠ none := by
-  rw [p3RatAutoRank_complete]
-  decide
+  simp [p3RatAutoRank_complete]
 
 /-- Whenever the exact automatic result is interpreted in ℂ, its
 rank is still the computed rational rank. -/
