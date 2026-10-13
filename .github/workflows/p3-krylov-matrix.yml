@@ -1,0 +1,28 @@
+name: P3 Krylov Matrix CI
+
+on:
+  push:
+    branches:
+      - research/p3-krylov-matrix-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  krylov-matrix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile explicit rectangular Krylov matrix
+        run: lake build P3.KrylovMatrix
+      - name: Audit matrix-rank theorem axioms
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/KrylovMatrixAxiomAudit.lean | tee krylov_matrix_axioms.log
+          if grep -q 'sorryAx' krylov_matrix_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
