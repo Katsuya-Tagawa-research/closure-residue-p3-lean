@@ -48,8 +48,7 @@ theorem p3IdentityRationalKrylov_exact (k : ℕ) :
       ((Fintype.equivFin (Fin (k + 1) × V)).symm col) =
     (Rat.castHom ℂ) (p3IdentityRationalKrylov (V := V) k row col)
   rw [p3CanonicalKrylovMatrix_entry]
-  dsimp [p3IdentityRationalKrylov]
-  split_ifs <;> simp_all [Matrix.single_apply]
+  simp [p3IdentityRationalKrylov, Matrix.single_apply]
 
 /-- Fully verified executable stopping depth for the finite
 identity-dynamics P3 model, with no externally supplied hQ. -/
