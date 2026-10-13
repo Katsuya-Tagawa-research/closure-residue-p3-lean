@@ -1,0 +1,5 @@
+import P3.RationalIdentityModel
+
+#print axioms P3.p3IdentityRationalKrylov_exact
+#print axioms P3.p3IdentityRationalKrylov_stopping_depth
+#print axioms P3.p3IdentitySingleVertex_stopping_depth
