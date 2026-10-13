@@ -59,11 +59,11 @@ theorem p3TwoVertexRationalOrbitEntry_exact
     simp [p3TwoVertexRationalOrbitEntry, Matrix.single_apply]
     by_cases hxy : x = a ∧ y = a
     · have hax : a = x ∧ a = y := ⟨hxy.1.symm, hxy.2.symm⟩
-      simp [hxy, hax]
+      simp only [if_pos hxy, if_pos hax, Rat.cast_one]
     · have hax : ¬(a = x ∧ a = y) := by
         intro h
         exact hxy ⟨h.1.symm, h.2.symm⟩
-      simp [hxy, hax]
+      simp only [if_neg hxy, if_neg hax, Rat.cast_zero]
   by_cases hone : j = 1
   · subst j
     simp only [pow_one]
@@ -71,15 +71,24 @@ theorem p3TwoVertexRationalOrbitEntry_exact
       (if x = (0 : Fin 2) ∧ y = (1 : Fin 2)
         then (Matrix.single a a (1 : ℂ)) 0 0 else 0) =
         (p3TwoVertexRationalOrbitEntry 1 a x y : ℂ)
-    fin_cases a
-    · change (if x = (0 : Fin 2) ∧ y = (1 : Fin 2)
+    by_cases ha : a = 0
+    · subst a
+      have hu : (Matrix.single (0 : Fin 2) 0 (1 : ℂ)) 0 0 = 1 := by
+        simp
+      rw [hu]
+      change (if x = (0 : Fin 2) ∧ y = (1 : Fin 2)
         then (1 : ℂ) else 0) =
         ↑(if x = (0 : Fin 2) ∧ y = (1 : Fin 2)
           then (1 : ℚ) else 0)
-      by_cases hxy : x = (0 : Fin 2) ∧ y = (1 : Fin 2) <;>
-        simp [hxy]
-    · change (if x = (0 : Fin 2) ∧ y = (1 : Fin 2)
-        then (0 : ℂ) else 0) = ↑(0 : ℚ)
+      by_cases hxy : x = (0 : Fin 2) ∧ y = (1 : Fin 2)
+      · simp only [if_pos hxy, Rat.cast_one]
+      · simp only [if_neg hxy, Rat.cast_zero]
+    · have hu : (Matrix.single a a (1 : ℂ)) 0 0 = 0 := by
+        simp [Matrix.single_apply, ha]
+      rw [hu]
+      have hr : p3TwoVertexRationalOrbitEntry 1 a x y = 0 := by
+        simp [p3TwoVertexRationalOrbitEntry, ha]
+      rw [hr]
       simp
   · have hge : 2 ≤ j := by omega
     rw [p3TwoVertexFirstResidue_pow_ge_two
