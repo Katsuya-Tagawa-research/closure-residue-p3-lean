@@ -77,7 +77,7 @@ theorem p3Rat_exists_nonsingular_pivot_of_factorization
   have hCT : ((Matrix.transpose C)).rank = r := by simpa using hC
   obtain ⟨cols, hcolsT⟩ := p3Rat_exists_nonsingular_row_submatrix (Matrix.transpose C) hCT
   have htranspose :
-      ((Matrix.transpose C).submatrix cols id) = (C.submatrix id cols)ᵀ := by
+      ((Matrix.transpose C).submatrix cols id) = Matrix.transpose (C.submatrix id cols) := by
     ext i j
     rfl
   have hcols : (C.submatrix id cols).det ≠ 0 := by
