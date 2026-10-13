@@ -26,8 +26,8 @@ def p3RationalReflectionU : A (Fin 2) :=
 /-- Exact reflection identity. -/
 theorem p3RationalReflectionU_sq :
     p3RationalReflectionU * p3RationalReflectionU = 1 := by
-  norm_num [p3RationalReflectionU, Matrix.mul_fin_two,
-    Matrix.one_fin_two]
+  norm_num [p3RationalReflectionU, Matrix.mul_fin_two]
+  exact Matrix.one_fin_two.symm
 
 /-- This rational reflection is Hermitian. -/
 theorem p3RationalReflectionU_selfadjoint :
