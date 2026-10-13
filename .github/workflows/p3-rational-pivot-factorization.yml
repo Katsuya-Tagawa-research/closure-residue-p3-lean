@@ -1,0 +1,28 @@
+name: P3 Rational Pivot Factorization CI
+
+on:
+  push:
+    branches:
+      - research/p3-pivot-factorization-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  rational-pivot-factorization:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile rank-factorization pivot identity
+        run: lake build P3.RationalPivotFactorization
+      - name: Audit pivot reconstruction theorems
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/RationalPivotFactorizationAxiomAudit.lean | tee p3_pivot_factor_axioms.log
+          if grep -q 'sorryAx' p3_pivot_factor_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi

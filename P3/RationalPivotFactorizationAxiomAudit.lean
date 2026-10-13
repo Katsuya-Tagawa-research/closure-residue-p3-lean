@@ -1,0 +1,5 @@
+import P3.RationalPivotFactorization
+
+#print axioms P3.p3RatPivot_reconstruct_of_factorization
+#print axioms P3.p3RatPivotAccepted_of_factorization
+#print axioms P3.p3RatAutoRank_eq_some_of_factorization
