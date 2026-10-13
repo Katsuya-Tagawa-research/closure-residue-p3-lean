@@ -27,19 +27,22 @@ def p3TwoVertexFirstResidue : Dynamics (Fin 2) where
   map_add' M N := by
     ext x y
     by_cases h : x = (0 : Fin 2) ∧ y = (1 : Fin 2)
-    · simp [h, Matrix.add_apply]
+    · simp [h, Pi.add_apply]
     · simp [h, Matrix.add_apply]
   map_smul' c M := by
     ext x y
     by_cases h : x = (0 : Fin 2) ∧ y = (1 : Fin 2)
-    · simp [h, Matrix.smul_apply]
+    · simp [h, Pi.smul_apply]
     · simp [h, Matrix.smul_apply]
 
 /-- Applying the map twice annihilates every matrix. -/
 theorem p3TwoVertexFirstResidue_square_zero (M : A (Fin 2)) :
     (p3TwoVertexFirstResidue ^ 2) M = 0 := by
   ext x y
-  simp [pow_succ, p3TwoVertexFirstResidue]
+  change p3TwoVertexFirstResidue (p3TwoVertexFirstResidue M) x y = 0
+  change (if x = (0 : Fin 2) ∧ y = (1 : Fin 2)
+    then p3TwoVertexFirstResidue M 0 0 else 0) = 0
+  simp [p3TwoVertexFirstResidue]
 
 /-- The first hidden response is nonzero: E₀₀ goes to E₀₁. -/
 theorem p3TwoVertexFirstResidue_noninvariant :
@@ -58,7 +61,9 @@ theorem p3TwoVertexFirstResidue_noninvariant :
       delta (V := Fin 2) (p3TwoVertexFirstResidue d.1) 0 1 = 0 := by
     simp [delta_apply]
   have hright : p3TwoVertexFirstResidue d.1 0 1 = (1 : ℂ) := by
-    simp [p3TwoVertexFirstResidue, hd, Matrix.single_apply]
+    change d.1 0 0 = 1
+    rw [hd]
+    simp [Matrix.single_apply]
   have hcontr : (0 : ℂ) = 1 := calc
     0 = delta (V := Fin 2) (p3TwoVertexFirstResidue d.1) 0 1 :=
       hleft.symm
