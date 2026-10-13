@@ -1,0 +1,28 @@
+name: P3 Matrix Units CI
+
+on:
+  push:
+    branches:
+      - research/p3-matrix-units-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  matrix-units:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile canonical matrix-unit coordinates
+        run: lake build P3.MatrixUnits
+      - name: Audit matrix-unit rank theorem axioms
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/MatrixUnitsAxiomAudit.lean | tee matrix_units_axioms.log
+          if grep -q 'sorryAx' matrix_units_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
