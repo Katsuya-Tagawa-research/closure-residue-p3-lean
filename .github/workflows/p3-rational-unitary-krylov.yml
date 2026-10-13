@@ -1,0 +1,28 @@
+name: P3 Rational Unitary Krylov CI
+
+on:
+  push:
+    branches:
+      - research/p3-physical-rational-krylov-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  rational-unitary-krylov:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile rationalized physical quantum-channel Krylov orbit
+        run: lake build P3.RationalUnitaryKrylov
+      - name: Audit unitary rational-orbit bridge
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/RationalUnitaryKrylovAxiomAudit.lean | tee rational_unitary_krylov_axioms.log
+          if grep -q 'sorryAx' rational_unitary_krylov_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
