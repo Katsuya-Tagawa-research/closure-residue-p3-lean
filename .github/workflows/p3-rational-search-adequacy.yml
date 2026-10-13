@@ -1,0 +1,28 @@
+name: P3 Rational Search Adequacy CI
+
+on:
+  push:
+    branches:
+      - research/p3-auto-rank-progress-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  rational-search-adequacy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile witness-relative finite search theorem
+        run: lake build P3.RationalSearchAdequacy
+      - name: Audit search adequacy axioms
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/RationalSearchAdequacyAxiomAudit.lean | tee rational_search_axioms.log
+          if grep -q 'sorryAx' rational_search_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
