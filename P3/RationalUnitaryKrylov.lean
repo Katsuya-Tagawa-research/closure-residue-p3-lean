@@ -56,7 +56,8 @@ theorem p3RationalReflectionOrbitQ_cast
   | zero =>
       ext x y
       by_cases h : a = x ∧ a = y
-      · simp [p3RationalReflectionOrbitQ, Matrix.single_apply, h]
+      · have hxy : x = y := h.1.symm.trans h.2
+        simp [p3RationalReflectionOrbitQ, Matrix.single_apply, h, hxy]
       · simp [p3RationalReflectionOrbitQ, Matrix.single_apply, h]
   | succ n ih =>
       calc
