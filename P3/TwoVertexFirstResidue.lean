@@ -26,14 +26,21 @@ def p3TwoVertexFirstResidue : Dynamics (Fin 2) where
     if x = (0 : Fin 2) ∧ y = (1 : Fin 2) then M 0 0 else 0
   map_add' M N := by
     ext x y
+    change (if x = (0 : Fin 2) ∧ y = (1 : Fin 2)
+      then (M + N) 0 0 else 0) =
+      (if x = 0 ∧ y = 1 then M 0 0 else 0) +
+      (if x = 0 ∧ y = 1 then N 0 0 else 0)
     by_cases h : x = (0 : Fin 2) ∧ y = (1 : Fin 2)
-    · simp [h, Pi.add_apply]
-    · simp [h, Pi.add_apply]
+    · simp [h, Matrix.add_apply]
+    · simp [h]
   map_smul' c M := by
     ext x y
+    change (if x = (0 : Fin 2) ∧ y = (1 : Fin 2)
+      then (c • M) 0 0 else 0) =
+      c • (if x = 0 ∧ y = 1 then M 0 0 else 0)
     by_cases h : x = (0 : Fin 2) ∧ y = (1 : Fin 2)
-    · simp [h, Pi.smul_apply]
-    · simp [h, Pi.smul_apply]
+    · simp [h, Matrix.smul_apply]
+    · simp [h]
 
 /-- Applying the map twice annihilates every matrix. -/
 theorem p3TwoVertexFirstResidue_square_zero (M : A (Fin 2)) :
@@ -41,8 +48,9 @@ theorem p3TwoVertexFirstResidue_square_zero (M : A (Fin 2)) :
   ext x y
   change p3TwoVertexFirstResidue (p3TwoVertexFirstResidue M) x y = 0
   change (if x = (0 : Fin 2) ∧ y = (1 : Fin 2)
-    then p3TwoVertexFirstResidue M 0 0 else 0) = 0
-  simp [p3TwoVertexFirstResidue]
+    then (if (0 : Fin 2) = 0 ∧ (0 : Fin 2) = 1 then M 0 0 else 0)
+    else 0) = 0
+  simp
 
 /-- The first hidden response is nonzero: E₀₀ goes to E₀₁. -/
 theorem p3TwoVertexFirstResidue_noninvariant :
