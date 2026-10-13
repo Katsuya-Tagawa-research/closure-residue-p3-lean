@@ -77,9 +77,9 @@ theorem p3FirstEqualRankAux_complete (r : ℕ → ℕ) :
 
 /-- The executable stopping-depth search. It queries exact rational
 matrices at depths 0 through `bound+1`. -/
-def p3RatFirstStoppingDepth (bound : ℕ)
+def p3RatFirstStoppingDepth {V : Type*} [Fintype V] (bound : ℕ)
     (Q : (k : ℕ) → Matrix (Fin (Fintype.card (V × V)))
-      (Fin (Fintype.card (Fin (k + 1) × V))) ℚ) [Fintype V] :
+      (Fin (Fintype.card (Fin (k + 1) × V))) ℚ) :
     Option ℕ :=
   p3FirstEqualRankAux (fun k => p3RatKrylovReport (Q k)) 0 (bound + 1)
 
