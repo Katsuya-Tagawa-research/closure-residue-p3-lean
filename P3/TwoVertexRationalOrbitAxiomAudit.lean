@@ -1,0 +1,6 @@
+import P3.TwoVertexRationalOrbit
+
+#print axioms P3.p3TwoVertexFirstResidue_pow_ge_two
+#print axioms P3.p3TwoVertexRationalOrbitEntry_exact
+#print axioms P3.p3TwoVertexRationalKrylov_exact
+#print axioms P3.p3TwoVertexRationalKrylov_stopping_depth
