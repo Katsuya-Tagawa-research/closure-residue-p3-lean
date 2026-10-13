@@ -1,0 +1,28 @@
+name: P9 Scalar Vector TT NoGo CI
+
+on:
+  push:
+    branches:
+      - research/p9-scalar-vector-tt-nogo-20261014
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  scalar-vector-tt-nogo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile finite quarter-turn TT no-go
+        run: lake build P3.P9ScalarVectorTTNoGo
+      - name: Audit TT no-go theorem dependencies
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/P9ScalarVectorTTNoGoAxiomAudit.lean | tee p9_tt_nogo_axioms.log
+          if grep -q 'sorryAx' p9_tt_nogo_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
