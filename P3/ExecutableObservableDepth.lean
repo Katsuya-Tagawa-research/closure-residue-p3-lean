@@ -129,7 +129,7 @@ theorem p3ObservableKrylovDepth_le_quadratic_gap (φ : Dynamics V) :
   have h := p3ObservableKrylovDepth_le_seed_gap φ
   have hdim : p3AlgebraDimension (V := V) =
       Fintype.card V * Fintype.card V := by
-    simp [p3AlgebraDimension, A, Matrix, Module.finrank_pi]
+    simpa [p3AlgebraDimension, A] using (Module.finrank_matrix ℂ ℂ V V)
   simpa [hdim] using h
 
 /-- Under exact rational presentation at all depths through bound+1,
