@@ -38,7 +38,7 @@ theorem p9TTFiniteSymbol_rank_two :
     p9TTFiniteSymbol 2
     (fun i : Fin 2 => i)
     (fun i : Fin 2 => if i = 0 then 0 else 3)
-    (by decide)
+    (by kernel_decide)
 
 /-- In the xi=e3 frame, the gauge/conformal map is
     (v1,v2,v3,f) -> (2f,2f,2v3+2f,0,v1,v2). -/
@@ -53,6 +53,6 @@ def p9ConformalGaugeSymbol : Matrix (Fin 6) (Fin 4) ℚ :=
 /-- TT annihilates all gauge and conformal perturbations. -/
 theorem p9TTFiniteSymbol_mul_gauge_zero :
     p9TTFiniteSymbol * p9ConformalGaugeSymbol = 0 := by
-  decide
+  kernel_decide
 
 end P3
