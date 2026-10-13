@@ -59,9 +59,9 @@ theorem p3KrylovRank_constant_after
     (hk : p3ObservableKrylovDepth φ ≤ k) :
     p3KrylovRank φ k =
       p3KrylovRank φ (p3ObservableKrylovDepth φ) := by
-  change Module.finrank ℂ (closure φ k) =
-    Module.finrank ℂ (closure φ (p3ObservableKrylovDepth φ))
+  unfold p3KrylovRank
   rw [p3Closure_stabilizes_at_observableKrylovDepth φ k hk]
+  rfl
 
 /-- A finite rank certificate pinpoints the *exact* first stationary
 depth: no earlier adjacent ranks can be equal. -/
