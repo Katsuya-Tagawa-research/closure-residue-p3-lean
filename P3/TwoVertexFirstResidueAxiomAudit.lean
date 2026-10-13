@@ -1,0 +1,7 @@
+import P3.TwoVertexFirstResidue
+
+#print axioms P3.p3TwoVertexFirstResidue_square_zero
+#print axioms P3.p3TwoVertexFirstResidue_noninvariant
+#print axioms P3.p3TwoVertexFirstResidue_hidden_ne_bot
+#print axioms P3.p3TwoVertexFirstResidue_closure_two_eq_one
+#print axioms P3.p3TwoVertexFirstResidue_depth_one
