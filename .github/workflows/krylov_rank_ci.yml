@@ -1,0 +1,28 @@
+name: P3 Finite Krylov Rank CI
+
+on:
+  push:
+    branches:
+      - research/p3-krylov-rank-certificate-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  krylov-rank:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile finite Krylov rank certificates
+        run: lake build P3.KrylovRank
+      - name: Audit rank theorem axioms
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/KrylovRankAxiomAudit.lean | tee krylov_rank_axioms.log
+          if grep -q 'sorryAx' krylov_rank_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
