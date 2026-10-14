@@ -1,0 +1,18 @@
+name: P9 H28 Triangle Wilson GKSL Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h28-triangle-gksl-wilson-readout-20261014
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h28-wilson-phase:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Verify rational triangle GKSL population jets and Wilson phase reconstruction
+        run: python3 P3/P9H28TriangleWilsonGKSLExactCheck.py
