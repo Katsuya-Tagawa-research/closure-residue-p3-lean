@@ -1,0 +1,18 @@
+name: P9 H34 Invariant Locality Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h34-invariant-operator-system-locality-20261014
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h34-invariant-locality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact invariant operator-system closure and locality obstruction
+        run: python3 P3/P9H34InvariantOperatorSystemLocalityExactCheck.py
