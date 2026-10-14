@@ -1,0 +1,6 @@
+import P3.P9SecondJetDescentObstruction
+
+#print axioms P3.p9SecondJet_factor_requires_kernel_silence
+#print axioms P3.p9ToySilentY_first_zero
+#print axioms P3.p9ToySilentY_second_nonzero
+#print axioms P3.p9ToySecondJet_no_factor_through_first
