@@ -160,6 +160,42 @@ the Markov population drift starts at `t`.
 Standard GKSL paired jumps also realize `Q_w` for any such w,
 without the coherent control mechanism.
 
+## B17: a calibrated-response conservative force candidate
+
+The coherent short-time response determines a natural, but
+**not uniquely compulsory**, finite quadratic observable for every
+fixed prepared population p:
+
+```math
+q(w;p)=\tfrac12\operatorname{diag}\Phi''_{0,x}(\operatorname{diag}(p))
+      =-A_w p,\qquad
+\mathcal E_p(w)
+=-\tfrac12 p^T q(w;p)
+=\tfrac12\sum_{a<b}w_{ab}(p_a-p_b)^2.
+```
+
+Define the response-conjugate force *by the independently
+specified readout protocol* `F_e^{quad}=\partial_{w_e}\mathcal E_p`
+with preparation p held fixed. Then
+
+```math
+F_{ab}^{quad}(w;p)=\tfrac12(p_a-p_b)^2,\quad
+V_{ef}^{quad}=\partial_e F_f^{quad}-\partial_f F_e^{quad}=0.
+```
+
+The exact multivariate polynomial checker verifies the
+measured-energy identity and all 15 mixed-derivative curl-zero
+conditions. This is a mathematically **constructive conservative
+response force** directly obtainable from the chosen quadratic
+population readout. However, because `F` is **defined as the
+derivative of a scalar**, its integrability is built into the
+operational definition; it does not prove that every physically
+relevant CR force, or the P9 Einstein response force, is
+variational. The independent commutator-defined one-form in
+the B14/B17 audit has nonzero curl, demonstrating that the
+microscopic controls do not uniquely specify a force law
+without declaring the actual readout/work-conjugacy rule.
+
 ## B14/B15/B17 decision
 
 - **Constructive B14 conditional success:** A declared six-edge coherent
