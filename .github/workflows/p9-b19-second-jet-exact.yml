@@ -1,0 +1,18 @@
+name: P9 B19 Second Jet Refinement Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-b19-second-jet-refinement-20261014
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  b19-second-jet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Verify K4 TT bilinear radical and quotient-descent witness
+        run: python3 P3/K4B19SecondJetRefinementExactCheck.py
