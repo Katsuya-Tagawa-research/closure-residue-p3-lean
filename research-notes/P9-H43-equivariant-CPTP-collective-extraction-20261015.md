@@ -116,6 +116,61 @@ Hence the CP conditional collective extractor is **not** the demanded microscopi
 
 Separately, the full two-knob covariant control family allows odd tangible directions and a nonzero mixed parity population Hessian. One can obtain the P6 exact collective null only by restricting actual declared controls to the **pointwise-even/odd-excluded tangent subspace**, or by a separately proven equivalent image restriction, *and* by preserving appropriate readout/intertwining conditions. These are candidate axioms and can be individually falsified.
 
+## 5b. Strong operational NO-GO: no autonomous effective dynamics after the CP collective extractor
+
+A stronger conclusion follows from the **necessary-and-sufficient linear quotient criterion**. For a linear surjection \(E:\mathcal A\to\mathrm{im}(E)\), a deterministic linear map \(\Phi_{\rm eff}\) satisfying
+\[
+E\Phi=\Phi_{\rm eff}E
+\]
+exists if and only if \(\ker E\) is \(\Phi\)-invariant. If \(E(X)=0\) but \(E\Phi(X)\ne0\), the assignment \(\Phi_{\rm eff}(E(X))=E\Phi(X)\) is not well-defined, **before** asking whether \(\Phi_{\rm eff}\) is CP or TP.
+
+For the *same* fixed H42 \(U\), choose the reflection-even, Hermitian chord
+\[
+X=E_{02}+E_{20},\qquad PX P=X.
+\]
+The legitimate CP collective extractor \(E=\mathcal S_{3/5}\mathcal T\) annihilates this hidden chord:
+\[
+\boxed{E(X)=0,}
+\]
+but direct rational multiplication gives
+\[
+\Phi(X)=UXU^\dagger=
+\begin{pmatrix}
+-4/9 & -2i/9 & 5/9\\
+2i/9 & 8/9 & 2i/9\\
+5/9 & -2i/9 & -4/9
+\end{pmatrix}.
+\]
+Its *population* part survives E:
+\[
+\boxed{\Delta_D E\Phi(X)
+=\operatorname{diag}(-4/9,8/9,-4/9)\ne0.}
+\]
+Hence
+\[
+\boxed{\ker E\ \text{is not \(\Phi\)-invariant},\qquad
+\nexists\ \Phi_{\rm eff}\text{ linear with }E\Phi=\Phi_{\rm eff}E.}
+\]
+This holds **even for physical density matrices**, not just unphysical perturbation operators. Set
+\[
+\rho_\pm=\frac{I_3}{3}\pm\frac16(E_{02}+E_{20}),
+\]
+which both have positive eigenvalues \((1/6,1/3,1/2)\). Then
+\[
+\boxed{E(\rho_+)=E(\rho_-)=I_3/3}
+\]
+but
+\[
+\boxed{
+\bigl[E\Phi(\rho_+)\bigr]_{11}
+-\bigl[E\Phi(\rho_-)\bigr]_{11}
+=\frac8{27}\ne0.
+}
+\]
+Thus two **operationally identical compressed current states** have distinguishable **next-step population predictions** under the same microscopic CPTP update. No standalone Markovian channel—even a nonlinear deterministic function of the current compressed density, if it is input-independent—can generate both distinct outputs from the same compressed input.
+
+This is a **finite quantum closure failure/hidden-history witness** in the broad conceptual sense of P3, but all dynamics and CP extraction maps here are standard quantum theory. It is **not** proof that the particular frozen P3 residue \(\mathcal R_3\) uniquely quantifies the lost chord or that CR predicts nonstandard dynamics. An enlarged observer state retaining the chord/history or a restricted admissible input ensemble is necessary to restore deterministic closure; actual memory dimension, optimal observer and physical P6 source remain open.
+
 ## 6. H43 interpretation, status and possible next gate
 
 **PASS exact algebra:** symmetry covariance vs pointwise invariance equivalence; 2D representation decomposition and nonzero covariant mixed Hessian; CPTP twirl commuting with H42 Φ; exact Schur-filter CP threshold and no-go for an unattenuated population-preserving support cutoff; CPTP attenuated collective microscopic *candidate* with its explicit nonzero locked Xi; non-intertwining witness for the composite.
