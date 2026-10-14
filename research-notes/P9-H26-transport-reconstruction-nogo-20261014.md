@@ -46,6 +46,19 @@ A based closed-loop holonomy changes only by conjugation. The fundamental 0120 l
 
 This underdetermination is not the claim that an actual physical connection satisfying yet-unwritten CR gluing must allow the twist. It specifies the exact missing interface information.
 
+## Strengthened No-Go: preserving the full P3 filtration as subspaces still does not suffice
+
+A particularly sharp variant uses the `SU(2)` diagonal element
+```math
+g_\pi=\operatorname{diag}(i,-i),\qquad
+R_\pi=\mathrm{Ad}_{g_\pi}
+=\operatorname{diag}(-1,-1,1)\in SO(3),
+\quad\operatorname{tr}R_\pi=-1.
+```
+Place `R_pi` on a chord, all other transports the identity. Its closed-loop holonomy has trace -1 versus 3 in the flat connection and is therefore not vertex-gauge equivalent. Nevertheless conjugation by `g_pi` preserves **all of the original H24 P3 Krylov filtration subspaces**: it fixes every diagonal operator, takes `z1,z2` to `-z1,-z2`, leaves the first hidden complex line invariant, leaves the full higher offdiagonal hidden space invariant, and fixes `Delta_D([z1,z2*])=(128i/81)Z`. It also preserves the **unlabeled span** of the two declared local coherent generators K1,K2, though it flips their individual labels/signs.
+
+Hence pointwise metric/orientation, *even P3 filtration preservation as a family of spaces and residue invariance*, and unlabeled first-residue generator-space preservation do **not** determine closed-loop transport. The connection must carry more information than these subspaces alone. This stronger witness remains conditional: `Ad_{g_pi}` **fails** to intertwine the actual H24 channel Phi, and it does not preserve calibrated *labeled* generator values. Imposing either justified condition may rule it out. This is an explicit motivation for H27 to specify what "physical CR-derived transport" must preserve.
+
 ## Conditional reconstruction theorem for phase transports
 
 For a connected graph with V vertices and E edges, fix H=SO(2)=U(1) as above. For each oriented edge e:u→v, let A_e∈H and write gauge action A'_e=G_v A_e G_u^{-1}. Because H is abelian, choosing a root and tree and setting tree transports to identity leaves **b1=E-V+1** independent chord/loop holonomies. Gauge-equivalence classes are
