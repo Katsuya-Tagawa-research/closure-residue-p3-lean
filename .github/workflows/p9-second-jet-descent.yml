@@ -1,0 +1,28 @@
+name: P9 Second Jet Descent Obstruction CI
+
+on:
+  push:
+    branches:
+      - research/p9-second-jet-descent-obstruction-20261014
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  second-jet-descent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile finite second-jet kernel obstruction
+        run: lake build P3.P9SecondJetDescentObstruction
+      - name: Audit second-jet lemmas
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/P9SecondJetDescentObstructionAxiomAudit.lean | tee p9_second_jet_axioms.log
+          if grep -q 'sorryAx' p9_second_jet_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
