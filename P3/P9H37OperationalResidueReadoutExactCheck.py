@@ -128,8 +128,10 @@ def empirical_currents(rad):
         for b in range(a+1,rad):
             ze=noisy_reconstruction(rho_p,a,b,a+b)
             we=noisy_reconstruction(sigma_p,a,b,a+2*b)
-            assert (ze-z_p[a][b])*(ze-z_p[a][b]).conj()<=gc(eta*eta)
-            assert (we-w_p[a][b])*(we-w_p[a][b]).conj()<=gc(eta*eta)
+            nz=(ze-z_p[a][b])*(ze-z_p[a][b]).conj()
+            nw=(we-w_p[a][b])*(we-w_p[a][b]).conj()
+            assert nz.i==0 and nz.r<=eta*eta
+            assert nw.i==0 and nw.r<=eta*eta
             out[(a,b)]=F(2)*(ze*we.conj()).i
     return out
 # Uncertainty from polynomial replacement also accounted for
