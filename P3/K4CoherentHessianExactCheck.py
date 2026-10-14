@@ -95,8 +95,40 @@ for k,(a,b) in enumerate(edges):
     derivative=q_ab/4
     assert (4*derivative)==gamma*x[k]*x[k]
 
+# Readout rank: fixed prepared p_b, all site populations.
+# One localized preparation gives rank 3; two gives rank 5;
+# three independent localized preparations recover all six weights.
+def rat_rank(rows):
+    A=[[Rat(v) for v in row] for row in rows]
+    if not A:return 0
+    nr,nc=len(A),len(A[0])
+    k=0
+    for j in range(nc):
+        pivot=next((i for i in range(k,nr) if A[i][j]!=0),None)
+        if pivot is None:continue
+        A[k],A[pivot]=A[pivot],A[k]
+        c=A[k][j]
+        for i in range(k+1,nr):
+            v=A[i][j]/c
+            for jj in range(j,nc):
+                A[i][jj]-=v*A[k][jj]
+        k+=1
+        if k==nr:break
+    return k
+
+def probe_rows(preps):
+    return [[int(a!=b and set(e)=={a,b})-
+             int(a==b and b in e) for e in edges]
+            for b in preps for a in range(4)]
+
+assert rat_rank(probe_rows([0]))==3
+assert rat_rank(probe_rows([0,1]))==5
+assert rat_rank(probe_rows([0,1,2]))==6
+assert rat_rank(probe_rows([0,1,2,3]))==6
+
 print('PASS: full symbolic polynomial identity for 4 coherent population Hessians')
 print('PASS: 6 independent off-diagonal first-residue action probes')
 print('PASS: 6 edge weights x_ab^2 from prepared-state quadratic population response')
+print('PASS: population preparation ranks 3,5,6 for one, two, three basis probes')
 print('PASS: uniform preparation silent; Markov stationary correlation comparison')
 print('Scope: a declared K4 coherent control family, not automatically inherited P3 CR controls')
