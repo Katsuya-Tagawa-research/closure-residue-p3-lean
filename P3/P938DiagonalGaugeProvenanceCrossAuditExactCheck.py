@@ -135,6 +135,27 @@ cycles=[
 ]
 assert rank_rational(cycles)==3
 assert all(div(j)==[F(0)]*4 for j in cycles)
+# New independent audit synthesis: all diagonal-alpha-induced
+# current changes are weighted gradients, NOT arbitrary cycles.
+# For positive K4 weights their 3D image complements cycle flows.
+wg=[[F(2)*weights[e]*incidence[v][e] for v in range(4)]
+    for e in range(6)]
+assert rank_rational(wg)==3
+# Use alpha variations e0,e1,e2, with e3 fixed as reference.
+# Combine 3 independent weighted gradients with the 3 cycle
+# currents. Rank six proves intersection exactly zero.
+combined=[[wg[e][v] for v in range(3)]+
+          [cycles[k][e] for k in range(3)] for e in range(6)]
+assert rank_rational(combined)==6
+for al in (basis[0],basis[1],basis[2],nonconstant):
+    curr=[sum((wg[e][v]*al[v] for v in range(4)),F(0))
+          for e in range(6)]
+    assert div(curr)==[F(2)*v for v in apply_lap(Lw,al)]
+    assert curr==[F(2)*weights[e]*(al[u]-al[v])
+                 for e,(u,v) in enumerate(edges)]
+# Hence among alpha variations, equality of residue witnesses forces
+# full equality of edge currents. This statement is FALSE for generic
+# independently variable hidden B (3 independent cycle currents).
 jm=[F(2),F(-1),F(3),F(4),F(0),F(5)]
 jp=[jm[e]+cycles[0][e]-2*cycles[1][e]+3*cycles[2][e]
     for e in range(6)]
