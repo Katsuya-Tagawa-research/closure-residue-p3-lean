@@ -36,7 +36,7 @@ def real_rank_complex(rows):
     for j in range(m):
         pivot=next((k for k in range(p,n) if a[k][j]!=Z0),None)
         if pivot is None:continue
-        a[p],a[pivot]=a[p],a[p]
+        a[p],a[pivot]=a[pivot],a[p]
         inv=a[p][j]
         a[p]=[x/inv for x in a[p]]
         for k in range(n):
