@@ -1,0 +1,18 @@
+name: P9 H32 Connected CPTP Krylov Provenance Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h32-connected-cptp-krylov-provenance-20261014
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h32-connected-cptp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Verify connected 3-site CPTP, original P3 residues and first-residue Xi ranks
+        run: python3 P3/P9H32ConnectedCPTPKrylovProvenanceExactCheck.py
