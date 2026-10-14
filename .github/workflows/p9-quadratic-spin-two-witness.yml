@@ -1,0 +1,28 @@
+name: P9 Quadratic Spin Two Witness CI
+
+on:
+  push:
+    branches:
+      - research/p9-quadratic-tt-witness-20261014
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quadratic-spin-two-witness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile finite quadratic TT witness
+        run: lake build P3.P9QuadraticSpinTwoWitness
+      - name: Audit four quadratic TT lemmas
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/P9QuadraticSpinTwoWitnessAxiomAudit.lean | tee p9_quadratic_tt_axioms.log
+          if grep -q 'sorryAx' p9_quadratic_tt_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
