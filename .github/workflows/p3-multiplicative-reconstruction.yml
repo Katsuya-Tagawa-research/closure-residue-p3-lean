@@ -1,0 +1,28 @@
+name: P3 Multiplicative Reconstruction CI
+
+on:
+  push:
+    branches:
+      - research/p3-multiplicative-reconstruction-20261013
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  multiplicative-reconstruction:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+      - name: Compile Phase 6.B multiplicative reconstruction
+        run: lake build P3.MultiplicativeReconstruction
+      - name: Audit reconstruction and linear ambiguity
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean P3/MultiplicativeReconstructionAxiomAudit.lean | tee p3_reconstruction_axioms.log
+          if grep -q 'sorryAx' p3_reconstruction_axioms.log; then
+            echo 'FAILED: sorryAx in dependencies'
+            exit 1
+          fi
