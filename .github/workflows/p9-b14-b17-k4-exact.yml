@@ -15,4 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Verify exact K4 conductance and curl calculations
-        run: python3 P3/K4B14B17ExactCheck.py
+        run: |
+          python3 P3/K4B14B17ExactCheck.py
+          python3 P3/K4CoherentHessianExactCheck.py
