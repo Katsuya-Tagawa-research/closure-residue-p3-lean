@@ -74,7 +74,7 @@ theorem p9SpinTwoTTWitness_eq :
     norm_num [p9TTFiniteSymbol, p9SpinTwoQuadraticWitness,
       p9SpinTwoCoordinates, p9SpinTwoQuadratic,
       p9SpinTwoE1, p9SpinTwoE2,
-      Matrix.mul_apply, Fin.sum_univ_succ]
+      Matrix.mul_apply, Fin.sum_univ_succ] <;> decide
 
 /-- Abstract quadratic response achieves two independent TT directions. -/
 theorem p9SpinTwoTTWitness_rank_two :
