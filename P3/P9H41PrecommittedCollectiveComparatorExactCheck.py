@@ -90,7 +90,9 @@ for ax,bx,cx,dx in ((F(1,2),F(3,5),F(2,3),F(4,5)),
                      gc(2*ax*cx)),
                scale(sub(unit(2,2),unit(1,1)),
                      gc(2*bx*dx)))
-    assert hes(ax,bx,cx,dx)==target
+    # The raw 2nd-order state response also has 0--2 coherence.
+    # Frozen P6 Sigma is the DIAGONAL population projection.
+    assert diag(hes(ax,bx,cx,dx))==target
     assert hess_scalar(ax,bx,cx,dx)==2*(ax*cx-bx*dx)
 
 # H41 fixed SAME Dataset-A information:
