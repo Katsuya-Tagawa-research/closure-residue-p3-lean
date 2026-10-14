@@ -1,0 +1,18 @@
+name: P9 H40 Single Channel Two Step Operational Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h40-single-channel-two-step-operational-intertwining-20261014
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h40-single-channel-physical-matching:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact GKSL original P3 residue, two-step intertwining and finite-time readout
+        run: python3 P3/P9H40SingleChannelTwoStepOperationalExactCheck.py
