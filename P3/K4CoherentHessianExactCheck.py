@@ -79,7 +79,9 @@ for k,(a,b) in enumerate(edges):
     H=com(K,C)
     assert C[a][b]==x[k],(a,b,C[a][b],x[k])
     assert H[a][a]/2==x[k]*x[k],(a,b,H[a][a]/2,x[k]*x[k])
-    assert H[b][b]/2==x[k]*x[k],(b,a)
+    total_out=sum((x[e]*x[e] for e,(u,v) in enumerate(edges)
+                   if b in (u,v)),Z)
+    assert H[b][b]/2==-total_out,(b,a)
 
 # Uniform preparation I/4 has no population Hessian signal.
 uniform=[[P.c(Rat(1,4)) if i==j else Z for j in range(4)] for i in range(4)]
