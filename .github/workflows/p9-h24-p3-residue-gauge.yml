@@ -1,0 +1,18 @@
+name: P9 H24 Nonzero P3 Residue Gauge Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h24-phase-sensitive-residue-gauge-20261014
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h24-residue-gauge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Verify original P3 residue and internal CPTP gauge holonomy with exact rational Gaussian arithmetic
+        run: python3 P3/P9H24PhaseSensitiveResidueGaugeExactCheck.py
