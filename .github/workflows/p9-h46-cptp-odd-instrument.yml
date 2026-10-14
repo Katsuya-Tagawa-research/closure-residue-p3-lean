@@ -1,0 +1,18 @@
+name: P9 H46 CPTP Odd Information Instrument and P3 Residue Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h46-cptp-instrument-odd-readout-disturbance-20261015
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h46-cptp-odd-instrument:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Audit rational CPTP flag instrument, diagonal nondemolition, quadratic residue errors
+        run: python3 P3/P9H46CPTPOddInstrumentReadoutDisturbanceExactCheck.py
