@@ -1,0 +1,18 @@
+name: P9.38 Laplacian Residue Provenance Cross Audit
+
+on:
+  push:
+    branches:
+      - research/p9-38-cross-audit-laplacian-provenance-20261014
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  p938-identity-k4-provenance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Verify exact K4 gauge Laplacian, cycle currents, and two-step CPTP no-go
+        run: python3 P3/P938DiagonalGaugeProvenanceCrossAuditExactCheck.py
