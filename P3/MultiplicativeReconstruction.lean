@@ -174,7 +174,7 @@ theorem p3ReflectionTransposedExtension_ne :
       (p3ReflectionTranspose p3ReflectionSkewJ) =
         p3ReflectionSkewJ
     rw [p3ReflectionTranspose_skew]
-    simp [p3ReflectionSkewJ_eigen_neg]
+    simp only [map_neg, p3ReflectionSkewJ_eigen_neg, neg_neg]
   have heq := congrArg
     (fun M : A (Fin 2) => M (0 : Fin 2) (1 : Fin 2)) hJ
   rw [ht, p3ReflectionSkewJ_eigen_neg] at heq
