@@ -48,6 +48,8 @@ D^2\Sigma_d(0)[X,Y]
 =2a_X a_Y(E_{00}-E_{11})
 +2b_X b_Y(E_{22}-E_{11}).
 \]
+The **raw** second-order state matrix also contains a left–right offdiagonal 02 coherence term. The displayed identity is **only after P6's population projection** \(\Delta_D\); it must not be asserted as an equality of full density-matrix derivatives. This was explicitly enforced in the exact checker after a dedicated-CI audit caught the overly strong full-matrix assertion.
+
 Let \(\ell_-(h)=\operatorname{Tr}[(E_{00}-E_{22})h]\). Then
 \[
 \boxed{
