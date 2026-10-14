@@ -43,7 +43,7 @@ theorem p9ScalarVectorQuarterTurn_plus_one_right_inverse :
     norm_num [p9ScalarVectorQuarterTurnQ,
       p9ScalarVectorQuarterTurnPlusOneInvQ,
       Matrix.mul_apply, Matrix.add_apply, Matrix.one_apply,
-      Fin.sum_univ_succ]
+      Fin.sum_univ_succ] <;> decide
 
 /-- A spin-two TT output intertwining the quarter-turn with
 the scalar+vector input must vanish exactly. In particular
