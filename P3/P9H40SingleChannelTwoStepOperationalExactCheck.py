@@ -26,7 +26,10 @@ def target_diag(vals):
     for k,v in enumerate(vals): x[k][k]=gc(v)
     return x
 def generator(x,K,alpha,gamma):
-    return sub(gksl_real_step(x,K,gamma),
+    # Generic anti-Hermitian K (possibly after diagonal site-gauge).
+    # Do not call the H38 specialized *real skew* generator guard.
+    assert dagger(K)==scale(K,-1)
+    return sub(sub(com(K,x),scale(hidden(x),gc(gamma))),
                scale(com(target_diag(alpha),x),I))
 def jets(x,K,alpha,gamma,order):
     out=[x]
