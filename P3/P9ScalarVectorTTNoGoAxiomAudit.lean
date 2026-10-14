@@ -1,0 +1,4 @@
+import P3.P9ScalarVectorTTNoGo
+
+#print axioms P3.p9ScalarVectorQuarterTurn_plus_one_right_inverse
+#print axioms P3.p9ScalarVector_tt_no_go
