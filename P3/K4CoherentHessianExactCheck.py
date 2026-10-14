@@ -39,6 +39,15 @@ class P:
     def __eq__(self,other):
         if not isinstance(other,P):other=P.c(other)
         return self.d==other.d
+    def deriv(self, variable):
+        d={}
+        for monom,coefficient in self.d.items():
+            m=monom.count(variable)
+            if m:
+                reduced=list(monom);reduced.remove(variable)
+                reduced=tuple(reduced)
+                d[reduced]=d.get(reduced,Rat(0))+m*coefficient
+        return P(d)
     def __repr__(self): return repr(self.d)
 
 Z=P.c(0)
@@ -95,6 +104,25 @@ for k,(a,b) in enumerate(edges):
     derivative=q_ab/4
     assert (4*derivative)==gamma*x[k]*x[k]
 
+# B17: an operationally constructed, but non-canonical,
+# conservative finite response potential from the quadratic readout.
+# For fixed diagonal preparation p, q_a = (1/2)rho''_aa = -A_w p.
+# E_p(w)=-(1/2) p.dot(q) = (1/2) Σ w_e (p_a-p_b)^2.
+measured_energy= -sum((pop[a]*(second[a][a]/2)
+                      for a in range(4)),Z)/2
+derived_dirichlet=sum((x[e]*x[e]*
+    (pop[a]-pop[b])*(pop[a]-pop[b])/2
+    for e,(a,b) in enumerate(edges)),Z)
+assert measured_energy==derived_dirichlet
+w=[P.x(11+e) for e in range(6)]
+energy_w=sum((w[e]*(pop[a]-pop[b])*(pop[a]-pop[b])/2
+            for e,(a,b) in enumerate(edges)),Z)
+forces=[energy_w.deriv(11+e) for e in range(6)]
+for e,(a,b) in enumerate(edges):
+    assert forces[e]==(pop[a]-pop[b])*(pop[a]-pop[b])/2
+    for k in range(6):
+        assert forces[e].deriv(11+k)-forces[k].deriv(11+e)==0
+
 # Readout rank: fixed prepared p_b, all site populations.
 # One localized preparation gives rank 3; two gives rank 5;
 # three independent localized preparations recover all six weights.
@@ -130,5 +158,6 @@ print('PASS: full symbolic polynomial identity for 4 coherent population Hessian
 print('PASS: 6 independent off-diagonal first-residue action probes')
 print('PASS: 6 edge weights x_ab^2 from prepared-state quadratic population response')
 print('PASS: population preparation ranks 3,5,6 for one, two, three basis probes')
+print('PASS: CR-like quadratic-return Dirichlet energy and curl-zero response force')
 print('PASS: uniform preparation silent; Markov stationary correlation comparison')
 print('Scope: a declared K4 coherent control family, not automatically inherited P3 CR controls')
