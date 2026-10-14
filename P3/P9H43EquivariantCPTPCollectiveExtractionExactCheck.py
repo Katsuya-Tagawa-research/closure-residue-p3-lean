@@ -183,6 +183,43 @@ assert E(action(U,dcenter))[0][2]==Z0
 assert action(U,E(dcenter))[0][2]==gc(F(4,9))
 assert E(action(U,dcenter))!=action(U,E(dcenter))
 assert twirl(action(U,dcenter))==action(U,twirl(dcenter))
+
+# STRONGER NO-GO: an autonomous effective CPTP/linear update
+# Phi_eff with E Phi=Phi_eff E cannot exist even on ALL physical
+# density matrices, because ker(E) is not invariant under Phi.
+# X is a REFLECTION-EVEN endpoint chord, completely erased by
+# E but carried into population and nearest-neighbor coherence.
+chord=add(unit(0,2),unit(2,0))
+assert twist(chord)==chord
+assert E(chord)==z()
+Phi_chord=action(U,chord)
+assert Phi_chord==[
+    [gc(F(-4,9)), -I*gc(F(2,9)), gc(F(5,9))],
+    [I*gc(F(2,9)),gc(F(8,9)),I*gc(F(2,9))],
+    [gc(F(5,9)),-I*gc(F(2,9)),gc(F(-4,9))]
+]
+assert E(Phi_chord)!=z()
+assert [E(Phi_chord)[v][v] for v in range(N)]==[
+    gc(F(-4,9)),gc(F(8,9)),gc(F(-4,9))]
+# Physical, PSD, trace-one states with spectra {1/6,1/3,1/2};
+# E maps both to I/3, but E Phi separates their populations.
+epsilon=F(1,6)
+rho_base=scale(eye(),F(1,3))
+rho_plus=add(rho_base,scale(chord,epsilon))
+rho_minus=sub(rho_base,scale(chord,epsilon))
+assert dagger(rho_plus)==rho_plus and dagger(rho_minus)==rho_minus
+assert trace(rho_plus)==trace(rho_minus)==O
+assert rho_plus[0][0]*rho_plus[2][2]-rho_plus[0][2]*rho_plus[2][0]==gc(F(1,12))
+assert rho_minus[0][0]*rho_minus[2][2]-rho_minus[0][2]*rho_minus[2][0]==gc(F(1,12))
+assert E(rho_plus)==E(rho_minus)==rho_base
+a_plus=E(action(U,rho_plus))
+a_minus=E(action(U,rho_minus))
+assert a_plus!=a_minus
+assert a_plus[1][1]-a_minus[1][1]==gc(F(8,27))
+# No deterministic linear map on the compressed outputs (let alone
+# CPTP) can map the SAME E(rho±) to two distinct next E Phi(rho±).
+# Strict autonomous closure needs an augmented hidden/memory state,
+# or a restricted input domain not containing both rho±.
 # Extra orientation/polarization/tangent-provenance is still required
 # to identify the CP-extracted image with independently frozen P6 J_N
 # and its *physical* 2D/1D target control selection.
