@@ -1,0 +1,18 @@
+name: P9 H41 Precommitted Collective Comparator Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h41-precommitted-collective-conditional-discrimination-20261015
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h41-precommitted-collective:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Audit fixed collective Xi/Hessian null and equal-norm standard GKSL comparator
+        run: python3 P3/P9H41PrecommittedCollectiveComparatorExactCheck.py
