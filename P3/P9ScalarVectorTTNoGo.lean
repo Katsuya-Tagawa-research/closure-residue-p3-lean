@@ -51,17 +51,25 @@ theorem p9ScalarVector_tt_no_go
     (B : Matrix (Fin 2) (Fin 4) ℚ)
     (hCov : B * p9ScalarVectorQuarterTurnQ = -B) :
     B = 0 := by
-  have hzero : B * (p9ScalarVectorQuarterTurnQ + 1) = 0 := by
-    rw [mul_add, mul_one, hCov]
-    exact neg_add_cancel B
+  have hzero : B * (p9ScalarVectorQuarterTurnQ +
+      (1 : Matrix (Fin 4) (Fin 4) ℚ)) = 0 := by
+    calc
+      B * (p9ScalarVectorQuarterTurnQ + 1) =
+          B * p9ScalarVectorQuarterTurnQ +
+            B * (1 : Matrix (Fin 4) (Fin 4) ℚ) :=
+        Matrix.mul_add _ _ _
+      _ = -B + B := by rw [hCov, Matrix.mul_one]
+      _ = 0 := neg_add_cancel B
   calc
-    B = B * 1 := (mul_one B).symm
-    _ = B * ((p9ScalarVectorQuarterTurnQ + 1) *
+    B = B * (1 : Matrix (Fin 4) (Fin 4) ℚ) :=
+      (Matrix.mul_one B).symm
+    _ = B * ((p9ScalarVectorQuarterTurnQ +
+          (1 : Matrix (Fin 4) (Fin 4) ℚ)) *
         p9ScalarVectorQuarterTurnPlusOneInvQ) := by
           rw [p9ScalarVectorQuarterTurn_plus_one_right_inverse]
     _ = (B * (p9ScalarVectorQuarterTurnQ + 1)) *
-        p9ScalarVectorQuarterTurnPlusOneInvQ := by
-          rw [mul_assoc]
-    _ = 0 := by rw [hzero, zero_mul]
+        p9ScalarVectorQuarterTurnPlusOneInvQ :=
+      (Matrix.mul_assoc _ _ _).symm
+    _ = 0 := by rw [hzero, Matrix.zero_mul]
 
 end P3
