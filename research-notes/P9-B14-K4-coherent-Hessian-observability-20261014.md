@@ -100,6 +100,42 @@ On the positive amplitude patch x>0 the derived rate chart has
 At x=(1,...,1), `\det Dw=64`.
 For the P9.10 K4 tensor chart, `\det D(G\circ w)=-16384`.
 
+## Minimal prepared-state observability: a finite No-Go and sharp threshold
+
+A single fixed diagonal preparation `p` supplies a zero-sum
+population Hessian `q=-A_w p` with at most three independent outputs,
+so a full-rank reconstruction of six weights is impossible.
+
+More strongly, **any two fixed diagonal preparations are insufficient**
+for local identification of all six independent conductances from
+these second-order population Hessians alone. To see this, project the
+two preparation vectors onto `S=1^perp`, and choose
+`0 != z in S` orthogonal to both projections.
+Then the symmetric nonzero perturbation `δA=z z^T` on S
+annihilates both prepared vectors. The K4 edge-to-tensor isomorphism
+makes `δA` equivalent to a nonzero perturbation `δw`;
+for small ε and all-positive base weights, `w+εδw` is still positive
+but produces the same two Hessian outputs.
+This is a rigorous **two-probe non-identifiability** statement within
+the unrestricted six-weight K4 sector.
+
+For **three independent projections** spanning S, the action of
+`A_w|_S` on a basis determines the entire operator and hence all
+six edge weights. Three localized preparations `E_00,E_11,E_22`
+suffice. Exact rational response-matrix ranks are
+
+```math
+\operatorname{rank} R_{E_{00}}=3,\quad
+\operatorname{rank} R_{E_{00},E_{11}}=5,\quad
+\operatorname{rank} R_{E_{00},E_{11},E_{22}}=6.
+```
+
+These exact ranks are checked by the standalone polynomial audit.
+This lower bound applies to **fixed short-time second-order population
+readouts**. It does not prohibit reconstruction from fewer
+preparations using additional observables, higher derivatives,
+multiple times, or calibrated structure restricting the possible w.
+
 ## Relation and non-equivalence to the P9.11 Markov model
 
 The P9.11 **continuous-time Markov** generator
