@@ -69,6 +69,25 @@ def inv(A):return trans(A)
 def hol02(A):return mm(inv(A[(0,2)]),mm(A[(1,2)],A[(0,1)]))
 assert trace(hol02(Aflat))==Q(3)
 assert trace(hol02(Atwisted))==Q(11,25)
+
+# Stronger counterexample: the pi-phase SU2 element diag(i,-i)
+# induces the half-turn diag(-1,-1,1) in the Bloch SO3 representation.
+# On the original H24 P3 closure filtration, Ad_g fixes D pointwise,
+# maps z1,z2 -> -z1,-z2, and preserves the diagonal residue R.
+# Thus filtration preservation (as SUBSPACES) still does not
+# determine the global edge holonomy. Dynamical intertwinement fails.
+Rhalf=[[-Q(1),Q(0),Q(0)],[Q(0),-Q(1),Q(0)],[Q(0),Q(0),Q(1)]]
+assert is_so3(Rhalf) and trace(Rhalf)==-1
+Afiltered=dict(Aflat); Afiltered[(0,2)]=Rhalf
+assert trace(hol02(Afiltered))==-1
+Ghalf=[[I,Z0],[Z0,-I]]
+assert mm2(dag2(Ghalf),Ghalf)==[[O,Z0],[Z0,O]]
+def half_conj(M):return mm2(mm2(Ghalf,M),dag2(Ghalf))
+assert half_conj(Z)==Z
+for M in (z1,z2,K1,K2):
+    assert half_conj(M)==scale2(M,-1)
+assert half_conj(R)==R
+assert half_conj(phi(Z))!=phi(half_conj(Z))
 # Trace is preserved under every vertex-frame gauge transformation.
 # Therefore no gauge transformation in SO3 (even larger than SO2)
 # identifies the two edge systems, despite identical local data.
