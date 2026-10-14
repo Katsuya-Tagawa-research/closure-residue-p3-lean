@@ -1,0 +1,18 @@
+name: P9 B14 B17 K4 Finite Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-b14-b17-k4-finite-20261014
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  k4-exact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Verify exact K4 conductance and curl calculations
+        run: python3 P3/K4B14B17ExactCheck.py
