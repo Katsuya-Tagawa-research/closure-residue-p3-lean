@@ -108,8 +108,7 @@ E00=diag(1,0)
 Dout=pmul(pmul(loop,emb(E00)),pdag(loop))
 assert all(Dout[k][i][i]==Z0 for k in range(1,6) for i in range(2))
 c6=F(183762944,43046721)
-print('diagnostic population-eps6:',Dout[6][0][0],Dout[6][1][1], 'expected', -c6, c6,flush=True)
-assert Dout[6][0][0]==-c6 and Dout[6][1][1]==c6
+assert Dout[6][0][0]==gc(-c6) and Dout[6][1][1]==gc(c6)
 assert Dout[3][0][1]==C(F(13312,6561),F(-2560,6561))
 # In contrast, a coherent prepared state sees diagonal-gauge
 # commutator action already at order eps^2.
