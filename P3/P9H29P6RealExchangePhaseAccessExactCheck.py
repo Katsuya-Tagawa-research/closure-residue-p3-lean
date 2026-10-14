@@ -79,7 +79,7 @@ for gamma in (F(0),F(2,3),F(5,4)):
     assert D[0][1]==gc(-gamma)
     # Gamma-dependent contamination is confined to a different
     # coherence edge for this preparation and choice of pulse order.
-    assert D==plus(com(Cbr,E0),times(com(A,E0),-gamma))
+    assert D==plus(com(Cbr,E0),times(com(A,E0),gamma))
     # The leading populations do not see the bracket at order t^2.
 
 # Reverse dephasing of positive elapsed time t is not CPTP:
