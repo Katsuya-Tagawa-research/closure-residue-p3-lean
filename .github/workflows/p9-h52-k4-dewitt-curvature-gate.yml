@@ -1,0 +1,18 @@
+name: P9 H52 K4 DeWitt Kinematics and Curvature Gate Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h52-k4-dewitt-kinematics-curvature-obstruction-20261015
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h52-k4-dewitt-gr-kinematics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact K4 local metric chart, ADM kinetic supermetric and spatial-curvature no-go
+        run: python3 P3/P9H52K4DeWittKinematicsCurvatureExactCheck.py
