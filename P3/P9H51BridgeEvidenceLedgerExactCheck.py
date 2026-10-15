@@ -81,7 +81,7 @@ from P9H50OperationalEquivalenceClosureExactCheck import (
     controls,outcomes,qflag,sign_channel,
     correlated_two,independent_two,superposed
 )
-assert R_OO==3*R_EE and R_EE!=R_OE
+assert R_OO==[[3*x for x in row] for row in R_EE] and R_EE!=R_OE
 assert rr([R_EE,R_OE])==2
 d=Seed(F(3,8),F(1,2),F(1,8))
 _,e,q=real_parity_parameters(d)
