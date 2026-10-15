@@ -1,0 +1,18 @@
+name: P9 H70 Restricted Code CPTP Twirl Residue Gap Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h70-restricted-code-recovery-cptp-twirl-residue-gap-20261016
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h70-restricted-code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact all-qubit KL no-recovery vs CP parity twirl code and signed P3 residue gap
+        run: python3 P3/P9H70RestrictedCodeCPTPTwirlResidueGapExactCheck.py
