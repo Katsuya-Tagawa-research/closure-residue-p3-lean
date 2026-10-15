@@ -1,0 +1,18 @@
+name: P9 H59 KKS-ADM Symplectic Origin Obstruction Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h59-kks-adm-local-global-symplectic-origin-obstructions-20261015
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h59-kks-adm-provenance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact four-site U4 KKS form, S4 observer lift, topological flux and local Darboux ADM chart
+        run: python3 P3/P9H59KKSADMSymplecticOriginObstructionExactCheck.py
