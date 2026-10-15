@@ -72,7 +72,7 @@ for i,x in enumerate((F(4,5),F(3,5),F(1))): D1[i][i]=x
 assert add(mm(tr(D0),D0),mm(tr(D1),D1))==eye(3)
 def step(S,A,history,choice):
     # Genuinely outcome-dependent adaptive choices:
-    parity of the previous record changes real rotation/dephasing.
+    # parity of the previous record changes real rotation/dephasing.
     U=(R01 if (choice+sum(history))%3==0 else
        R12 if (choice+sum(history))%3==1 else R02)
     q=(F(3,5) if (len(history)+choice)%2==0 else F(4,7))
