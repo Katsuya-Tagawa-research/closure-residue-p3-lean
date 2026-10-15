@@ -51,6 +51,13 @@ for depth in (1,2,3):
         assert hidden(state)==gauged(H[depth][seed])
 assert rr(image(3))==6
 assert rr([gauged(v) for v in image(3)])==6
+# Original signed P3 depth-three residue is diagonal-gauge invariant.
+seed=unit(0,0)
+z1=hidden(Phi(seed))
+z2=hidden(Phi(Phi(seed)))
+R=diag(com(z1,dagger(z2)))
+Rg=diag(com(gauged(z1),dagger(gauged(z2))))
+assert R!=z() and Rg==R
 print("PASS H65: H32 original-P3 Krylov Xi, hidden return and 9-unit CPTP channel all exactly diagonal-gauge covariant")
 
 # An apparent pure-imaginary 'odd control' can be a coordinate
