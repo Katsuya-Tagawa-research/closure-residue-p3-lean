@@ -52,6 +52,15 @@ assert J0[:2]==J90[:2]  # phase-blind despite distinct coherent states
 assert J0[2]!=J90[2]    # Z control response resolves relative phase
 assert rank(J0[:2])==rank(J90[:2])==2
 assert rank(J0)==rank(J90)==2
+# An invariant response signature depending only on p cannot induce a
+# positive rank-2 metric on (p,q) by ANY positive observer weighting.
+# Flatten Sigma_XY=[0,4p,-4p,0], differential columns (dp,dq).
+Dsig=[[F(0),F(0)],[F(4),F(0)],[F(-4),F(0)],[F(0),F(0)]]
+Gram=[[sum(Dsig[k][i]*Dsig[k][j] for k in range(4))
+       for j in range(2)] for i in range(2)]
+assert Gram==[[F(32),F(0)],[F(0),F(0)]]
+assert rank(Gram)==1 and Gram[1][1]==0
+print("PASS H62: any U(1)-invariant Sigma(p) has phase-null pullback metric; no positive 2D G without q-sensitive channels")
 print("PASS H62: calibrated X/Y immediate CONTROL slopes have no q information on a coherent U2 sector")
 print("PASS H62: adding calibrated Z control-response supplies q-sensitive data, but uses fixed XY reference axes")
 
