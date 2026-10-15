@@ -1,0 +1,18 @@
+name: P9 H78 Hardware-Port Tangent and Reset-Scope Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h78-hardware-port-tangent-observability-reset-scope-20261016
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h78-hardware-port:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact microscopic control-port generator ranks and mandatory-reset source rank
+        run: python3 P3/P9H78MicroscopicHardwarePortsObservabilityExactCheck.py
