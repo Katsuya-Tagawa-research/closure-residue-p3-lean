@@ -34,7 +34,7 @@ not derived from uncontrolled original P3 residues alone.
 Gaussian rational / exact Fraction operations only, stdlib.
 """
 from fractions import Fraction as F
-from P9H24PhaseSensitiveResidueGaugeExactCheck import O,Z0,gc
+from P9H24PhaseSensitiveResidueGaugeExactCheck import I,O,Z0,gc
 from P9H75SemicausalMicroMemorySourceExactCheck import (
     A,B,edge_cayley,lift,ONE6,MBASIS,D6,R60,micro,
     matadj,matmul
@@ -160,7 +160,7 @@ print("PASS H77: strong full-catalog exact linear predictive memory rank is 36; 
 X=MBASIS[index(0,3)]
 assert flagged(X)==[[Z0 for j in range(6)] for i in range(6)]
 assert micro(X)==[[Z0 for j in range(6)] for i in range(6)]
-assert R60[0][0]==gc(F(-32,135))*gc(0,1)
+assert R60[0][0]==I*gc(F(-32,135))
 print("PASS H77: SAME uncontrolled 6D original-P3 source and residue across incompatible allowed apparatus/control catalogs")
 print("BOUNDARY: not a P3-only selection of W/F/A/B or a non-Markovian microscopic origin theorem")
 print("BOUNDARY: exact ranks assume ALL microscopic input states and full flag-resolved quantum output (tomographic), NOT scalar site probabilities alone")
