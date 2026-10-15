@@ -1,0 +1,18 @@
+name: P9 H56 Nonuniform Offshell HDA and Positive K4 Chart Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h56-nonuniform-offshell-hda-positive-k4-chart-20261015
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h56-nonuniform-offshell-hda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact nonuniform off-shell ADM bracket, boundary current and positive K4 shear obstruction
+        run: python3 P3/P9H56NonuniformOffshellK4HDAExactCheck.py
