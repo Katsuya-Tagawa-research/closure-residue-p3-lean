@@ -1,0 +1,18 @@
+name: P9 H63 Transpose Observer Symplectic Orientation Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h63-transpose-equivariant-observer-symplectic-orientation-20261015
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h63-real-observer-orientation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact rational adaptive real-instrument and KKS anti-symplectic gates
+        run: python3 P3/P9H63TransposeObserverSymplecticOrientationExactCheck.py
