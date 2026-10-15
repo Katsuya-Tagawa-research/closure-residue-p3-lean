@@ -1,0 +1,18 @@
+name: P9 H77 Exact Control-Observability Predictive Memory Rank
+
+on:
+  push:
+    branches:
+      - research/p9-h77-control-observability-closure-minimal-memory-rank-20261016
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h77-exact-control-observability:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact Fraction-rational Heisenberg observable closures and rank 18-36 control-memory hierarchy
+        run: python3 P3/P9H77ControlObservabilityMemoryRankExactCheck.py
