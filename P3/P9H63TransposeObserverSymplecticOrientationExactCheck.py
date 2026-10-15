@@ -71,11 +71,11 @@ for i,x in enumerate((F(3,5),F(4,5),F(0))): D0[i][i]=x
 for i,x in enumerate((F(4,5),F(3,5),F(1))): D1[i][i]=x
 assert add(mm(tr(D0),D0),mm(tr(D1),D1))==eye(3)
 def step(S,A,history,choice):
-    # Genuinely outcome-dependent adaptive choices:
-    # parity of the previous record changes real rotation/dephasing.
-    U=(R01 if (choice+sum(history))%3==0 else
-       R12 if (choice+sum(history))%3==1 else R02)
-    q=(F(3,5) if (len(history)+choice)%2==0 else F(4,7))
+    # Adaptation depends on PRIOR outcomes only, never on the
+    # current outcome being sampled (causal instrument order).
+    s=sum(history)%3
+    U=R01 if s==0 else R12 if s==1 else R02
+    q=F(3,5) if (len(history)+sum(history))%2==0 else F(4,7)
     S1,A1=apply(U,S,A,q)
     D=D0 if choice==0 else D1
     S2,A2=inst(S1,A1,D)
