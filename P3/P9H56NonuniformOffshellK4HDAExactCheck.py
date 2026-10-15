@@ -22,7 +22,7 @@ All exact fractions, no random sampling or numeric tolerances.
 """
 from fractions import Fraction as F
 from P9H52K4DeWittKinematicsCurvatureExactCheck import (
-    I,zeros,add,scale,mm,trans,inv,det,rank,B,G,V,
+    I,zeros,add,scale,mm,trans,trace,inv,det,rank,B,G,V,
     flatten_symmetric,cov_metric,positive_definite
 )
 from P9H53K4SolderedSpatialCurvatureExactCheck import (
