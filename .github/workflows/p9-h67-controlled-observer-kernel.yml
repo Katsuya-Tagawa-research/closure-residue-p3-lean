@@ -1,0 +1,18 @@
+name: P9 H67 Controlled Instrument Kernel Stabilizer Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h67-controlled-kernel-stabilizer-observer-provenance-20261015
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h67-instrument-kernel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact H42/H46/H48 controlled kernel stabilizer, finite Cayley rank and observer closure
+        run: python3 P3/P9H67ControlledObserverKernelStabilizerExactCheck.py
