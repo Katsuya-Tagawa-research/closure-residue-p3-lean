@@ -1,0 +1,269 @@
+{
+  "title": "H51 evidence ledger — P3–P11 Mathematical Bridge",
+  "date": "2026-10-15",
+  "program": "Twelve-Paper Generative Program",
+  "scope": "H35–H50 stacked Draft PRs; finite P3 original residue / standard CPTP-GKSL / P6 conditional source-to-control and observability checks",
+  "repository": "Katsuya-Tagawa-research/closure-residue-p3-lean",
+  "source_cross_audit": {
+    "id": "P9.38",
+    "pr": 53,
+    "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/53",
+    "claim": "Diagonal-gauge Laplacian and P3 population-only phase no-go cross-audit"
+  },
+  "source_chain": {
+    "first_pr": 54,
+    "last_pr": 69,
+    "stacked_on_pr": 53,
+    "all_draft_unmerged_at_audit": true,
+    "ci_report": {
+      "pr": 69,
+      "head": "54b94d2204d9892d3c9b8c892f07b7bcd902ca57",
+      "workflows_passed": 63,
+      "workflows_total": 63,
+      "limitation": "passing automated CI is not human expert refereeing or merged/frozen manuscript"
+    }
+  },
+  "definitions": {
+    "PROVEN_FINITE": "Algebraically established under declared concrete finite-model scope, exact rational checks or standard mathematical proof; not universal CR physical law",
+    "PROVEN_GENERAL_CONDITIONAL_PREMISES": "General mathematical lemma under explicitly specified identical full process hypotheses",
+    "CONDITIONAL": "Additional predeclared physical-accessibility, calibration, observer or detector assumptions; not derivable by original P3 data alone",
+    "REFUTED_IMPLICATION": "Explicit counterexample or no-go to stated implication; not refutation of all CR variants",
+    "OPEN": "Missing derivation/experiment/physical bridge; must not be silently promoted"
+  },
+  "milestones": [
+    {
+      "id": "H35",
+      "pr": 54,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/54",
+      "status": "PROVEN_FINITE",
+      "claim": "standard-GKSL factorial soft-locality distance tails",
+      "assumptions": "Distance to observer and finite site-dephasing assumptions; not a hard causal cone",
+      "p9_import": "P9 finite transport bound only",
+      "guard": "No geometry or CR-specific velocity"
+    },
+    {
+      "id": "H36",
+      "pr": 55,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/55",
+      "status": "PROVEN_FINITE",
+      "claim": "original P3 signed commutator residue as edge-current divergence with factorial leakage bound",
+      "assumptions": "Fixed GKSL nearest-neighbor generator; seed and depth indexing as declared",
+      "p9_import": "P9 microscopic residue expression",
+      "guard": "No CR-only detector or Einstein curvature"
+    },
+    {
+      "id": "H37",
+      "pr": 56,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/56",
+      "status": "REFUTED_IMPLICATION",
+      "claim": "population-only detection of signed P3 residue fails by paired-Hamiltonian symmetry",
+      "assumptions": "Real-symmetric hopping with real diagonal input and site dephasing",
+      "p9_import": "No-go on population-only readout; conditional X/Y tomography needs extra phases",
+      "guard": "Not a general proof no instrument can read residue"
+    },
+    {
+      "id": "H38",
+      "pr": 57,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/57",
+      "status": "REFUTED_IMPLICATION",
+      "claim": "frozen real P6 controls cannot access imaginary-coherence quadrature or generate signed original P3 R3 from diagonal seed",
+      "assumptions": "Two-real-knob exchange and independently calibrated dephasing only",
+      "p9_import": "P6 hardware provenance hard boundary",
+      "guard": "Any Stark phase / extra controls are explicitly added"
+    },
+    {
+      "id": "H39",
+      "pr": 58,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/58",
+      "status": "CONDITIONAL",
+      "claim": "finite-positive-time X/Y phase tomography by additional independently calibrated phase control",
+      "assumptions": "Physically extra Stark phase + exchange probes + independently calibrated q and gamma",
+      "p9_import": "Conditional instrument design",
+      "guard": "Not available in frozen P6 by assumption"
+    },
+    {
+      "id": "H40",
+      "pr": 59,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/59",
+      "status": "PROVEN_FINITE",
+      "claim": "one fixed augmented GKSL and exact original P3 two-step residue with gauge-coordinate intertwiner; population Markov surrogate fails",
+      "assumptions": "Fixed Stark alpha and quantum readout beyond frozen P6",
+      "p9_import": "Existence of nonzero original P3 signed residue/readout",
+      "guard": "Coordinate equivalence is not an independent physical micro-origin"
+    },
+    {
+      "id": "H41",
+      "pr": 60,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/60",
+      "status": "CONDITIONAL",
+      "claim": "collective a=b gives left-minus-right Hessian null; same exact total norm allows unlocked standard comparator",
+      "assumptions": "Predeclared Jcol and star-compatible physical tangent provenance; Dataset A does not calibrate edge split",
+      "p9_import": "P6 conditional selection theorem only",
+      "guard": "Standard QM also contains a=b and gives zero"
+    },
+    {
+      "id": "H42",
+      "pr": 61,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/61",
+      "status": "REFUTED_IMPLICATION",
+      "claim": "reflection-covariant CPTP plus saturated original P3 R3 does not force collective Jcol or locked physical controls",
+      "assumptions": "Full original diagonal MASA, exact rational three-site U",
+      "p9_import": "Independent provenance required",
+      "guard": "Fails even with nonzero maximal P3 diagonal residue"
+    },
+    {
+      "id": "H43",
+      "pr": 62,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/62",
+      "status": "PROVEN_FINITE",
+      "claim": "pointwise reflection-invariant physical tangent forces locking; CP attenuated collective extraction exists but fails dynamic intertwining",
+      "assumptions": "Pointwise symmetry vs swapped-control covariance distinguished; Schur CP threshold",
+      "p9_import": "Conditional symmetry/observer extraction and obstruction",
+      "guard": "CP extraction alone does not derive physical control selection"
+    },
+    {
+      "id": "H44",
+      "pr": 63,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/63",
+      "status": "PROVEN_FINITE",
+      "claim": "one real even-chord memory minimally closes future linear E outputs; odd-odd P3 quadratic return remains invisible",
+      "assumptions": "Fixed H42 U and H43 E; observer image rank4 vs even algebra rank5",
+      "p9_import": "P3 observational nonclosure and two-snapshot finite realization",
+      "guard": "Not sufficient for full nonlinear original P3 residue"
+    },
+    {
+      "id": "H45",
+      "pr": 64,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/64",
+      "status": "PROVEN_FINITE",
+      "claim": "fixed-channel real-diagonal original P3 depth3 bilinear parity formula and one signed odd SEED label",
+      "assumptions": "Known U and Hermitian diagonal preparations",
+      "p9_import": "Source-labelled residue sufficiency and 2D diagonal residue rank",
+      "guard": "Not one-scalar generic odd quantum dynamical memory"
+    },
+    {
+      "id": "H46",
+      "pr": 65,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/65",
+      "status": "CONDITIONAL",
+      "claim": "CPTP 12-branch odd flag or diagonal-seed nonselective QND readout with statistical error bound",
+      "assumptions": "Extra detector, independent state preparation, known even u and U",
+      "p9_import": "Conditional experimental residue measurement protocol",
+      "guard": "Not independently inherited from frozen P6 hardware"
+    },
+    {
+      "id": "H47",
+      "pr": 66,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/66",
+      "status": "CONDITIONAL",
+      "claim": "held-out finite-time same-center-calibration H46 flag separation and finite-shot bound",
+      "assumptions": "Precommitted Jcol/tangent alignment, partial Dataset-A relative-split uncertainty, calibrated errors",
+      "p9_import": "Conditional falsifiable P6 control-selection test",
+      "guard": "Gap vanishes with adequate independent a:b calibration"
+    },
+    {
+      "id": "H48",
+      "pr": 67,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/67",
+      "status": "PROVEN_FINITE",
+      "claim": "instrument kernel criterion and full labelled-record ranks 3/4/7; one-step history rank9",
+      "assumptions": "Full conditional quantum-block tomography is extra resource",
+      "p9_import": "Minimal linear observer record no-go and source-map existence criterion",
+      "guard": "Does not prove a physical CP quotient or P6 provenance"
+    },
+    {
+      "id": "H49",
+      "pr": 68,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/68",
+      "status": "CONDITIONAL",
+      "claim": "controlled-CPTP conditional instrument-coherence slopes recover signed a,b and test source membership",
+      "assumptions": "Full conditional coherent tomography, predeclared source map and actual controlled Phi_x",
+      "p9_import": "Test of selected physical tangent membership",
+      "guard": "Matching full standard CPTP controls gives same prediction"
+    },
+    {
+      "id": "H50",
+      "pr": 69,
+      "pr_url": "https://github.com/Katsuya-Tagawa-research/closure-residue-p3-lean/pull/69",
+      "status": "PROVEN_GENERAL_CONDITIONAL_PREMISES",
+      "claim": "identical complete allowed controlled CPTP processes, initial states and CP instruments give identical all finite adaptive outcomes",
+      "assumptions": "FULL matched Markovian controlled process or identical process tensor, not only fresh one-step map",
+      "p9_import": "No CR-only operational discriminator in matched standard finite sector",
+      "guard": "Does not refute independently new quantum process constraints or GR"
+    }
+  ],
+  "global_open_gates": [
+    {
+      "gate": "G-SOURCE",
+      "title": "Derive actual P6 J_N from an independently specified P3/P4 microscopic update, not post-fit response",
+      "owner": "P3–P11 / P6",
+      "import_to_P9": "NO"
+    },
+    {
+      "gate": "G-PHYSICAL-CONTROL",
+      "title": "Construct independent star-compatible micro-to-physical controlled tangent provenance map with actual P6 apparatus permissions",
+      "owner": "P6",
+      "import_to_P9": "NO"
+    },
+    {
+      "gate": "G-DISCRIMINATOR",
+      "title": "Demonstrate measurable CR constraint that survives best standard quantum comparator with identical complete calibration and process access",
+      "owner": "P6",
+      "import_to_P9": "NO"
+    },
+    {
+      "gate": "G-SOLDER",
+      "title": "Derive physical P7/P8 soldering/observer covariance with local 1+3 Lorentzian structure from independently physical sector",
+      "owner": "P7/P8/P9",
+      "import_to_P9": "NO"
+    },
+    {
+      "gate": "G-ACTION",
+      "title": "Derive Einstein–Hilbert or alternative covariant gravitational action from CR-generated sector with exact stated assumptions",
+      "owner": "P9",
+      "import_to_P9": "OPEN"
+    },
+    {
+      "gate": "G-DYNAMICS",
+      "title": "Vary physical metric/matter, prove Bianchi/conservation and ADM/HDA or equivalent first-class consistency",
+      "owner": "P9",
+      "import_to_P9": "OPEN"
+    },
+    {
+      "gate": "G-CONTINUUM",
+      "title": "Control local-to-continuum scaling, hyperbolicity, covariance and physical domain of validity",
+      "owner": "P9/P11",
+      "import_to_P9": "OPEN"
+    },
+    {
+      "gate": "G-COMPLETENESS",
+      "title": "Generative completeness/universality beyond finite exact models",
+      "owner": "P11/P12",
+      "import_to_P9": "NO"
+    }
+  ],
+  "forbidden_promotions": [
+    "CI PASS => peer-reviewed mathematical physics",
+    "standard CPTP original P3 residue => CR-exclusive outcome",
+    "static source Jcol label => physical P6 control provenance",
+    "same uncontrolled / fresh reduced CPTP step => same complete non-Markovian process",
+    "conditional collective null => standard quantum mechanics violation",
+    "finite dimension rank3 / K4 tensor => physical Einstein equations",
+    "finite discrete metric or Fisher metric => EH action / Bianchi / HDA",
+    "Gaussian-rational finite model => continuum universality"
+  ],
+  "p9_allowed": [
+    "exact original P3 signed quadratic-residue algebra with explicit fixed generator, depth and observer",
+    "standard GKSL factorial soft-locality for stated finite graph and dephasing",
+    "explicit hidden-flow/observer-memory nonclosure and CP-instrument examples",
+    "conditional observer-control selection lemmas with provenance and calibration hypotheses written out",
+    "full-controlled-process operational-equivalence theorem as no-discriminator control"
+  ],
+  "p9_not_allowed": [
+    "physical CR-only experimental signature established",
+    "P3 physically fixes P6 declared real control manifold",
+    "P7/P8 soldering, ADM/HDA, EH variation or Einstein equations derived from H35–H50",
+    "hypothetical Jcol as measured/derived physical sector",
+    "human peer review or real-world physical experiment complete"
+  ]
+}
