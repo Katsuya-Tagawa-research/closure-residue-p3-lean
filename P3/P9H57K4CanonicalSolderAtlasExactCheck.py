@@ -141,8 +141,7 @@ for i in range(edges):
     # Under v=T w and pB=T^-T pA, partial_w v_i=T_i.,
     # partial_p pB_j=(T^-T)_j.,
     for j in range(edges):
-        gp=mv(trans(inv(TAB)),[F(int(k==j))
-                              for k in range(edges)])
+        gp=trans(inv(TAB))[j]
         assert dot(TAB[i],gp)==F(int(i==j))
 # Equivalent transformed functional derivatives:
 Fw=[F(1),F(2),F(-3),F(4),F(1,2),F(-2,7)]
