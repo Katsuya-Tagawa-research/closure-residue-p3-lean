@@ -93,9 +93,7 @@ for j in (1,2):
     c2=a1*a1.conj()
     c3=a1*a2.conj()+a2*a1.conj()
     coeff[j]=(c2,c3)
-assert coeff[1]==(O,O) if False else True
-assert coeff[1]==(O,O) if False else True
-assert coeff[1]==(O,O) if False else True
+# Opposite signed odd-time coefficients on the two output sites.
 assert coeff[1]==(gc(1),gc(1))
 assert coeff[2]==(gc(1),gc(-1))
 assert coeff[1][1]-coeff[2][1]==gc(2)
