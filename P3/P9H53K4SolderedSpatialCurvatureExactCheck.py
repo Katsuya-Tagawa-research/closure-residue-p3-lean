@@ -152,10 +152,22 @@ for i in range(3):
         assert mm(mm(trans(L),gpij[i][j]),L)==gij[i][j]
 # If solder frame transforms compatibly as above, same physical
 # scalar curvature follows (spatial coordinates are held fixed).
-Rp,Ricp,Einp,Gamp=levi_civita_curvature(gp,gpi,gpij)
-assert Rp==R
-assert mm(mm(trans(L),Ricp),L)==Ric
-assert mm(mm(trans(L),Einp),L)==Ein
+# Raw relabeled INTERNAL components are NOT yet the metric
+# components in the fixed PHYSICAL spatial coordinate frame:
+# treating gp as a coordinate metric without re-soldering is wrong.
+R_unsoldered,_,_,_=levi_civita_curvature(gp,gpi,gpij)
+assert R_unsoldered==F(-114293,8640000)!=R
+# Apply the compensated external solder to ALL spatial metric jets
+# first, leaving coordinate-derivative indices in the same chart.
+def solder_back(M):
+    return mm(mm(trans(L),M),L)
+g_phys=solder_back(gp)
+gi_phys=[solder_back(X) for X in gpi]
+gij_phys=[[solder_back(X) for X in row] for row in gpij]
+assert (g_phys,gi_phys,gij_phys)==(g,gi,gij)
+Rp,Ricp,Einp,Gamp=levi_civita_curvature(
+    g_phys,gi_phys,gij_phys)
+assert Rp==R and Ricp==Ric and Einp==Ein
 
 # A physically independent solder choice is NECESSARY: S is an
 # internal fiber. For this audit we adopt a constant chosen solder
