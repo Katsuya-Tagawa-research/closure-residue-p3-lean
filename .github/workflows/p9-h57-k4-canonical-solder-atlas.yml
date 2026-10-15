@@ -1,0 +1,18 @@
+name: P9 H57 K4 Canonical Solder Atlas and Cocycle Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h57-k4-canonical-atlas-solder-transition-cocycle-20261015
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h57-k4-canonical-atlas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact positive K4 charts, symplectic cocycle, solder derivative and time-connection
+        run: python3 P3/P9H57K4CanonicalSolderAtlasExactCheck.py
