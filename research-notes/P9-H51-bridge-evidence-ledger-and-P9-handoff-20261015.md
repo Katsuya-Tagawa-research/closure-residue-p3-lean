@@ -1,10 +1,10 @@
 # H51 — P3–P11 Mathematical Bridge: Evidence Ledger, P9 Safe-Import Boundary, and Outstanding Gate Dossier
 
 **Date:** 2026-10-15  
-**Repository:** \`Katsuya-Tagawa-research/closure-residue-p3-lean\`  
+**Repository:** `Katsuya-Tagawa-research/closure-residue-p3-lean`  
 **Status:** stacked **Draft / unmerged** H51 branch based on H50 PR #69  
 **Scope:** H35–H50, PR #54–#69, building on the P9.38 independent cross-audit PR #53. Earlier H24–H34 remain the foundation of the bridge and are **not** retrospectively renumbered.  
-**Verification:** parent H50 head \`54b94d2204d9892d3c9b8c892f07b7bcd902ca57\` had GitHub Actions **63/63 PASS** when H51 was started. This is **automated mathematical/code/Lean CI**, **NOT human expert review**, journal acceptance or actual experimental validation. H51 is a synthesis, not a new original-P3 theorem.
+**Verification:** parent H50 head `54b94d2204d9892d3c9b8c892f07b7bcd902ca57` had GitHub Actions **63/63 PASS** when H51 was started. This is **automated mathematical/code/Lean CI**, **NOT human expert review**, journal acceptance or actual experimental validation. H51 is a synthesis, not a new original-P3 theorem.
 
 ## 1. Classification rules
 
@@ -123,6 +123,6 @@ is a useful **finite positive-definite response geometry candidate under positiv
 
 ## 6. Reproducibility and machine-checkable evidence
 
-Companion \`research-notes/P9-H51-evidence-ledger-20261015.json\` contains **exactly 16** H35–H50 evidence rows, linked source PR identifiers, a **four-category** primary classification with separate general-theorem code, restricted P9 import permissions, eight open gates, and prohibitions on claim promotion.
+Companion `research-notes/P9-H51-evidence-ledger-20261015.json` contains **exactly 16** H35–H50 evidence rows, linked source PR identifiers, a **four-category** primary classification with separate general-theorem code, restricted P9 import permissions, eight open gates, and prohibitions on claim promotion.
 
-\`P3/P9H51BridgeEvidenceLedgerExactCheck.py\` validates chain identity and the provenance rules and rechecks representative original P3 residue, observer rank hierarchy, P6 source-sector counterexample and standard-process operational equivalence from the existing tested finite modules. H51 does not claim to independently re-prove all of H35–H50; those are retained as unchanged stacked Draft evidence in separate CI suites. No code from frozen manuscripts is changed.
+`P3/P9H51BridgeEvidenceLedgerExactCheck.py` validates chain identity and the provenance rules and rechecks representative original P3 residue, observer rank hierarchy, P6 source-sector counterexample and standard-process operational equivalence from the existing tested finite modules. H51 does not claim to independently re-prove all of H35–H50; those are retained as unchanged stacked Draft evidence in separate CI suites. No code from frozen manuscripts is changed.
