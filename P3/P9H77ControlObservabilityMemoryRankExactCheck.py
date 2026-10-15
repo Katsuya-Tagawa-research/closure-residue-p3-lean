@@ -108,7 +108,17 @@ def add_independent(row,pivot_vectors):
     c=v[pivot]
     normal=[x/c for x in v]
     assert pivot not in pivot_vectors
+    # Maintain REDUCED row echelon form: earlier inserted basis rows
+    # can have nonzero entries in this newly discovered pivot.
+    # Clearing them is essential so a later elimination does not
+    # reintroduce an already eliminated earlier pivot coordinate.
+    for old_p,basis in list(pivot_vectors.items()):
+        coeff=basis[pivot]
+        if coeff:
+            pivot_vectors[old_p]=[a-coeff*b for a,b in zip(basis,normal)]
     pivot_vectors[pivot]=normal
+    assert all(pivot_vectors[p][q]==(F(1) if p==q else F(0))
+               for p in pivot_vectors for q in pivot_vectors)
     return normal
 
 def closure(names,max_depth=10):
