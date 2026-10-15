@@ -16,3 +16,5 @@ jobs:
       - uses: actions/checkout@v5
       - name: Exact rational adaptive real-instrument and KKS anti-symplectic gates
         run: python3 P3/P9H63TransposeObserverSymplecticOrientationExactCheck.py
+      - name: Independent finite SWAP-ZZ local rank and finite-time comparator
+        run: python3 P3/P9H63P972SwapZZComparatorExactCheck.py
