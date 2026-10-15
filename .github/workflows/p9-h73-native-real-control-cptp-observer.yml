@@ -1,0 +1,18 @@
+name: P9 H73 Native Real-Control CPTP Operator-System Observer Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h73-native-real-control-cptp-operator-system-observer-20261016
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h73-cptp-operator-system:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact 25-setting real-pinching CP observer and full two-knob site-dephasing closure
+        run: python3 P3/P9H73NativeRealControlOperatorSystemCPTPExactCheck.py
