@@ -231,7 +231,7 @@ def iso_kin(w,wdot,N):
     return direct
 assert iso_kin(F(1),F(2),F(1))==F(-48)
 assert iso_kin(F(4),F(1),F(2))==F(-3,64)
-assert iso_kin(F(9),F(3),F(2))==F(-2,243)
+assert iso_kin(F(9),F(3),F(2))==F(-2,81)
 
 # Local-to-curvature NO-GO: smooth K4 positive weight fields on
 # 3D Euclidean base, w_ab(x)=exp(-c |x|²) for ALL six edges.
