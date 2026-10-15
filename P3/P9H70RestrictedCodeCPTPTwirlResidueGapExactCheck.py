@@ -136,7 +136,10 @@ assert dagger(r0)==scale(r0,-1)
 assert dagger(r2)==scale(r2,-1)
 assert r0==[[I*gc(F(-32,81)),Z0,Z0],
            [Z0,I*gc(F(16,81)),Z0],
-           [Z0,Z0,I*gc(F(16,81))]] or True
+           [Z0,Z0,I*gc(F(16,81))]]
+assert r2==[[I*gc(F(16,81)),Z0,Z0],
+           [Z0,I*gc(F(16,81)),Z0],
+           [Z0,Z0,I*gc(F(-32,81))]]
 print("PASS H70: SAME all-time CPTP twirl observer histories for E00/E22 but DIFFERENT original P3 signed R3")
 print("BOUNDARY: the H68 qubit-recovery NO-GO is instrument-specific; H43 parity-code CP success is observer-specific")
 print("BOUNDARY: H43 twirl preserves linear microscopic Phi but not all original signed P3 quadratic residues")
