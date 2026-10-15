@@ -111,7 +111,7 @@ O12=ortho_edge(1,2,F(5,13),F(12,13))
 Q12=ortho_edge(1,2,0,1)
 O02=mm(mm(Q12,O01),dagger(Q12))
 assert real_orth(O02)
-for W in (O01,O12,O02,R)+G:
+for W in [O01,O12,O02,R]+G:
     for X in BASIS:
         assert eclosed(conjugate(W,X))==conjugate(W,eclosed(X))
 
