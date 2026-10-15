@@ -25,7 +25,7 @@ from fractions import Fraction as F
 from itertools import combinations,permutations
 from P9H52K4DeWittKinematicsCurvatureExactCheck import (
     I,zeros,add,scale,mm,trans,inv,det,rank,T as basis,G,V,
-    B,cov_metric,positive_definite,flatten_symmetric
+    B,cov_metric,dg,positive_definite,flatten_symmetric
 )
 from P9H57K4CanonicalSolderAtlasExactCheck import (
     edgeCi,edgeC,Tmat,mv,can_pi,dot,raw_g,sandwich,sample_stencil
