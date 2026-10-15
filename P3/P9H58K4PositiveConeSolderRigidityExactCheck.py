@@ -63,6 +63,15 @@ def mat_sub(a,b):return add(a,scale(b,-1))
 def qform(x):
     return sum((x[i]*G[i][j]*x[j]
                 for i in range(n) for j in range(n)),F(0))
+def hamiltonian_connection(p,w,lamb,lambdot,PM):
+    Tc=scale(PM,lamb*lamb)
+    dTdt=scale(PM,2*lamb*lambdot)
+    pB=can_pi(p,Tc)
+    v=mv(Tc,w)
+    correction=dot(pB,mv(dTdt,w))
+    assert correction==2*lambdot*dot(p,w)/lamb
+    return pB,v,correction,Tc,dTdt
+
 def opposite_edge_witness(s):
     T= Tmat(s)
     assert T==transition([[F(1),s,0],[0,F(1),0],[0,0,F(1)]])
