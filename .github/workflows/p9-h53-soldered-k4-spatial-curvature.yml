@@ -1,0 +1,18 @@
+name: P9 H53 K4 Soldered Spatial Curvature Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h53-k4-soldered-second-jets-spatial-curvature-20261015
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h53-k4-soldered-curvature:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Check exact K4 curvature second jets, solder covariance and neighbor-cell O(h²) convergence
+        run: python3 P3/P9H53K4SolderedSpatialCurvatureExactCheck.py
