@@ -1,0 +1,18 @@
+name: P9 H72 Calibrated Collision Source and Full-Control Algebra No-Go
+
+on:
+  push:
+    branches:
+      - research/p9-h72-calibrated-collision-cayley-source-and-full-control-algebra-no-go-20261016
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h72-collision-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact inverse Cayley micro source, 5D CPTP observer and P6 full-control algebra obstruction
+        run: python3 P3/P9H72CalibratedCollisionSourceObserverExactCheck.py
