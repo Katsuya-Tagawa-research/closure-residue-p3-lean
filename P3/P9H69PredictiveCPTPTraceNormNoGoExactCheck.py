@@ -99,15 +99,20 @@ def tildeU():
             K[i][j]=U[i][j]
             K[i+3][j+3]=U[i][j]
     return K
+def adjoint6(M):
+    return [[M[j][i].conj() for j in range(6)] for i in range(6)]
+def mm6(M,P):
+    return [[sum((M[i][k]*P[k][j] for k in range(6)),Z0)
+             for j in range(6)] for i in range(6)]
 U6=tildeU()
 identity6=zero6()
 for k in range(6):identity6[k][k]=O
-assert mm(dagger(U6),U6)==identity6
+assert mm6(adjoint6(U6),U6)==identity6
 for a in range(3):
     for b in range(3):
         E=unit(a,b)
         assert partial_flag_trace(embed(E))==E
-        lhs=mm(mm(U6,embed(E)),dagger(U6))
+        lhs=mm6(mm6(U6,embed(E)),adjoint6(U6))
         assert lhs==embed(Phi(E))
 print("PASS H69: full quantum isometric memory admits an actual CPTP intertwiner and CPTP left recovery")
 print("BOUNDARY: this sufficient full-state storage is tautological and does not derive smaller physical CR observer memory")
