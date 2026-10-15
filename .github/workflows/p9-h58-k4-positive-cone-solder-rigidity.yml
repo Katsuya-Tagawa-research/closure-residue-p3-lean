@@ -1,0 +1,18 @@
+name: P9 H58 Global Positive K4 Cone Solder Rigidity Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h58-k4-positive-cone-rigidity-physical-solder-gates-20261015
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h58-positive-cone-rigidity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Audit 24 K4 cone symmetries, shear no-go, canonical transitions and solder connections
+        run: python3 P3/P9H58K4PositiveConeSolderRigidityExactCheck.py
