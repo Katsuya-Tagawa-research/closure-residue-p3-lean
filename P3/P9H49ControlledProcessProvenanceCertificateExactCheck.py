@@ -149,7 +149,7 @@ for a,b in controls:
         assert two_coeff(K,X,0,0)==Phi(Phi(X))
         for m,n in ((0,0),(1,0),(0,1),(1,1),(2,0),(0,2)):
             out=two_coeff(K,X,m,n)
-            assert dagger(out)==dagger(out)
+            assert dagger(out)==out
             assert trace(out)==(O if (m,n)==(0,0) else Z0)
             # A standard QM comparator using EXACT same controlled
             # superoperators + same instrument must reproduce
