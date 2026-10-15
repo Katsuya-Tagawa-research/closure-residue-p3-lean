@@ -1,0 +1,18 @@
+name: P9 H68 Minimal Predictive CP Augmentation Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h68-minimal-predictive-cp-instrument-augmentation-20261016
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h68-predictive-completion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact original H48 instrument rank, minimal chord probes, CP augmentation and CPTP recovery obstruction
+        run: python3 P3/P9H68MinimalPredictiveCPAugmentationExactCheck.py
