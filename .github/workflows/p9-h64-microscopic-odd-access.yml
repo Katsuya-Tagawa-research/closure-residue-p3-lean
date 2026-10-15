@@ -1,0 +1,18 @@
+name: P9 H64 Microscopic Odd Source Equivariant Access Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h64-microscopic-odd-source-equivariant-access-gates-20261015
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h64-source-physical-access:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact P3 hidden odd/even Krylov source versus physical P6 transpose-equivariant control
+        run: python3 P3/P9H64MicroscopicOddSourceEquivariantAccessExactCheck.py
