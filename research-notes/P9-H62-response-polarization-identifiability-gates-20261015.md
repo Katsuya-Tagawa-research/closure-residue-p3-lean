@@ -53,6 +53,8 @@ This is a **strict phase-information No-Go for this specified two-channel, zero-
 
 **Explicit rational witness:** \(p=3/100\), \(R=1/25\), \(r=1/20\) on the genuine U(2) suborbit of P9's four-level diagonal \(\rho_0\). Phase \(q=0\) corresponds to coherence \(R\), while phase \(q=\pi/2\) corresponds to coherence \(-iR\). Their X/Y control responses are equal; their coherent states are different. No approximation is used.
 
+**Corollary H62.1b (phase-null response metric).** Suppose the available P6-style fingerprint on this coherent SU(2) patch is invariant under relative U(1) rephasing, so that \(\Sigma(q,p)=\Sigma(p)\). Then \(D\Sigma(\partial_q)=0\). For **every** positive observer weighting \(W\), the pullback semimetric \(G_\Sigma=(D\Sigma)^T W D\Sigma\) is degenerate in the angular direction and cannot equal a strictly positive 2D \(G\) with \(G_{qq}>0\). In the particular flat-component inner product for \(\Sigma^{(1)}_{XY}=(0,4p,-4p,0)\), \(G_\Sigma=32\,dp^2\), rank 1. This is a *general derivative/rank argument* subject to the stated U(1)-invariance, not proof that the full P6 finite-time \(\Sigma\) is invariant or deficient. That physical premise must be checked.
+
 ### H62.2 — an additional Z control-response channel restores q sensitivity, conditionally
 
 Keeping the same calibrated \(X,Y\) controls, the extra response is
