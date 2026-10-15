@@ -1,0 +1,18 @@
+name: P9 H61 Polarization Metric DeWitt Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h61-polarization-metric-dewitt-gates-20261015
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h61-polarization-signature:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact rational torus polarization obstruction, acoustic tensor matching and DeWitt inertia
+        run: python3 P3/P9H61PolarizationMetricDeWittGatesExactCheck.py
