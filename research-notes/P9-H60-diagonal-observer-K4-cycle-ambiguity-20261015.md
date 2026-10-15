@@ -72,7 +72,7 @@ Each positive \(r_e\) is physically realizable *mathematically* as the squared m
 
 ## 3. Why the ambiguity matters to the H52/H58 K₄ metric target
 
-In the H52 basis \(f_i=e_i-e_3\subset\mathbf1^\perp\), define \(v_{ab}=f_a-f_b\), \(B_w=\sum_{a<b}w_{ab}v_{ab}v_{ab}^T\) and
+In the H52 basis \(f_i=e_i-e_3\subset\mathbf1^\perp\), let \(T=[f_1\ f_2\ f_3]\) be the 4×3 basis matrix and define \(v_{ab}=T^T(e_a-e_b)\), \(B_w=\sum_{a<b}w_{ab}v_{ab}v_{ab}^T\) and
 
 \[
 g_w=16G B_w^{-1}G,\qquad G=f^Tf.
