@@ -1,0 +1,30 @@
+name: P9 H94 Original H75 Multi-Setting Coherence Tomography Gate
+
+on:
+  push:
+    branches:
+      - research/p9-h94-multisetting-pre-reset-coherence-tomography-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h94-existing-gate-tomography:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H94 exact original H75 reset factorization and inherited four-word positive POVM rank12 tomography
+        run: python3 P3/P9H94ExistingGateMultiSettingCoherenceTomographyExactCheck.py
+      - name: Preserve H93 actual original real-control SO6/Grassmann rank and code leakage
+        run: python3 P3/P9H93ExistingRealControlGrassmannAccessExactCheck.py
+      - name: Preserve H92 actual source U5 Grassmann and original reset erasure
+        run: python3 P3/P9H92FiveLevelGrassmannKKSResetSilenceExactCheck.py
+      - name: Preserve H91 CP checkpoint KKS Poisson rank obstruction
+        run: python3 P3/P9H91CheckpointKKSRankADMObstructionExactCheck.py
+      - name: Preserve H90 P9 P11 gravity-provenance audit
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
+      - name: Preserve H79 actual minimum 5-level CP checkpoint
+        run: python3 P3/P9H79ResetCheckpointCPTPMemoryExactCheck.py
+      - name: Preserve H80 sharp CP memory sufficiency bound
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
