@@ -1,0 +1,22 @@
+name: P9 H82 Integration Audit and P9 P11 Handoff Exact Check
+
+on:
+  push:
+    branches:
+      - research/p9-h82-integration-audit-p9-p11-handoff-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h82-integration-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H82 finite reachability observability Hankel exact rational audit
+        run: python3 P3/P9H82IntegrationAuditExactCheck.py
+      - name: Preserve H80 sharp CPTP full checkpoint recovery gate
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
+      - name: Preserve H81 positive-state positive-POVM schedule No-Go
+        run: python3 P3/P9H81OperationalAccessibilityAxiomExactCheck.py
