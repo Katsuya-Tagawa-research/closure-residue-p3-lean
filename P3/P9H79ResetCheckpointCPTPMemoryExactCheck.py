@@ -204,8 +204,10 @@ assert matadj(Delta)==Delta and mattrace(Delta)==Z0
 zplus=matadd(matscale(eye_n(3),F(1,3)),matscale(Delta,F(1,12)))
 zminus=matadd(matscale(eye_n(3),F(1,3)),matscale(Delta,F(-1,12)))
 assert mattrace(zplus)==mattrace(zminus)==O
-assert zplus[0][0]*zplus[1][1]-zplus[0][1]*zplus[1][0]>Z0
-assert zminus[0][0]*zminus[1][1]-zminus[0][1]*zminus[1][0]>Z0
+for rho in (zplus,zminus):
+    minor=rho[0][0]*rho[1][1]-rho[0][1]*rho[1][0]
+    assert minor.i==0 and minor.r>0
+    assert rho[0][0].i==0 and rho[0][0].r>0
 JDelta=micro(embed(Delta))
 assert flagged(JDelta)==JDelta
 marginal=qtrace(JDelta)
