@@ -1,0 +1,30 @@
+name: P9 H86 Microscopic Exchange Laplacian Provenance Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h86-microscopic-exchange-laplacian-provenance-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h86-exchange-laplacian:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H86 exact local no-go exchange Laplacian and sign-sensitive quantum witness
+        run: python3 P3/P9H86ExchangeLaplacianPhysicalPortExactCheck.py
+      - name: Preserve H85 A4 edge selection and independent source premise
+        run: python3 P3/P9H85A4EdgeSourceSelectionExactCheck.py
+      - name: Preserve H84 joint CP extensions and calibrated edge readout
+        run: python3 P3/P9H84SpatialCouplingProvenanceEdgeIdentifiabilityExactCheck.py
+      - name: Preserve H83 ultralocal HDA gate
+        run: python3 P3/P9H83UltralocalGradientHDAGateExactCheck.py
+      - name: Preserve H82 finite linear record
+        run: python3 P3/P9H82IntegrationAuditExactCheck.py
+      - name: Preserve H80 sharp CPTP memory
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
+      - name: Preserve H81 causal schedule positive-POVM witness
+        run: python3 P3/P9H81OperationalAccessibilityAxiomExactCheck.py
