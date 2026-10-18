@@ -1,0 +1,28 @@
+name: P9 H93 Original Real-Control SO6 versus Source Grassmann KKS Gate
+
+on:
+  push:
+    branches:
+      - research/p9-h93-existing-real-control-lie-rank-code-leakage-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h93-real-control-grassmann:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H93 exact inherited H75/H76 real SO6 Lie closure, source-code leakage, KKS rank9/3 obstruction
+        run: python3 P3/P9H93ExistingRealControlGrassmannAccessExactCheck.py
+      - name: Preserve H92 genuine 5D source Grassmann KKS rank12, original reset phase erasure
+        run: python3 P3/P9H92FiveLevelGrassmannKKSResetSilenceExactCheck.py
+      - name: Preserve H91 checkpoint M3+M2 rank bound
+        run: python3 P3/P9H91CheckpointKKSRankADMObstructionExactCheck.py
+      - name: Preserve H90 P9 P11 gravity proof-gate audit
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
+      - name: Preserve H79 actual CP checkpoint support
+        run: python3 P3/P9H79ResetCheckpointCPTPMemoryExactCheck.py
+      - name: Preserve H80 sharp CPTP reset-memory lower bound
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
