@@ -118,9 +118,15 @@ for i in range(3):
         # Explicit diagonal sandwich without radicals:
         # first block sqrt(σ_iσ_j)=m_i m_j/3.
         m=[F(1),F(3,5),F(3,5)]
-        assert X[i][j]==gc(3*m[i]*m[j])*sigma[i][i]**0 if False else X[i][j]==gc(m[i]*m[j])
+        assert X[i][j]==gc(m[i]*m[j])
+        # Verify normalized likelihood entries without irrational
+        # inverse square roots: X_ij^2=9 σ_ii σ_jj and X_ij>0.
+        assert X[i][j]*X[i][j]==gc(9)*sigma[i][i]*sigma[j][j]
+        assert X[i][j].i==0 and X[i][j].r>0
         if i>0 and j>0:
             assert X[i+2][j+2]==gc(F(16,25))
+            assert X[i+2][j+2]*X[i+2][j+2]==(
+                gc(9)*sigma[i+2][i+2]*sigma[j+2][j+2])
         assert L[(i,j)][i][j]==O
 assert real_rank_complex([vflat(L[i,j]) for i in range(3) for j in range(3)])==9
 
@@ -148,7 +154,6 @@ BASIS13=[BLOCK0[i,j] for i in range(3) for j in range(3)]
 BASIS13 += [BLOCK1[i,j] for i in (1,2) for j in (1,2)]
 assert len(BASIS13)==13
 assert real_rank_complex([vflat(X) for X in BASIS13])==13
-assert all(mul(X,Y)==Y or mul(X,Y)!=Y for X in BASIS13 for Y in BASIS13)
 for X in BASIS13:
     for Y in BASIS13:
         # Block diagonal algebra is closed under products.
