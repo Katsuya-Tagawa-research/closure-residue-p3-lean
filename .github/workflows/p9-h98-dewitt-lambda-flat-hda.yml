@@ -1,0 +1,28 @@
+name: P9 H98 DeWitt Lambda Flat Offshell HDA Selector and Source K4 Cotangent
+
+on:
+  push:
+    branches:
+      - research/p9-h98-dewitt-lambda-flat-hda-selector-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h98-dewitt-lambda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H98 actual source H75 flag data conditional K4 cotangent lift and independent nonuniform flat HDA lambda selector
+        run: python3 P3/P9H98DeWittLambdaFlatHDASourceSelectorExactCheck.py
+      - name: Preserve H97 physical real Hamiltonian SO4 rank3 isotropic gate
+        run: python3 P3/P9H97PhysicalRealHamiltonianCodeSO4IsotropicExactCheck.py
+      - name: Preserve H96 genuine 6D CPTP finite bounded GKSL obstruction and DeWitt sign
+        run: python3 P3/P9H96FiniteGKSLDeWittProvenanceExactCheck.py
+      - name: Preserve H90 P9 P11 gravity provenance ledger
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
+      - name: Preserve H85 actual positive source K4 A4 additive selector provenance
+        run: python3 P3/P9H85A4EdgeSourceSelectionExactCheck.py
+      - name: Preserve H83 independently imported spatial-gradient H-H comparator
+        run: python3 P3/P9H83UltralocalGradientHDAGateExactCheck.py
