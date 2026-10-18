@@ -16,6 +16,8 @@ jobs:
       - uses: actions/checkout@v5
       - name: H98 actual source H75 flag data conditional K4 cotangent lift and independent nonuniform flat HDA lambda selector
         run: python3 P3/P9H98DeWittLambdaFlatHDASourceSelectorExactCheck.py
+      - name: H99 source-selected rank3 and positive-CPTP 3D curvature 2-jet witness
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
       - name: Preserve H97 physical real Hamiltonian SO4 rank3 isotropic gate
         run: python3 P3/P9H97PhysicalRealHamiltonianCodeSO4IsotropicExactCheck.py
       - name: Preserve H96 genuine 6D CPTP finite bounded GKSL obstruction and DeWitt sign
