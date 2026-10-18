@@ -56,7 +56,7 @@ e0=[1,0,0]
 r=[1,0,0]
 Ps=powers(T,3)
 reachable=[mv(p,e0) for p in Ps]
-future_rows=[mv([r],p)[0] for p in Ps]  # one input basis row per future word
+future_rows=[mm([r],p)[0] for p in Ps]  # one input basis row per future word
 H=[[dot(s,col) for col in reachable] for s in future_rows]
 assert rank(reachable)==3
 assert rank(future_rows)==3
@@ -86,7 +86,7 @@ print("PASS H82: adding calibrated independent readouts monotonically refines ob
 rows=[r]
 depth_ranks=[rank(rows)]
 for _ in range(3):
-    rows=rows+[mv([u],T)[0] for u in rows]
+    rows=rows+[mm([u],T)[0] for u in rows]
     depth_ranks.append(rank(rows))
 assert depth_ranks==[1,2,3,3],depth_ranks
 print("PASS H82: descending silent-kernel dual stabilizes after finite depth, ranks 1→2→3→3")
