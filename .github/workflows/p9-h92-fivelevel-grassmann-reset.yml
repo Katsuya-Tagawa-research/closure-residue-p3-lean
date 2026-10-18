@@ -1,0 +1,26 @@
+name: P9 H92 Source Five-Level Grassmann KKS Rank and Reset Silence
+
+on:
+  push:
+    branches:
+      - research/p9-h92-fivelevel-pre-reset-grassmann-kks-reset-silence-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h92-grassmann-reset:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H92 exact true H75 source U5 Grassmann rank12 and full CPTP reset loss
+        run: python3 P3/P9H92FiveLevelGrassmannKKSResetSilenceExactCheck.py
+      - name: Preserve H91 true checkpoint block-KKS rank 4 and 8
+        run: python3 P3/P9H91CheckpointKKSRankADMObstructionExactCheck.py
+      - name: Preserve H90 P9 P11 gravitational provenance ledger
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
+      - name: Preserve H79 CP 5-level quantum memory
+        run: python3 P3/P9H79ResetCheckpointCPTPMemoryExactCheck.py
+      - name: Preserve H80 sharp CPTP memory minimality
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
