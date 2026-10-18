@@ -1,0 +1,30 @@
+name: P9 H95 Single-Reset KKS Symplectic Transport No-Go
+
+on:
+  push:
+    branches:
+      - research/p9-h95-single-reset-symplectic-bottleneck-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h95-single-reset-bottleneck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H95 exact original H75 qutrit factorization, rank-eight bottleneck and positive Helstrom witness
+        run: python3 P3/P9H95SingleResetSymplecticBottleneckExactCheck.py
+      - name: Preserve H94 four-setting positive local coherence tomography
+        run: python3 P3/P9H94ExistingGateMultiSettingCoherenceTomographyExactCheck.py
+      - name: Preserve H93 source real-control SO6 and code leakage
+        run: python3 P3/P9H93ExistingRealControlGrassmannAccessExactCheck.py
+      - name: Preserve H92 genuine H75 positive Grassmann KKS rank12
+        run: python3 P3/P9H92FiveLevelGrassmannKKSResetSilenceExactCheck.py
+      - name: Preserve H91 source CP checkpoint Poisson rank obstruction
+        run: python3 P3/P9H91CheckpointKKSRankADMObstructionExactCheck.py
+      - name: Preserve H90 P9 P11 gravitational provenance gate register
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
+      - name: Preserve H80 sharp physical CPTP checkpoint-memory lower bound
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
