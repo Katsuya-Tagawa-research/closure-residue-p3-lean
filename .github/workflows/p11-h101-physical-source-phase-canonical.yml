@@ -16,6 +16,8 @@ jobs:
       - uses: actions/checkout@v5
       - name: H101 original positive CPTP family constant K4 metric vs legitimate source output phase effect
         run: python3 P3/P11H101PhaseBlindFlagCanonicalProvenanceExactCheck.py
+      - name: H102 real SO3 Lagrangian vs conditional SU2 source Hamiltonian and positive phase POVM
+        run: python3 P3/P11H102RealControlLagrangianConditionalSU2ExactCheck.py
       - name: Preserve H100 ADM comparator alpha beta lambda coupling nonselection
         run: python3 P3/P9H100ConstraintNormalizationGenerativeProvenanceExactCheck.py
       - name: Preserve H99 genuine source four-flags K4 metric rank3 and curvature 2jet witness
