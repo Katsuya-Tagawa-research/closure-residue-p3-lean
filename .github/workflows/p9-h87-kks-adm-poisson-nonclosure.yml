@@ -1,0 +1,32 @@
+name: P9 H87 KKS ADM Poisson Response Nonclosure and DeWitt Gate
+
+on:
+  push:
+    branches:
+      - research/p9-h87-kks-adm-poisson-nonclosure-dewitt-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h87-kks-adm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H87 exact KKS nonprojectable six-response quotient and DeWitt inertia
+        run: python3 P3/P9H87KKSADMPoissonNonclosureDeWittExactCheck.py
+      - name: Preserve H86 coherent exchange physical-port gate
+        run: python3 P3/P9H86ExchangeLaplacianPhysicalPortExactCheck.py
+      - name: Preserve H85 A4 source edge selector
+        run: python3 P3/P9H85A4EdgeSourceSelectionExactCheck.py
+      - name: Preserve H84 multi-cell CPTP and calibrated readout
+        run: python3 P3/P9H84SpatialCouplingProvenanceEdgeIdentifiabilityExactCheck.py
+      - name: Preserve H83 ultralocal HDA obstruction
+        run: python3 P3/P9H83UltralocalGradientHDAGateExactCheck.py
+      - name: Preserve H82 finite linear predictive quotient
+        run: python3 P3/P9H82IntegrationAuditExactCheck.py
+      - name: Preserve H80 CPTP checkpoint minimality
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
+      - name: Preserve H81 physical control-order No-Go
+        run: python3 P3/P9H81OperationalAccessibilityAxiomExactCheck.py
