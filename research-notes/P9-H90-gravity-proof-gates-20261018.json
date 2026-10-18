@@ -1,0 +1,147 @@
+{
+  "title": "H90 — P9/P11 source-to-gravity generative proof gates",
+  "date": "2026-10-18",
+  "classification": [
+    "EXACT",
+    "CONDITIONAL",
+    "NO-GO",
+    "OPEN"
+  ],
+  "note": "Each gate's generative_status evaluates derivation from declared H75/P3/F source premises, not whether some externally supplied ADM/QM comparator is internally consistent. The first finite H75 gate does not establish an F uniqueness theorem.",
+  "gates": [
+    {
+      "id": "G0",
+      "name": "Finite CPTP source and original P3 diagonal residue",
+      "generative_status": "EXACT",
+      "scope": "particular H75 source only; not universal F",
+      "sources": [
+        "H75"
+      ]
+    },
+    {
+      "id": "G1",
+      "name": "Actual intercell ports, coupling graph and AX-OA scheduling",
+      "generative_status": "OPEN",
+      "scope": "independent apparatus can be stipulated but not derived from H75/P3",
+      "sources": [
+        "H81",
+        "H84",
+        "H85",
+        "H86",
+        "H89"
+      ]
+    },
+    {
+      "id": "G2",
+      "name": "Physical spatial solder and nonuniform field/gluing covariance",
+      "generative_status": "OPEN",
+      "scope": "K4 chart exists conditionally; not a sourced field manifold",
+      "sources": [
+        "H56",
+        "H83",
+        "H85",
+        "H90"
+      ]
+    },
+    {
+      "id": "G3",
+      "name": "Micro KKS to ADM canonical symplectic and dynamical intertwiner",
+      "generative_status": "OPEN",
+      "scope": "local U4 Darboux comparator possible; compact-global exact cotangent target No-Go",
+      "sources": [
+        "H59",
+        "H61",
+        "H87",
+        "H88",
+        "H89"
+      ]
+    },
+    {
+      "id": "G4",
+      "name": "Source-generated indefinite DeWitt gravitational momentum Hamiltonian",
+      "generative_status": "OPEN",
+      "scope": "signature (5+,1-) not from positive (6+,0-) configuration-preserving congruence",
+      "sources": [
+        "H61",
+        "H87"
+      ]
+    },
+    {
+      "id": "G5",
+      "name": "Full sourced nonuniform off-shell H-H H-D D-D constraint algebra",
+      "generative_status": "OPEN",
+      "scope": "conditional standard ADM comparator available; original P3-source derivation absent",
+      "sources": [
+        "H56",
+        "H61",
+        "H83",
+        "H90"
+      ]
+    },
+    {
+      "id": "G6",
+      "name": "Einstein-Hilbert or equivalent Einstein dynamics source derivation",
+      "generative_status": "OPEN",
+      "scope": "cannot import standard ADM action and count it as generated",
+      "sources": [
+        "H56",
+        "H59",
+        "H61",
+        "H90"
+      ]
+    },
+    {
+      "id": "G7",
+      "name": "CR-specific empirical discriminator and full F generative completeness",
+      "generative_status": "OPEN",
+      "scope": "P11/P12 and experimental requirements beyond P9 minimum",
+      "sources": [
+        "H81",
+        "H84",
+        "H85",
+        "H86",
+        "H89",
+        "H90"
+      ]
+    }
+  ],
+  "comparator_results": [
+    {
+      "claim": "A4 equivariant affine selectors form a three-parameter space",
+      "classification": "EXACT",
+      "sources": [
+        "H85"
+      ]
+    },
+    {
+      "claim": "Source/local readouts select unique candidate spatial H-H symbol",
+      "classification": "NO-GO",
+      "scope": "relative to H90's restricted source and two supplied comparator selectors",
+      "sources": [
+        "H85",
+        "H90"
+      ]
+    },
+    {
+      "claim": "Assumed ADM has full nonuniform off-shell HDA",
+      "classification": "CONDITIONAL",
+      "sources": [
+        "H56"
+      ]
+    },
+    {
+      "claim": "Real-only control catalog accesses all U4 imaginary coherences",
+      "classification": "NO-GO",
+      "sources": [
+        "H89"
+      ]
+    },
+    {
+      "claim": "Physical apparatus with exchange+phase coherent controls reconstructs U4 state",
+      "classification": "CONDITIONAL",
+      "sources": [
+        "H89"
+      ]
+    }
+  ]
+}
