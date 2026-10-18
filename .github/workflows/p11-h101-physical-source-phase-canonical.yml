@@ -1,0 +1,30 @@
+name: P11 H101 Genuine Source Phase Blindness and Canonical Provenance
+
+on:
+  push:
+    branches:
+      - research/p11-h101-phase-blind-source-canonical-provenance-20261019
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h101-source-phase-canonical:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H101 original positive CPTP family constant K4 metric vs legitimate source output phase effect
+        run: python3 P3/P11H101PhaseBlindFlagCanonicalProvenanceExactCheck.py
+      - name: Preserve H100 ADM comparator alpha beta lambda coupling nonselection
+        run: python3 P3/P9H100ConstraintNormalizationGenerativeProvenanceExactCheck.py
+      - name: Preserve H99 genuine source four-flags K4 metric rank3 and curvature 2jet witness
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H98 source K4 cotangent and nonuniform ADM HDA comparator
+        run: python3 P3/P9H98DeWittLambdaFlatHDASourceSelectorExactCheck.py
+      - name: Preserve H97 actual H75 source real Hamiltonian so4/isotropic limit
+        run: python3 P3/P9H97PhysicalRealHamiltonianCodeSO4IsotropicExactCheck.py
+      - name: Preserve H90 P9-P11 generative gravity provenance gate register
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
+      - name: Preserve H85 original true positive H75 four flags and A4 K4 selector
+        run: python3 P3/P9H85A4EdgeSourceSelectionExactCheck.py
