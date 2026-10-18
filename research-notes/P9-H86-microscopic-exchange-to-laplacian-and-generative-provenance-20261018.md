@@ -100,7 +100,7 @@ Thus these are not even unitarily conjugate Hamiltonians on the one-excitation s
 
 **Coherent access repair, independently assumed:** If one can prepare the phase-referenced **entangled across-cell** one-excitation state
 \[
-|\psi_{ij}\rangle=(|i\rangle-i|j\rangle)/\sqrt2
+|\psi_{ij}\rangle=(|i\rangle+i|j\rangle)/\sqrt2
 \]
 and measure the positive site-occupation projector \(E_{ii}\), then
 \[
