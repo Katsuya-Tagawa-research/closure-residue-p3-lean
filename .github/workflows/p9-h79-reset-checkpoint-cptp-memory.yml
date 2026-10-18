@@ -1,0 +1,18 @@
+name: P9 H79 Physical Reset-Checkpoint CPTP Memory Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h79-reset-checkpoint-fivelevel-cptp-memory-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h79-reset-cptp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact five-level CPTP encoding and reset-checkpoint quantum recovery
+        run: python3 P3/P9H79ResetCheckpointCPTPMemoryExactCheck.py
