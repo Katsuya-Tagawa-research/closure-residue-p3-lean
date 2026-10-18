@@ -1,0 +1,28 @@
+name: P11 H102 Source Real Hamiltonian Lagrangian vs Conditional SU2 Canonical Pair
+
+on:
+  push:
+    branches:
+      - research/p11-h102-real-control-lagrangian-vs-conditional-su2-source-20261019
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h102-source-canonical-real-vs-complex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H102 full original H75 qutrit so3 Lagrangian KKS and conditional isospectral SU2 pair with positive POVMs
+        run: python3 P3/P11H102RealControlLagrangianConditionalSU2ExactCheck.py
+      - name: Preserve H101 original source positive phase family and independently calibrated phase readout
+        run: python3 P3/P11H101PhaseBlindFlagCanonicalProvenanceExactCheck.py
+      - name: Preserve H100 P9 P11 ADM comparator normalization proof-gate ledger
+        run: python3 P3/P9H100ConstraintNormalizationGenerativeProvenanceExactCheck.py
+      - name: Preserve H99 positive source configuration rank and curvature two-jet ambiguity
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H97 real micro-control source KKS rank/isotropy comparison
+        run: python3 P3/P9H97PhysicalRealHamiltonianCodeSO4IsotropicExactCheck.py
+      - name: Preserve H90 P9/P11 gravity provenance and unresolved Einstein gates
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
