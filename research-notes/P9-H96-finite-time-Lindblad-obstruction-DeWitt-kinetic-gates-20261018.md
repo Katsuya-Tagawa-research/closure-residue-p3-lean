@@ -102,7 +102,7 @@ At a physical 3D spatial metric chart \(g=I_3\), the ADM gravitational momentum 
 \quad\pi=\pi^\top\in\operatorname{Sym}(3).}
 \tag{H96-DW}
 \]
-In independent real tensor entries \(p=(\pi_{11},\pi_{22},\pi_{33},\pi_{12},\pi_{13},\pi_{23})\), its symmetric matrix is
+In independent real tensor entries \(p=(\pi_{11},\pi_{22},\pi_{33},\pi_{12},\pi_{13},\pi_{23})\), its symmetric quadratic-form matrix (half the ordinary Hessian) is
 \[
 D=\begin{pmatrix}
 1/2&-1/2&-1/2&0&0&0\\
@@ -113,7 +113,7 @@ D=\begin{pmatrix}
 0&0&0&0&0&2
 \end{pmatrix}.
 \]
-The \(3\times3\) diagonal block is \(I_3-\frac12\mathbf1\mathbf1^\top\); its eigenvalues are \(1,1,-1/2\), and the three off-diagonal modes have eigenvalue 2 each. Thus
+The \(3\times3\) diagonal block is \(I_3-\frac12\mathbf1\mathbf1^\top\); its quadratic-form-matrix eigenvalues are \(1,1,-1/2\), and the three off-diagonal modes have eigenvalue 2 each. The actual coordinate Hessian is \(2D\), with eigenvalues \(2,2,-1,4,4,4\); both matrices have the same inertia. Thus
 \[
 \boxed{\operatorname{inertia}(D)=(5+,1-),\quad
 \det D=-4.}
@@ -125,7 +125,7 @@ The traceless modes are all positive. For any \(g>0\), the momentum tensor under
 
 A positive Fisher/K4 response metric or any positive-definite quadratic \(F>0\) cannot be transformed into \(D\) by a **configuration-preserving invertible real momentum change** \(F\mapsto B^\top FB\) (Sylvester's inertia theorem). However, this does **NOT** prove that every possible microscopic Hamiltonian must have positive kinetic Hessian; a genuinely sourced Hamiltonian might independently have an indefinite kinetic term. H96 establishes a **necessary dynamical sign test**, not an impossibility theorem for all future F/P3 axioms.
 
-The checker exactly computes all six tensor Hessian directions, determinant \(-4\), positive traceless and negative trace witnesses, and a rational positive-congruence comparison. This is an independent finite audit, **not** a derivation of GR from the H75 source.
+The checker exactly computes all six quadratic-form eigen-directions, determinant \(-4\), positive traceless and negative trace witnesses, and a rational positive-congruence comparison. This is an independent finite audit, **not** a derivation of GR from the H75 source.
 
 ## 6. Direct P9/P11 proof handoff: stop replacing physics by observation rank
 
