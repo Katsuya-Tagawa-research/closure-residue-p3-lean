@@ -1,0 +1,24 @@
+name: P9 H83 Ultralocality Gradient HDA Gate Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h83-ultralocality-gradient-coupling-hda-gate-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h83-ultralocal-hda-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H83 exact symbolic polynomial ultralocal obstruction and edge flux
+        run: python3 P3/P9H83UltralocalGradientHDAGateExactCheck.py
+      - name: Preserve H82 operational-accessibility Hankel gate
+        run: python3 P3/P9H82IntegrationAuditExactCheck.py
+      - name: Preserve H80 exact CPTP minimum
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
+      - name: Preserve H81 physical positive POVM order witness
+        run: python3 P3/P9H81OperationalAccessibilityAxiomExactCheck.py
