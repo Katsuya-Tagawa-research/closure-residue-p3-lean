@@ -1,0 +1,28 @@
+name: P9 H91 Genuine CPTP Checkpoint KKS Rank vs ADM Canonical Gate
+
+on:
+  push:
+    branches:
+      - research/p9-h91-checkpoint-kks-rank-obstruction-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h91-checkpoint-kks-rank:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H91 source-specific CPTP checkpoint KKS rank obstruction
+        run: python3 P3/P9H91CheckpointKKSRankADMObstructionExactCheck.py
+      - name: Preserve H79 genuine CP rank13 post-reset memory
+        run: python3 P3/P9H79FiveLevelCPTPCheckpointMemoryExactCheck.py
+      - name: Preserve H80 sharp minimal 5-level CPTP checkpoint memory
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
+      - name: Preserve H90 source-to-HDA coupling nonselection and P9 P11 gate ledger
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
+      - name: Preserve H89 physical coherent control-access conditions
+        run: python3 P3/P9H89KKSPhysicalCoherenceAccessExactCheck.py
+      - name: Preserve H87 independent U4 comparator and DeWitt sign gate
+        run: python3 P3/P9H87KKSADMPoissonNonclosureDeWittExactCheck.py
