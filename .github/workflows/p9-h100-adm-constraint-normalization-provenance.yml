@@ -1,0 +1,30 @@
+name: P9 H100 ADM Constraint Normalization and P11 Generative Provenance Gate
+
+on:
+  push:
+    branches:
+      - research/p9-h100-constraint-normalization-f-provenance-20261019
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h100-constraint-normalization:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H100 exact independent traceless isotropic offshell ADM alpha beta lambda Lambda normalization and H99 positive source witness
+        run: python3 P3/P9H100ConstraintNormalizationGenerativeProvenanceExactCheck.py
+      - name: Preserve H99 actual source-positive K4 metric rank3 and spatial scalar-curvature 2jet nonselection
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H98 standard ADM lambda-HDA flat nonuniform comparison and source cotangent
+        run: python3 P3/P9H98DeWittLambdaFlatHDASourceSelectorExactCheck.py
+      - name: Preserve H97 existing source real-control SO4 isotropic obstruction
+        run: python3 P3/P9H97PhysicalRealHamiltonianCodeSO4IsotropicExactCheck.py
+      - name: Preserve H96 genuine original finite GKSL embedding and DeWitt inertia
+        run: python3 P3/P9H96FiniteGKSLDeWittProvenanceExactCheck.py
+      - name: Preserve H90 P9-P11 provenance proof gate register
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
+      - name: Preserve H83 independently imported nonuniform H-H gradient coupling comparator
+        run: python3 P3/P9H83UltralocalGradientHDAGateExactCheck.py
