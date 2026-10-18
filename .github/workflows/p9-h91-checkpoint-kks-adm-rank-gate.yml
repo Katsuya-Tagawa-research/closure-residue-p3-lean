@@ -17,7 +17,7 @@ jobs:
       - name: H91 source-specific CPTP checkpoint KKS rank obstruction
         run: python3 P3/P9H91CheckpointKKSRankADMObstructionExactCheck.py
       - name: Preserve H79 genuine CP rank13 post-reset memory
-        run: python3 P3/P9H79FiveLevelCPTPCheckpointMemoryExactCheck.py
+        run: python3 P3/P9H79ResetCheckpointCPTPMemoryExactCheck.py
       - name: Preserve H80 sharp minimal 5-level CPTP checkpoint memory
         run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
       - name: Preserve H90 source-to-HDA coupling nonselection and P9 P11 gate ledger
