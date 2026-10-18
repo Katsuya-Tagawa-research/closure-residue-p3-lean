@@ -1,0 +1,30 @@
+name: P9 H97 Actual H75 Real Hamiltonian SO4 Isotropic G3 G4 Gate
+
+on:
+  push:
+    branches:
+      - research/p9-h97-physical-real-hamiltonian-so4-isotropic-g3-g4-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h97-source-real-hamiltonian:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H97 exact genuine H75 real code-preserving so4 rank3 isotropic KKS and original A/B infinitesimal leakage
+        run: python3 P3/P9H97PhysicalRealHamiltonianCodeSO4IsotropicExactCheck.py
+      - name: Preserve H96 actual H75 nonembedding finite bounded GKSL and DeWitt kinetic signature
+        run: python3 P3/P9H96FiniteGKSLDeWittProvenanceExactCheck.py
+      - name: Preserve H95 single original CPTP reset rank-eight bottleneck
+        run: python3 P3/P9H95SingleResetSymplecticBottleneckExactCheck.py
+      - name: Preserve H93 full existing real Lie closure and Grassmann rank
+        run: python3 P3/P9H93ExistingRealControlGrassmannAccessExactCheck.py
+      - name: Preserve H92 genuine original 5-level Grassmann KKS rank12
+        run: python3 P3/P9H92FiveLevelGrassmannKKSResetSilenceExactCheck.py
+      - name: Preserve H91 minimal checkpoint 5-level CP Poisson rank
+        run: python3 P3/P9H91CheckpointKKSRankADMObstructionExactCheck.py
+      - name: Preserve H90 P9 P11 source-to-gravity proof gate ledger
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
