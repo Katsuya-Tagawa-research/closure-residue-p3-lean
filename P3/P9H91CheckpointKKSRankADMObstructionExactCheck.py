@@ -73,7 +73,7 @@ for a in range(3):
         expected=J5(X)
         assert first==[row[:3] for row in expected[:3]]
         assert second==[
-            [expected[3+i][3+j] if i>=1 and j>=1 else Z0
+            [expected[2+i][2+j] if i>=1 and j>=1 else Z0
              for j in range(3)] for i in range(3)
         ]
         assert envblock(raw,0,1)==zero(3) and envblock(raw,1,0)==zero(3)
