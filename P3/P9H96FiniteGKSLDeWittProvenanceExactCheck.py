@@ -1,5 +1,5 @@
 """H96: exact H75 rank9/kernel27 vs finite-time GKSL invertibility;
-ADM DeWitt kinetic Hessian has (5+,1-) signature, not Fisher (++...+).
+ADM DeWitt kinetic quadratic form has (5+,1-) signature, not Fisher (++...+).
 
 Original H75 four-Kraus CP instrument and P3 residue untouched.
 General finite-time generator theorem is via inverse fundamental matrix
@@ -149,7 +149,7 @@ assert Q([F(1),F(-1),F(0),F(0),F(0),F(0)])==F(2)
 det=F(1)
 for _,lam in basis:det*=lam
 assert det==F(-4)
-print("PASS H96.3: exact standard ADM DeWitt 6-momentum Hessian eigenvalues {1,1,-1/2,2,2,2}, inertia (5+,1-), determinant -4, negative conformal trace witness -3/2")
+print("PASS H96.3: exact standard ADM DeWitt quadratic matrix D eigenvalues {1,1,-1/2,2,2,2}, true Hessian 2D eigenvalues {2,2,-1,4,4,4}, inertia (5+,1-), det(D)=-4, negative conformal trace witness -3/2")
 
 # Independent positive response/Fisher Hessian cannot gain negative
 # inertia by a legitimate REAL INVERTIBLE configuration-preserving
