@@ -1,0 +1,30 @@
+name: P11 H103 Exact H75 Source-Equivariant Canonical Transport and P9 Cartan Handoff
+
+on:
+  push:
+    branches:
+      - research/p11-h103-source-equivariant-subgroup-cartan-bridge-gate-20261019
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h103-source-cartan-canonical:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H103 actual full M6 B-sector equivariance, one-direction real source centralizer and A-orbit spectral No-Go
+        run: python3 P3/P11H103SourceEquivariantTransportCartanInterfaceExactCheck.py
+      - name: Preserve H102 original real SO3 Lagrangian vs conditional SU2 positive H75 phase witness
+        run: python3 P3/P11H102RealControlLagrangianConditionalSU2ExactCheck.py
+      - name: Preserve H101 full positive phase-family and flag-readout insufficiency
+        run: python3 P3/P11H101PhaseBlindFlagCanonicalProvenanceExactCheck.py
+      - name: Preserve H100 offshell ADM normalization provenance
+        run: python3 P3/P9H100ConstraintNormalizationGenerativeProvenanceExactCheck.py
+      - name: Preserve H99 actual source K4 metric rank3 curvature two-jet nonselection
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H97 physical real control/source-output support and isotropy
+        run: python3 P3/P9H97PhysicalRealHamiltonianCodeSO4IsotropicExactCheck.py
+      - name: Preserve H90 P9-P11 gravity gate registry
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
