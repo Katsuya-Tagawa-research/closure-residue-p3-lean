@@ -1,0 +1,26 @@
+name: P9 H84 Spatial Coupling Provenance and Edge Response Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h84-spatial-coupling-provenance-operational-edge-identifiability-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h84-spatial-coupling-provenance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H84 exact physical joint CPTP marginal counterexample and edge response
+        run: python3 P3/P9H84SpatialCouplingProvenanceEdgeIdentifiabilityExactCheck.py
+      - name: Preserve H83 ultralocal obstruction and edge flux
+        run: python3 P3/P9H83UltralocalGradientHDAGateExactCheck.py
+      - name: Preserve H82 finite predictive linear quotient
+        run: python3 P3/P9H82IntegrationAuditExactCheck.py
+      - name: Preserve H80 sharp physical CPTP minimum
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
+      - name: Preserve H81 physical operational scheduling No-Go
+        run: python3 P3/P9H81OperationalAccessibilityAxiomExactCheck.py
