@@ -1,0 +1,28 @@
+name: P9 H85 A4 Spatial Edge Selection and Provenance Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h85-a4-edge-selection-identifiability-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h85-a4-edge-selection:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H85 exact A4 affine nullity conditional edge weights and K4 metrics
+        run: python3 P3/P9H85A4EdgeSourceSelectionExactCheck.py
+      - name: Preserve H84 positive multi-cell CPTP ambiguity and ZZ identification
+        run: python3 P3/P9H84SpatialCouplingProvenanceEdgeIdentifiabilityExactCheck.py
+      - name: Preserve H83 ultralocal HDA obstruction and edge flux
+        run: python3 P3/P9H83UltralocalGradientHDAGateExactCheck.py
+      - name: Preserve H82 finite linear predictive record
+        run: python3 P3/P9H82IntegrationAuditExactCheck.py
+      - name: Preserve H80 sharp CPTP checkpoint minimum
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
+      - name: Preserve H81 scheduling positive-POVM No-Go
+        run: python3 P3/P9H81OperationalAccessibilityAxiomExactCheck.py
