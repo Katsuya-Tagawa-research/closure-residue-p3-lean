@@ -1,0 +1,30 @@
+name: P9 H99 Actual H75 K4 Metric Source Rank and Curvature Jet No-Go
+
+on:
+  push:
+    branches:
+      - research/p9-h99-source-metric-rank-curvature-jet-nonselection-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h99-source-rank-curvature-jet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H99 real H75 source-selected metric rank3 and two positive CPTP curvature-jet/ADM-constraint witnesses
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H98 conditional positive K4 cotangent and nonuniform ADM lambda H-H gate
+        run: python3 P3/P9H98DeWittLambdaFlatHDASourceSelectorExactCheck.py
+      - name: Preserve H97 actual source code-preserving SO4 KKS/physical Hamiltonian limit
+        run: python3 P3/P9H97PhysicalRealHamiltonianCodeSO4IsotropicExactCheck.py
+      - name: Preserve H96 original H75 finite GKSL embedding obstruction and DeWitt inertia
+        run: python3 P3/P9H96FiniteGKSLDeWittProvenanceExactCheck.py
+      - name: Preserve H85 original H75-positive A4 endpoint K4 selector and distinct metrics
+        run: python3 P3/P9H85A4EdgeSourceSelectionExactCheck.py
+      - name: Preserve H90 P9-P11 physical source provenance gate register
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
+      - name: Preserve H83 independent off-shell H-H gradient coupling comparator
+        run: python3 P3/P9H83UltralocalGradientHDAGateExactCheck.py
