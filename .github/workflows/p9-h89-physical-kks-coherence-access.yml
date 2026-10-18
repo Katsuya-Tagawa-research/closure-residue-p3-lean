@@ -1,0 +1,36 @@
+name: P9 H89 Physical KKS Coherence-Access and Lie Control Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h89-physical-kks-observability-control-access-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h89-physical-kks-access:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H89 exact positive physical coherence tomography, real-only no-go, connected Lie rank
+        run: python3 P3/P9H89KKSPhysicalCoherenceAccessExactCheck.py
+      - name: Preserve H88 local/global KKS coherence completion
+        run: python3 P3/P9H88CoherenceCompletedKKSPoissonExactCheck.py
+      - name: Preserve H87 nonprojectability and DeWitt
+        run: python3 P3/P9H87KKSADMPoissonNonclosureDeWittExactCheck.py
+      - name: Preserve H86 coherent exchange Laplacian
+        run: python3 P3/P9H86ExchangeLaplacianPhysicalPortExactCheck.py
+      - name: Preserve H85 A4 edge selector
+        run: python3 P3/P9H85A4EdgeSourceSelectionExactCheck.py
+      - name: Preserve H84 two-cell CPTP ambiguity
+        run: python3 P3/P9H84SpatialCouplingProvenanceEdgeIdentifiabilityExactCheck.py
+      - name: Preserve H83 ultralocal/HDA gate
+        run: python3 P3/P9H83UltralocalGradientHDAGateExactCheck.py
+      - name: Preserve H82 linear observability quotient
+        run: python3 P3/P9H82IntegrationAuditExactCheck.py
+      - name: Preserve H80 CPTP exact quantum memory
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
+      - name: Preserve H81 operational ordering no-go
+        run: python3 P3/P9H81OperationalAccessibilityAxiomExactCheck.py
