@@ -1,0 +1,34 @@
+name: P9 H88 Local/Global KKS Coherence Completion Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h88-coherence-completion-kks-local-global-poisson-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h88-kks-coherence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H88 exact rank12 spectral Casimirs global SU4 closure
+        run: python3 P3/P9H88CoherenceCompletedKKSPoissonExactCheck.py
+      - name: Preserve H87 Poisson nonprojectability and DeWitt gate
+        run: python3 P3/P9H87KKSADMPoissonNonclosureDeWittExactCheck.py
+      - name: Preserve H86 coherent exchange Laplacian port
+        run: python3 P3/P9H86ExchangeLaplacianPhysicalPortExactCheck.py
+      - name: Preserve H85 A4 edge source selector
+        run: python3 P3/P9H85A4EdgeSourceSelectionExactCheck.py
+      - name: Preserve H84 multichannel CPTP correlation ambiguity
+        run: python3 P3/P9H84SpatialCouplingProvenanceEdgeIdentifiabilityExactCheck.py
+      - name: Preserve H83 ultralocal ADM HDA obstruction
+        run: python3 P3/P9H83UltralocalGradientHDAGateExactCheck.py
+      - name: Preserve H82 linear predictive record
+        run: python3 P3/P9H82IntegrationAuditExactCheck.py
+      - name: Preserve H80 CPTP checkpoint sufficiency
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
+      - name: Preserve H81 operational ordering No-Go
+        run: python3 P3/P9H81OperationalAccessibilityAxiomExactCheck.py
