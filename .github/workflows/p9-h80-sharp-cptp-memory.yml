@@ -1,0 +1,18 @@
+name: P9 H80 Sharp CPTP Sufficient Quantum Memory Exact Audit
+
+on:
+  push:
+    branches:
+      - research/p9-h80-sharp-cptp-sufficiency-minimal-fivelevel-memory-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h80-sharp-cptp-memory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact faithful likelihood operator algebra and sharp 5-level CPTP memory certificate
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
