@@ -46,7 +46,7 @@ because \(\rho_{\rm real}\) is real symmetric and \([K,L]\) real skew. The orbit
 
 In particular the original real A/B controls **cannot create nonzero computational-basis imaginary coherence** \(Y_{01}\) from this real diagonal seed, regardless of how they are concatenated in the real orthogonal group. The H75 fixed complex U appears *downstream inside an irreversible reset* and is **not** an independently sourced coherent pre-reset Hamiltonian; it cannot be counted to evade this real-control restriction.
 
-## 3. H102.2 — An abstract and operational 2D KKS pair if and only if an EXTRA X quadrature is available (CONDITIONAL EXACT)
+## 3. H102.2 — An abstract and operational 2D KKS pair if an independently certified EXTRA X quadrature is available (CONDITIONAL EXACT)
 
 Define the Pauli-type Hermitian source-site operators
 \[
