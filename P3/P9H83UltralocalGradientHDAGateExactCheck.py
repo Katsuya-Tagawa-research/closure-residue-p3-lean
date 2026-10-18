@@ -78,7 +78,7 @@ print("PASS H83.1: ultralocal H-H zero polynomial for arbitrary lapses and cell 
 
 def He(L):
     return sum((A/2*L[i]*p[i]*p[i]
-        +kappa/4*(L[i]+L[(i+1)%n])*(q[(i+1)%n]-q[i])*(q[(i+1)%n]-q[i]))
+        +kappa/4*(L[i]+L[(i+1)%n])*(q[(i+1)%n]-q[i])*(q[(i+1)%n]-q[i])
                for i in range(n)),Poly())
 
 HH=PB(He(N),He(M))
