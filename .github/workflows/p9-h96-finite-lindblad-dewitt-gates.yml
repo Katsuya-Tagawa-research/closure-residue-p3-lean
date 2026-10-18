@@ -1,0 +1,32 @@
+name: P9 H96 Finite GKSL Embedding and DeWitt Kinetic Provenance Gate
+
+on:
+  push:
+    branches:
+      - research/p9-h96-finite-lindblad-g3-dewitt-g4-20261018
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h96-g3-g4-source-dynamics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H96 exact original micro superoperator rank9/kernel27 and finite-time Lindblad/DeWitt gate
+        run: python3 P3/P9H96FiniteGKSLDeWittProvenanceExactCheck.py
+      - name: Preserve H95 no-bypass single-reset KKS symplectic transport No-Go
+        run: python3 P3/P9H95SingleResetSymplecticBottleneckExactCheck.py
+      - name: Preserve H94 four-setting genuine positive CPTP tomography
+        run: python3 P3/P9H94ExistingGateMultiSettingCoherenceTomographyExactCheck.py
+      - name: Preserve H93 inherited real-control so6 / rank9 vs Grassmann
+        run: python3 P3/P9H93ExistingRealControlGrassmannAccessExactCheck.py
+      - name: Preserve H92 true source Gr2(C5) and original reset erasure
+        run: python3 P3/P9H92FiveLevelGrassmannKKSResetSilenceExactCheck.py
+      - name: Preserve H91 true CP-checkpoint KKS rank bound
+        run: python3 P3/P9H91CheckpointKKSRankADMObstructionExactCheck.py
+      - name: Preserve H90 P9-P11 source-to-gravity proof-gate ledger
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
+      - name: Preserve H80 exact CPTP checkpoint minimal quantum memory
+        run: python3 P3/P9H80SharpCPTPStatisticalSufficiencyExactCheck.py
