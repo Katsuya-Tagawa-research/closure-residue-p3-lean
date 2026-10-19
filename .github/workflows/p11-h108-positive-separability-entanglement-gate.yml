@@ -16,6 +16,8 @@ jobs:
       - uses: actions/checkout@v5
       - name: H108 genuine original H75 36D positive output separability witness universal bound and conditional H105 link violation
         run: python3 P3/P11H108PositiveSeparableBoundConditionalLinkExactCheck.py
+      - name: H108 PRIMARY P9 16D 48D autonomous Hamiltonian backreaction audit and faithful H75 irreversible-to-unitary intertwiner No-Go
+        run: python3 P3/P11H108P9PrimarySourceInvertibilityBridgeNoGoExactCheck.py
       - name: Preserve H107 source-output positive phase-correlation effect and typed seven-gate ledger
         run: python3 P3/P11H107TypedP9P11GenerativeHandoffPositivePhaseReadoutExactCheck.py
       - name: Preserve H106 actual H75 local-only No-Go and conditional entangled branch NPT
