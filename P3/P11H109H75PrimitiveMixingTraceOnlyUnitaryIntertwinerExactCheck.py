@@ -61,9 +61,10 @@ for X in SBASIS:
     assert mattrace(V(X))==mattrace(X)
     lhs=hs(X,X)-hs(V(X),V(X))
     rhs=gc(F(16,25))*sum((
-        abs(X[0][j])**2+abs(X[j][0])**2 for j in (1,2)
-    ),F(0))
-    assert lhs.i==0 and lhs.r==rhs.r if hasattr(rhs,'r') else lhs.r==rhs
+        X[0][j].conj()*X[0][j]+X[j][0].conj()*X[j][0]
+        for j in (1,2)
+    ),Z0)
+    assert lhs==rhs and lhs.i==0
 assert V(I3)==I3
 assert mattrace(V(I3))==gc(F(3))
 print("PASS H109.1: original H75 visible 3D channel EXACTLY equals Ad_U after Schur damping cross site-0 versus 1/2 by 3/5; unital/trace-preserving on all 9 quantum basis units")
@@ -103,7 +104,6 @@ traceless=H91.traceless
 assert len(traceless)==8
 # Separate diagonal/symmetric/antisymmetric generator pieces
 # cover all complex-traceless site operators.
-assert H91.rank([[sum((z.r for z in row),F(0)) for row in G3]])>=0
 assert iszero(powers(I3,3)) is False
 # Stronger exact nondegeneracy test: 8 coordinate directions
 # two traceless diagonals and six site quadratures produce
