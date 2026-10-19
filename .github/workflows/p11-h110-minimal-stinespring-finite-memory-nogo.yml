@@ -1,0 +1,44 @@
+name: P11 H110 H75 Minimal Stinespring and Fixed Finite Closed Memory No-Go
+
+on:
+  push:
+    branches:
+      - research/p11-h110-finite-unitary-dilation-fresh-ancilla-memory-no-go-20261019
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h110-finite-memory-dilation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H110 original H75 exact one-step minimal Stinespring, fresh finite histories and analytic fixed finite memory recurrence No-Go
+        run: python3 P3/P11H110H75MinimalDilationFiniteClosedMemoryNoGoExactCheck.py
+      - name: Preserve H109 original H75 three-step mixing and trace-only ANY linear map into unitary target
+        run: python3 P3/P11H109H75PrimitiveMixingTraceOnlyUnitaryIntertwinerExactCheck.py
+      - name: Preserve H108 original P9 16D 48D Hamiltonian primary source and faithful intertwiners
+        run: python3 P3/P11H108P9PrimarySourceInvertibilityBridgeNoGoExactCheck.py
+      - name: Preserve H108 original H75 positive separability readout and universal bound
+        run: python3 P3/P11H108PositiveSeparableBoundConditionalLinkExactCheck.py
+      - name: Preserve H107 source-positive phase readout and typed seven-gate P9 P11 register
+        run: python3 P3/P11H107TypedP9P11GenerativeHandoffPositivePhaseReadoutExactCheck.py
+      - name: Preserve H106 actual source local-only entangling Hamiltonian No-Go
+        run: python3 P3/P11H106LocalOnlySeparabilityVsLinkEntanglementExactCheck.py
+      - name: Preserve H105 source two-cell true Kraus commutant and conditional KKS gate
+        run: python3 P3/P11H105TwoCellConditionalCoherentCanonicalTransportExactCheck.py
+      - name: Preserve H104 actual source observer vs K4 holonomy selector failure
+        run: python3 P3/P11H104ObserverPreservingHolonomySourceGateExactCheck.py
+      - name: Preserve H103 source B all-input intertwiner and A spectral transport No-Go
+        run: python3 P3/P11H103SourceEquivariantTransportCartanInterfaceExactCheck.py
+      - name: Preserve H102 true original local real SO3 and extra SU2 symplectic pair
+        run: python3 P3/P11H102RealControlLagrangianConditionalSU2ExactCheck.py
+      - name: Preserve H101 source-positive flag-constant phase observer insufficiency
+        run: python3 P3/P11H101PhaseBlindFlagCanonicalProvenanceExactCheck.py
+      - name: Preserve H100 conditional DeWitt ADM normalization source gate
+        run: python3 P3/P9H100ConstraintNormalizationGenerativeProvenanceExactCheck.py
+      - name: Preserve H99 source-selected K4 metric rank3 curvature two-jet nonselection
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H90 P9 P11 gravity physical-source provenance ledger
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
