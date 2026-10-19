@@ -1,0 +1,37 @@
+name: P11 AX13 typed initiality exact algebra audit
+on:
+  push:
+    branches:
+      - research/p11-ax13-typed-generative-initiality-20261019
+    paths:
+      - 'research/p11/ax13-typed-generative-initiality-20261019/**'
+      - '.github/workflows/p11_ax13_typed_initiality.yml'
+  pull_request:
+    paths:
+      - 'research/p11/ax13-typed-generative-initiality-20261019/**'
+      - '.github/workflows/p11_ax13_typed_initiality.yml'
+permissions:
+  contents: read
+jobs:
+  typed-algebra-exact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax13-typed-generative-initiality-20261019/P11_AX13_typed_free_generation_audit.py
+      - run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('research/p11/ax13-typed-generative-initiality-20261019/P11_AX13_exact_results.json').read_text())
+          assert r['all_passed'] and r['exact_checks']==1557
+          assert r['free_words_through_degree_6']==127
+          assert r['physical_realization_origin']=='OPEN'
+          assert r['F_generativity_completeness']=='OPEN'
+          assert r['retraction_r0_nonzero_quadratic_return'] is False
+          print('AX13 exact algebra checks PASS; physics and generative completeness OPEN')
+          PY
