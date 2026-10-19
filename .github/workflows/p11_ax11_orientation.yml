@@ -1,0 +1,42 @@
+name: P11 AX11 minimal chiral instrument exact audit
+on:
+  pull_request:
+    paths:
+      - 'research/p11/ax11-minimal-orientation-20261019/**'
+      - '.github/workflows/p11_ax11_orientation.yml'
+  push:
+    branches:
+      - 'research/p11-ax11-minimal-orientation-20261019'
+    paths:
+      - 'research/p11/ax11-minimal-orientation-20261019/**'
+      - '.github/workflows/p11_ax11_orientation.yml'
+permissions:
+  contents: read
+jobs:
+  exact-minimal-orientation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax11-minimal-orientation-20261019/P11_AX11_chiral_minimality_audit.py
+      - name: Validate bounded claims
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/ax11-minimal-orientation-20261019/P11_AX11_exact_results.json')
+          o=json.loads(p.read_text())
+          assert o['all_passed'] and o['exact_assertions_passed']==803
+          assert o['minimal_hankel_rank']==4
+          assert o['reachable_rank']==o['observable_rank']==4
+          assert o['transition_determinant']=='1/27'
+          assert o['transpose_is_completely_positive'] is False
+          assert o['external_Y_reference_distinguishes'] is True
+          assert o['source_catalog_exhaustiveness']=='OPEN'
+          assert o['P11_generative_completeness']=='OPEN'
+          print('AX11 minimal transpose gauge finite audit PASS; F-origin OPEN')
+          PY
