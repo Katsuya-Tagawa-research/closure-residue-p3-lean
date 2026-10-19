@@ -1,0 +1,36 @@
+name: P11 H107 Typed P9 Handoff and Positive Original H75 Phase-Correlation Readout
+
+on:
+  push:
+    branches:
+      - research/p11-h107-typed-generative-handoff-phase-correlation-witness-20261019
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h107-p9-p11-handoff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H107 exact H75 output positive phase-correlation POVM plus P9 P11 sourced-assumed-open dependency DAG
+        run: python3 P3/P11H107TypedP9P11GenerativeHandoffPositivePhaseReadoutExactCheck.py
+      - name: Preserve H106 true original local-only NO-GO and conditional link NPT
+        run: python3 P3/P11H106LocalOnlySeparabilityVsLinkEntanglementExactCheck.py
+      - name: Preserve H105 original H75 x H75 16-Kraus source and conditional canonical link
+        run: python3 P3/P11H105TwoCellConditionalCoherentCanonicalTransportExactCheck.py
+      - name: Preserve H104 fixed observer vs covariant K4 edge holonomy source gate
+        run: python3 P3/P11H104ObserverPreservingHolonomySourceGateExactCheck.py
+      - name: Preserve H103 original B-unitary intertwiner and A-spectral obstruction
+        run: python3 P3/P11H103SourceEquivariantTransportCartanInterfaceExactCheck.py
+      - name: Preserve H102 fixed-spectrum accessible control vs hypothetical SU2 KKS pair
+        run: python3 P3/P11H102RealControlLagrangianConditionalSU2ExactCheck.py
+      - name: Preserve H101 flag-constant accessible phase readout
+        run: python3 P3/P11H101PhaseBlindFlagCanonicalProvenanceExactCheck.py
+      - name: Preserve H100 imported ADM offshell normalization versus unsourced couplings
+        run: python3 P3/P9H100ConstraintNormalizationGenerativeProvenanceExactCheck.py
+      - name: Preserve H99 H75 positive selected K4 metric rank3 curvature nonselection
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H90 P9 P11 gravity physical source proof gates
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
