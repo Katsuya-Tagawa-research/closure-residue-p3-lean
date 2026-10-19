@@ -1,0 +1,39 @@
+name: P11 AX01 finite observer quotient audit
+on:
+  pull_request:
+    paths:
+      - 'research/p11/ax01-finite-observer-quotient-20261019/**'
+      - '.github/workflows/p11_ax01_observer_quotient.yml'
+  push:
+    branches:
+      - 'research/p11-ax01-observer-quotient-20261019'
+    paths:
+      - 'research/p11/ax01-finite-observer-quotient-20261019/**'
+      - '.github/workflows/p11_ax01_observer_quotient.yml'
+permissions:
+  contents: read
+jobs:
+  exact-finite-cptp-observer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax01-finite-observer-quotient-20261019/P11_AX01_observer_quotient_audit.py
+      - run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/ax01-finite-observer-quotient-20261019/P11_AX01_exact_results.json')
+          r=json.loads(p.read_text())
+          assert r['all_passed'] and r['exact_assertions_passed']==74
+          assert r['quantum_obs_quotient_dim']==2 and r['quantum_hidden_dim']==7
+          assert r['extension_obstruction']=='-1/4'
+          assert r['sampling_observability_rank_pi']==1
+          assert r['sampling_observability_rank_quarter']==2
+          assert r['p11_generative_completeness']=='OPEN'
+          print('P11-AX01 74 exact algebra checks PASS; P11 completeness OPEN')
+          PY
