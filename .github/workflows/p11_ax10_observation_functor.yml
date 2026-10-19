@@ -1,0 +1,39 @@
+name: P11 AX10 observation functor and source reconstruction audit
+on:
+  push:
+    branches: [research/p11-ax10-physical-cr-category-20261019]
+    paths:
+      - 'research/p11/ax10-physical-cr-category-20261019/**'
+      - '.github/workflows/p11_ax10_observation_functor.yml'
+  pull_request:
+    paths:
+      - 'research/p11/ax10-physical-cr-category-20261019/**'
+      - '.github/workflows/p11_ax10_observation_functor.yml'
+permissions:
+  contents: read
+jobs:
+  exact-quantum-instrument-category:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax10-physical-cr-category-20261019/P11_AX10_physical_cr_category_audit.py
+      - name: Assert evidence and OPEN completeness gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/ax10-physical-cr-category-20261019/P11_AX10_exact_results.json')
+          r=json.loads(p.read_text())
+          assert r['all_passed'] and r['exact_checks']==990
+          assert r['minimal_observation_hankel_rank']==2
+          assert r['source_channel_superoperator_traces']==['8','0']
+          assert r['nonfaithful_observation_functor'] is True
+          assert r['not_essentially_injective_on_source_objects'] is True
+          assert r['gate_G2']=='OPEN' and r['gate_G3_F_generativity']=='OPEN'
+          print('P11–AX10 exact finite observer functor audit PASS; G2/G3 OPEN')
+          PY
