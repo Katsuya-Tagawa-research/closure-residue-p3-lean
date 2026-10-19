@@ -1,0 +1,40 @@
+name: P11 AX21 noncircular dissipative source exact audit
+on:
+  push:
+    branches:
+      - research/p11-ax21-dissipative-origin-20261020
+    paths:
+      - 'research/p11/ax21-dissipative-origin-20261020/**'
+      - '.github/workflows/p11_ax21_source_origin.yml'
+  pull_request:
+    paths:
+      - 'research/p11/ax21-dissipative-origin-20261020/**'
+      - '.github/workflows/p11_ax21_source_origin.yml'
+permissions:
+  contents: read
+jobs:
+  exact-conditional-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax21-dissipative-origin-20261020/P11_AX21_noncircular_dissipative_source_audit.py
+      - name: Enforce exact gates and retain OPEN claims
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/ax21-dissipative-origin-20261020/P11_AX21_exact_results.json')
+          r=json.loads(p.read_text())
+          assert r['all_passed'] and r['exact_checks']==96
+          assert r['D5_pointer_rank']==5 and r['rotated_pointer_rank']==5
+          assert r['MASA_intersection_rank']==1
+          assert r['averaged_dissipator_kernel_rank']==1
+          assert r['G2_native_source_provenance']=='OPEN'
+          assert r['G3_F_origin']=='OPEN'
+          print('AX21 exact finite audit PASS; G2/G3 remain OPEN')
+          PY
