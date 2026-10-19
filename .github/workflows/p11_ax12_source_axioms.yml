@@ -1,0 +1,41 @@
+name: P11 AX12 source axioms and relative reconstruction exact audit
+on:
+  push:
+    branches:
+      - 'research/p11-ax12-source-axioms-20261019'
+    paths:
+      - 'research/p11/ax12-source-axioms-20261019/**'
+      - '.github/workflows/p11_ax12_source_axioms.yml'
+  pull_request:
+    paths:
+      - 'research/p11/ax12-source-axioms-20261019/**'
+      - '.github/workflows/p11_ax12_source_axioms.yml'
+permissions:
+  contents: read
+jobs:
+  finite-symbolic-source-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax12-source-axioms-20261019/P11_AX12_source_axioms_audit.py
+      - name: Verify proof-gate flags and exact ranks
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('research/p11/ax12-source-axioms-20261019/P11_AX12_exact_results.json').read_text())
+          assert r['all_passed'] and r['exact_assertions_passed']==312
+          assert r['relative_process_tomography_rank']==16
+          assert r['hidden_source_superoperator_traces']==['8','0']
+          assert r['marked_inventory_dimensions']==[1,2]
+          assert r['G2_source_observer_completeness']=='OPEN'
+          assert r['G3_F_generativity_completeness']=='OPEN'
+          assert r['original_P3_residue_equivalence']=='OPEN'
+          assert r['physical_P6_gate']=='OPEN'
+          print('AX12 finite PASS; physical source and F completeness OPEN')
+          PY
