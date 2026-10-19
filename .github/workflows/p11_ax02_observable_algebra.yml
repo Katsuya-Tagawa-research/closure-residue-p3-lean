@@ -1,0 +1,40 @@
+name: P11 AX02 observable quotient algebra exact audit
+on:
+  pull_request:
+    paths:
+      - 'research/p11/ax02-observable-quotient-algebra-20261019/**'
+      - '.github/workflows/p11_ax02_observable_algebra.yml'
+  push:
+    branches:
+      - 'research/p11-ax02-observable-algebra-20261019'
+    paths:
+      - 'research/p11/ax02-observable-quotient-algebra-20261019/**'
+      - '.github/workflows/p11_ax02_observable_algebra.yml'
+permissions:
+  contents: read
+jobs:
+  sympy-ax02:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax02-observable-quotient-algebra-20261019/P11_AX02_observable_quotient_algebra_audit.py
+      - name: Check finite evidence and OPEN boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          f=Path('research/p11/ax02-observable-quotient-algebra-20261019/P11_AX02_exact_results.json')
+          r=json.loads(f.read_text())
+          assert r['all_passed'] and r['checks_passed']==204
+          assert r['ce_range_dimension']==4 and r['ce_kernel_dimension']==5
+          assert r['ce_ambient_product_closed'] is False
+          assert r['ax01_extension_obstruction']=='-1/4'
+          assert r['physical_primitive_provenance']=='OPEN'
+          assert r['p11_generative_completeness']=='OPEN'
+          print('P11-AX02 finite evidence PASS; F-origin and physical provenance OPEN')
+          PY
