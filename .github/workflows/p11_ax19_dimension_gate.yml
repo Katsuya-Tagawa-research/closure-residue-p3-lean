@@ -1,0 +1,40 @@
+name: P11 AX19 dimension and hidden-source exact audit
+on:
+  push:
+    branches:
+      - research/p11-ax19-dimension-source-gate-20261019
+    paths:
+      - 'research/p11/ax19-dimension-source-gate-20261019/**'
+      - '.github/workflows/p11_ax19_dimension_gate.yml'
+  pull_request:
+    paths:
+      - 'research/p11/ax19-dimension-source-gate-20261019/**'
+      - '.github/workflows/p11_ax19_dimension_gate.yml'
+permissions:
+  contents: read
+jobs:
+  exact-h37-witness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax19-dimension-source-gate-20261019/P11_AX19_dimension_independence_audit.py
+      - name: Verify bounded-scope certificate
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/ax19-dimension-source-gate-20261019/P11_AX19_exact_results.json')
+          r=json.loads(p.read_text())
+          assert r['all_passed'] and r['exact_assertions_passed']==1433
+          assert r['H37_derivative_response_rank']==25
+          assert r['H37_finite_response_dimension_lower_bound']==5
+          assert r['physical_d_equals_5_from_operational_data_alone'] is False
+          assert r['G2_exhaustive_native_dimension']=='OPEN'
+          assert r['G3_F_generativity']=='OPEN'
+          print('AX19 exact conditional dimension witness PASS; G2/G3 OPEN')
+          PY
