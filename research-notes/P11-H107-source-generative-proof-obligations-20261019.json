@@ -1,0 +1,156 @@
+{
+  "title": "H107 P9/P11 typed common-source generative proof obligations",
+  "date": "2026-10-19",
+  "source": {
+    "original": "H75 six-level four-Kraus CPTP mathematical model and original P3 signed residue unchanged",
+    "two_cell": "Original H75 tensor-square, 16 Kraus, native real site A/B controls",
+    "conditional_link": "H105 controlled X12⊗P1, INDEPENDENTLY postulated, not an original native control",
+    "cartan": "P9.125–128 reported, not primary-source verified as identical to H75",
+    "ADM": "External canonical continuum comparator, not sourced from H75"
+  },
+  "decision": "Original local-only no-go; conditional positive correlation witness; source-generated GR open.",
+  "gates": [
+    {
+      "id": "AX-SRC",
+      "status": "PARTIAL",
+      "proved": [
+        "H75 mathematical CPTP source and two-cell local Lie algebra"
+      ],
+      "independent": [
+        "physical coherent intercell Hamiltonian",
+        "P9 Cartan matched microscopic source"
+      ],
+      "open": [
+        "F generation of common source and cells"
+      ]
+    },
+    {
+      "id": "AX-OA",
+      "status": "PARTIAL",
+      "proved": [
+        "coarse four flags indistinguishable",
+        "extra positive output correlation effect distinguishes"
+      ],
+      "independent": [
+        "calibrated local phase/site detectors"
+      ],
+      "open": [
+        "complete physically justified gravitational-field observation"
+      ]
+    },
+    {
+      "id": "AX-CAN",
+      "status": "NO_GO_PLUS_CONDITIONAL",
+      "proved": [
+        "native local Lie operations cannot source H105 link",
+        "H105 extra link yields one conditional KKS pair"
+      ],
+      "independent": [
+        "physical complex intercell controlled Hamiltonian"
+      ],
+      "open": [
+        "six physical ADM canonical pairs or justified reduced symplectic sector"
+      ]
+    },
+    {
+      "id": "AX-SP",
+      "status": "OPEN",
+      "proved": [
+        "H99 H85 source-selected metric rank3",
+        "H104 source-compatible edge holonomy underdetermined"
+      ],
+      "independent": [
+        "physical intercell transfer and solder"
+      ],
+      "open": [
+        "Cartan/torsion/curvature and second-jet sourcing"
+      ]
+    },
+    {
+      "id": "AX-DYN",
+      "status": "OPEN",
+      "proved": [
+        "H98/H100 ADM normalization only conditionally imported"
+      ],
+      "independent": [
+        "physical DeWitt kinetic and curvature action"
+      ],
+      "open": [
+        "full off-shell HDA and Einstein field equations"
+      ]
+    },
+    {
+      "id": "AX-NORM",
+      "status": "OPEN",
+      "proved": [
+        "H100 leaves gravity scale and cosmological term undetermined"
+      ],
+      "independent": [
+        "physical Newton/Λ selection and unit calibration"
+      ],
+      "open": [
+        "derived physical couplings"
+      ]
+    },
+    {
+      "id": "AX-GEN",
+      "status": "OPEN",
+      "proved": [
+        "typed counterexample/proof-obligation ledger"
+      ],
+      "independent": [
+        "explicit noncircular F axiom scheme"
+      ],
+      "open": [
+        "Generative Completeness and distinctive experimental prediction"
+      ]
+    }
+  ],
+  "dependencies": [
+    [
+      "AX-SRC",
+      "AX-OA"
+    ],
+    [
+      "AX-SRC",
+      "AX-CAN"
+    ],
+    [
+      "AX-SRC",
+      "AX-SP"
+    ],
+    [
+      "AX-OA",
+      "AX-CAN"
+    ],
+    [
+      "AX-CAN",
+      "AX-DYN"
+    ],
+    [
+      "AX-SP",
+      "AX-DYN"
+    ],
+    [
+      "AX-DYN",
+      "AX-NORM"
+    ],
+    [
+      "AX-NORM",
+      "AX-GEN"
+    ],
+    [
+      "AX-DYN",
+      "AX-GEN"
+    ]
+  ],
+  "operational_exact": {
+    "flag00_probability": "153/625",
+    "native_positive_effect_probability": "153/1250",
+    "conditional_link_positive_effect_probability": "9/250",
+    "difference_link_minus_native": "-54/625",
+    "native_conditional_flag00_probability": "1/2",
+    "link_conditional_flag00_probability": "5/34",
+    "conditional_link_npt_minor": "-2916/390625"
+  }
+}
