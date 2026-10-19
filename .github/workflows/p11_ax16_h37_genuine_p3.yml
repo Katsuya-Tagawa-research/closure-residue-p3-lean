@@ -1,0 +1,41 @@
+name: P11 AX16 authentic H37 P3 residue audit
+on:
+  push:
+    branches:
+      - research/p11-ax16-h37-genuine-p3-20261019
+    paths:
+      - 'research/p11/ax16-h37-genuine-p3-filtration-20261019/**'
+      - '.github/workflows/p11_ax16_h37_genuine_p3.yml'
+  pull_request:
+    paths:
+      - 'research/p11/ax16-h37-genuine-p3-filtration-20261019/**'
+      - '.github/workflows/p11_ax16_h37_genuine_p3.yml'
+permissions:
+  contents: read
+jobs:
+  exact-genuine-p3-h37:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax16-h37-genuine-p3-filtration-20261019/P11_AX16_H37_genuine_P3_filtration_audit.py
+      - run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/ax16-h37-genuine-p3-filtration-20261019/P11_AX16_exact_results.json')
+          d=json.loads(p.read_text())
+          assert d['all_passed'] and d['exact_checks']==59
+          assert d['H37_resolvent_H1_rank']==4 and d['H37_resolvent_R2_rank']==4
+          assert d['H37_resolvent_CR_quadratic_first_depth']==2
+          assert d['H37_semigroup_R2_rank_for_all_sufficiently_small_positive_times']==4
+          assert d['H37_semigroup_determinant_first_nonzero_power']==26
+          assert d['H37_projected_K_rank']==4
+          assert d['P3_residue_operator_identical_to_K'] is False
+          assert d['F_Generative_Completeness']=='OPEN'
+          print('P11 AX16 exact P3 residue PASS; G2/G3 physical/F source remains OPEN')
+          PY
