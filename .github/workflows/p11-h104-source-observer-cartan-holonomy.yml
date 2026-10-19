@@ -1,0 +1,28 @@
+name: P11 H104 H75 Observer-Preserving CPTP and K4 Holonomy Source Gate
+
+on:
+  push:
+    branches:
+      - research/p11-h104-observer-covariant-holonomy-source-gate-20261019
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h104-observer-holonomy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H104 exact true H75 coarse/fine observer preservation no-go, edge holonomy and conditional K4 metric solder
+        run: python3 P3/P11H104ObserverPreservingHolonomySourceGateExactCheck.py
+      - name: Preserve H103 full six-level B channel intertwiner and A orbit spectral no-go
+        run: python3 P3/P11H103SourceEquivariantTransportCartanInterfaceExactCheck.py
+      - name: Preserve H102 original real SO3 Lagrangian and conditional SU2 canonical pair
+        run: python3 P3/P11H102RealControlLagrangianConditionalSU2ExactCheck.py
+      - name: Preserve H101 true source positive phase/readout distinction
+        run: python3 P3/P11H101PhaseBlindFlagCanonicalProvenanceExactCheck.py
+      - name: Preserve H99 K4 four-flag source rank3 and curvature nonselection
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H90 GR/F proof-obligation ledger
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
