@@ -90,8 +90,7 @@ R6=H112.Win
 assert matmul(matadj(R6),R6)==eye_n(6)
 tau,tauB=H112.tau,H112.tauB
 for X in MBASIS:
-    p=(effect_event(P0,micro(X)) if trace(X).i==0 else trace(matmul(P0,micro(X))),
-       effect_event(P1,micro(X)) if trace(X).i==0 else trace(matmul(P1,micro(X))))
+    p=(trace(matmul(P0,micro(X))),trace(matmul(P1,micro(X))))
     assert p==H112.pa(X)
     classical=matadd(scale(micro(tau),p[0]),scale(micro(tauB),p[1]))
     assert classical==H112.full_return_process(X)
