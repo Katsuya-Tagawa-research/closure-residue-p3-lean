@@ -1,0 +1,32 @@
+name: P11 H106 H75 Local-Only LOCC No-Go vs Conditional Link Entanglement
+
+on:
+  push:
+    branches:
+      - research/p11-h106-local-loCC-separability-vs-link-entanglement-20261019
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h106-local-vs-nonlocal-entanglement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H106 original local Hamiltonian so3 plus so3 and CPTP separability no-go vs H105 conditional NPT flag00 output
+        run: python3 P3/P11H106LocalOnlySeparabilityVsLinkEntanglementExactCheck.py
+      - name: Preserve H105 true 16-Kraus two-cell commutant conditional coherent KKS pair
+        run: python3 P3/P11H105TwoCellConditionalCoherentCanonicalTransportExactCheck.py
+      - name: Preserve H104 original CPTP coarse fine observer and K4 edge holonomy nonselection
+        run: python3 P3/P11H104ObserverPreservingHolonomySourceGateExactCheck.py
+      - name: Preserve H103 B exact source intertwiner and A source spectrum No-Go
+        run: python3 P3/P11H103SourceEquivariantTransportCartanInterfaceExactCheck.py
+      - name: Preserve H102 source real SO3 Lagrangian and conditional SU2 gate distinction
+        run: python3 P3/P11H102RealControlLagrangianConditionalSU2ExactCheck.py
+      - name: Preserve H101 source positive phase family and readout witness
+        run: python3 P3/P11H101PhaseBlindFlagCanonicalProvenanceExactCheck.py
+      - name: Preserve H99 original H75 K4 source rank3 curvature 2jet
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H90 P9 P11 rigorous sourced GR gate ledger
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
