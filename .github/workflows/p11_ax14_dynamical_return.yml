@@ -1,0 +1,40 @@
+name: P11 AX14 dynamical quadratic return exact audit
+on:
+  pull_request:
+    paths:
+      - 'research/p11/ax14-dynamical-residue-return-20261019/**'
+      - '.github/workflows/p11_ax14_dynamical_return.yml'
+  push:
+    branches:
+      - 'research/p11-ax14-dynamical-return-20261019'
+    paths:
+      - 'research/p11/ax14-dynamical-residue-return-20261019/**'
+      - '.github/workflows/p11_ax14_dynamical_return.yml'
+permissions:
+  contents: read
+jobs:
+  exact-gksl-conditional-return:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax14-dynamical-residue-return-20261019/P11_AX14_dynamical_return_audit.py
+      - run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/ax14-dynamical-residue-return-20261019/P11_AX14_exact_results.json')
+          r=json.loads(p.read_text())
+          assert r['all_passed'] and r['exact_checks']==114
+          assert r['H37_weighted_graph_laplacian_rank']==4
+          assert r['H37_short_time_p1_from_p0_t2_coefficient']=='1/4'
+          assert r['triangle_same_second_derivative'] and r['triangle_third_derivative_distinguishable']
+          assert r['original_P3_Rk_identification']=='OPEN'
+          assert r['F_derived_generator_origin']=='OPEN'
+          assert r['G2_source_completeness']=='OPEN' and r['G3_generativity_completeness']=='OPEN'
+          print('P11 AX14 finite algebra PASS; P3/F/physical source gates OPEN')
+          PY
