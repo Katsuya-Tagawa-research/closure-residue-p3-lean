@@ -1,0 +1,39 @@
+name: P11 SPS H121 infinitesimal Choi audit
+on:
+  pull_request:
+    paths:
+      - 'research/p11/sps-h121-20261019/**'
+      - '.github/workflows/p11_sps_h121.yml'
+  push:
+    branches:
+      - 'research/p11-sps-h121-infinitesimal-choi-noise-20261019'
+    paths:
+      - 'research/p11/sps-h121-20261019/**'
+      - '.github/workflows/p11_sps_h121.yml'
+permissions:
+  contents: read
+jobs:
+  finite-choi-tangent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/sps-h121-20261019/P3P11_SPS_H121_infinitesimal_choi_audit.py
+      - name: Verify finite results and open physical boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/sps-h121-20261019/P3P11_SPS_H121_exact_results.json')
+          r=json.loads(p.read_text())
+          assert r['all_passed'] and r['exact_assertions_passed']==78
+          assert r['noise_C_rank']==2 and r['h37_noise_rank']==4
+          assert r['canonical_H_coeffs']==['1/5','0','1/7']
+          assert r['physical_primitive_provenance']=='OPEN'
+          assert r['p6_physical_gate']=='OPEN'
+          print('SPS-H121 78 exact algebra checks PASS; physical source provenance OPEN')
+          PY
