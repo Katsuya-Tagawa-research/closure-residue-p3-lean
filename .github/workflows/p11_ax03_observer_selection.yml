@@ -1,0 +1,41 @@
+name: P11 AX03 canonical observer projection exact audit
+on:
+  pull_request:
+    paths:
+      - 'research/p11/ax03-observer-projection-20261019/**'
+      - '.github/workflows/p11_ax03_observer_selection.yml'
+  push:
+    branches:
+      - 'research/p11-ax03-canonical-observer-projection-20261019'
+    paths:
+      - 'research/p11/ax03-observer-projection-20261019/**'
+      - '.github/workflows/p11_ax03_observer_selection.yml'
+permissions:
+  contents: read
+jobs:
+  sympy-ax03:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax03-observer-projection-20261019/P11_AX03_canonical_observer_audit.py
+      - name: Verify exact result and OPEN scientific gates
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          p=Path('research/p11/ax03-observer-projection-20261019/P11_AX03_exact_results.json')
+          r=json.loads(p.read_text())
+          assert r['all_passed'] and r['exact_assertions_passed']==119
+          assert r['H37_fixed_point_algebra_dim']==1
+          assert r['H37_marked_diagonal_observer_dim']==5
+          assert r['H37_Y0_population_jet']=='p0-p1'
+          assert r['H37_p0_second_population_jet']=='(p1-p0)/2'
+          assert r['operator_algebra_E_selection_from_F']=='OPEN'
+          assert r['p11_generative_completeness']=='OPEN'
+          print('P11 AX03 119 finite checks PASS; F-origin remains OPEN')
+          PY
