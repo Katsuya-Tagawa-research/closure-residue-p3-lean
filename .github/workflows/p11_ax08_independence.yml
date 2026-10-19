@@ -1,0 +1,40 @@
+name: P11 AX08 noncircular generativity finite audit
+on:
+  pull_request:
+    paths:
+      - 'research/p11/ax08-noncircular-generativity-20261019/**'
+      - '.github/workflows/p11_ax08_independence.yml'
+  push:
+    branches:
+      - 'research/p11-ax08-noncircular-generativity-20261019'
+    paths:
+      - 'research/p11/ax08-noncircular-generativity-20261019/**'
+      - '.github/workflows/p11_ax08_independence.yml'
+permissions:
+  contents: read
+jobs:
+  finite-observer-fibre:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax08-noncircular-generativity-20261019/P11_AX08_independence_audit.py
+      - name: Verify strict source and physics boundaries
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/ax08-noncircular-generativity-20261019/P11_AX08_exact_results.json')
+          r=json.loads(p.read_text())
+          assert r['all_passed'] and r['exact_assertions_passed']==604
+          assert r['max_exhaustively_checked_word_length']==6
+          assert r['extra_B_X_readout_expectation_id']==1
+          assert r['extra_B_X_readout_expectation_Ad_Z']==-1
+          assert r['G2_physical_native_source']=='OPEN'
+          assert r['G3_F_generative_completeness']=='OPEN'
+          print('P11–AX08 finite PASS; physical source and F generativity OPEN')
+          PY
