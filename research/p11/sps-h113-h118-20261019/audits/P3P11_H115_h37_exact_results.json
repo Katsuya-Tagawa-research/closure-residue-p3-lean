@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-19",
+  "model": "H37 five-site GKSL, generator Krylov surrogate",
+  "site_count": 5,
+  "h": "1/2",
+  "gamma": "2/3",
+  "detunings": [
+    "0",
+    "1/7",
+    "-1/9",
+    "2/11",
+    "-3/13"
+  ],
+  "native_real_control_dimension": 4,
+  "J_mix_complex_dimension": 5,
+  "Xi_J_mix_real_dimension": 5,
+  "J_full_complex_dimension": 8,
+  "Xi_J_full_real_dimension": 8,
+  "J_D_of_K_complex_dimension": 8,
+  "J_D_of_Hhop_complex_dimension": 8,
+  "lie_K_real_dimension": 10,
+  "J_D_of_lie_K_complex_dimension": 20,
+  "diag_quadratic_residue_dimension": 4,
+  "generator_krylov_ranks": [
+    {
+      "k": 0,
+      "M_rank": 5,
+      "H_rank": 0
+    },
+    {
+      "k": 1,
+      "M_rank": 9,
+      "H_rank": 4
+    },
+    {
+      "k": 2,
+      "M_rank": 13,
+      "H_rank": 8
+    },
+    {
+      "k": 3,
+      "M_rank": 17,
+      "H_rank": 12
+    },
+    {
+      "k": 4,
+      "M_rank": 21,
+      "H_rank": 16
+    },
+    {
+      "k": 5,
+      "M_rank": 23,
+      "H_rank": 18
+    },
+    {
+      "k": 6,
+      "M_rank": 25,
+      "H_rank": 20
+    }
+  ],
+  "L2_p0_02": "-1/4",
+  "rank_mod_101": 25,
+  "rank_mod_1009": 25,
+  "scope": "Exact matrix identities, not original discrete-Phi grade-wise claims, hardware validation, P6 provenance, or P11 completeness."
+}
