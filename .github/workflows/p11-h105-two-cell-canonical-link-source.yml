@@ -1,0 +1,30 @@
+name: P11 H105 Two-Cell Original CPTP and Conditional Canonical Link Source Audit
+
+on:
+  push:
+    branches:
+      - research/p11-h105-two-cell-conditional-canonical-transport-20261019
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h105-two-cell-canonical-link:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H105 exact original H75 x H75 strong Kraus commutant, native local B no-go, conditional one-KKS-pair X intercell and positive POVMs
+        run: python3 P3/P11H105TwoCellConditionalCoherentCanonicalTransportExactCheck.py
+      - name: Preserve H104 same-source flag/fine observer and externally assigned K4 holonomy nonselection
+        run: python3 P3/P11H104ObserverPreservingHolonomySourceGateExactCheck.py
+      - name: Preserve H103 full M6 B-channel covariance and A-control spectrum no-go
+        run: python3 P3/P11H103SourceEquivariantTransportCartanInterfaceExactCheck.py
+      - name: Preserve H102 actual SO3 Lagrangian/conditional SU2 positive POVM distinction
+        run: python3 P3/P11H102RealControlLagrangianConditionalSU2ExactCheck.py
+      - name: Preserve H101 positive full original source phase-readout observation sufficiency
+        run: python3 P3/P11H101PhaseBlindFlagCanonicalProvenanceExactCheck.py
+      - name: Preserve H99 selected H75 K4 source metric rank3 curvature 2jet
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H90 P9/P11 honest source GR proof-gate register
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
