@@ -1,0 +1,39 @@
+name: P11 AX22 intrinsic noise commutant exact audit
+on:
+  push:
+    branches:
+      - research/p11-ax22-intrinsic-noise-commutant-20261020
+    paths:
+      - 'research/p11/ax22-intrinsic-noise-commutant-20261020/**'
+      - '.github/workflows/p11_ax22_noise_commutant.yml'
+  pull_request:
+    paths:
+      - 'research/p11/ax22-intrinsic-noise-commutant-20261020/**'
+      - '.github/workflows/p11_ax22_noise_commutant.yml'
+permissions:
+  contents: read
+jobs:
+  exact-noise-commutant:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax22-intrinsic-noise-commutant-20261020/P11_AX22_noise_commutant_audit.py
+      - name: Verify bounded-scope ledger
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/ax22-intrinsic-noise-commutant-20261020/P11_AX22_exact_results.json')
+          v=json.loads(p.read_text())
+          assert v['all_passed'] and v['exact_assertions_passed']==171
+          assert v['H37_intrinsic_noise_commutant_dimension']==5
+          assert v['depolarizing_noise_commutant_dim']==1
+          assert v['degenerate_B_commutant_dim']==9
+          assert v['G2_native_source_provenance']=='OPEN' and v['G3_generativity_completeness']=='OPEN'
+          print('AX22 exact mathematical gate PASS; physical G2 and generative G3 remain OPEN')
+          PY
