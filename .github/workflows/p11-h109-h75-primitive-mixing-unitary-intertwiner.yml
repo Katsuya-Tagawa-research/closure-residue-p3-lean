@@ -1,0 +1,42 @@
+name: P11 H109 Exact H75 Primitive Mixing and Trace-Only P9 Unitary Intertwiner No-Go
+
+on:
+  push:
+    branches:
+      - research/p11-h109-h75-primitive-mixing-unitary-intertwiner-no-go-20261019
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h109-mixing-intertwiner:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H109 exact H75 visible 3-step Gram rank 8, all M6 source mixing and trace-only any unitary target linear intertwiner theorem
+        run: python3 P3/P11H109H75PrimitiveMixingTraceOnlyUnitaryIntertwinerExactCheck.py
+      - name: Preserve H108 actual P9 primary 16D 48D Hamiltonian reconstruction and faithful source identity No-Go
+        run: python3 P3/P11H108P9PrimarySourceInvertibilityBridgeNoGoExactCheck.py
+      - name: Preserve H108 original positive 36D H75 separability witness and conditional linked entanglement
+        run: python3 P3/P11H108PositiveSeparableBoundConditionalLinkExactCheck.py
+      - name: Preserve H107 exact original H75 phase readout and typed P9 P11 provenance ledger
+        run: python3 P3/P11H107TypedP9P11GenerativeHandoffPositivePhaseReadoutExactCheck.py
+      - name: Preserve H106 original H75 local-only entanglement No-Go
+        run: python3 P3/P11H106LocalOnlySeparabilityVsLinkEntanglementExactCheck.py
+      - name: Preserve H105 original two-cell H75 Kraus-compatible conditional coherent link
+        run: python3 P3/P11H105TwoCellConditionalCoherentCanonicalTransportExactCheck.py
+      - name: Preserve H104 same-source fixed observer versus K4 holonomy nonselection
+        run: python3 P3/P11H104ObserverPreservingHolonomySourceGateExactCheck.py
+      - name: Preserve H103 source B intertwiner and A output spectral obstruction
+        run: python3 P3/P11H103SourceEquivariantTransportCartanInterfaceExactCheck.py
+      - name: Preserve H102 original real SO3 Lagrangian and conditional SU2 KKS
+        run: python3 P3/P11H102RealControlLagrangianConditionalSU2ExactCheck.py
+      - name: Preserve H101 original positive phase readout versus incomplete flags
+        run: python3 P3/P11H101PhaseBlindFlagCanonicalProvenanceExactCheck.py
+      - name: Preserve H100 offshell ADM conditional comparator and sourced normalization gate
+        run: python3 P3/P9H100ConstraintNormalizationGenerativeProvenanceExactCheck.py
+      - name: Preserve H99 actual source-selected K4 metric rank3 curvature nonselection
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H90 honest P9 P11 Einstein and F proof-obligation ledger
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
