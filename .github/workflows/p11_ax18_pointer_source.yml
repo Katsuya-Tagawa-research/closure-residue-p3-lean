@@ -1,0 +1,41 @@
+name: P11 AX18 physical observer selection exact audit
+on:
+  push:
+    branches:
+      - research/p11-ax18-physical-observer-selection-20261019
+    paths:
+      - 'research/p11/ax18-physical-observer-selection-20261019/**'
+      - '.github/workflows/p11_ax18_pointer_source.yml'
+  pull_request:
+    paths:
+      - 'research/p11/ax18-physical-observer-selection-20261019/**'
+      - '.github/workflows/p11_ax18_pointer_source.yml'
+permissions:
+  contents: read
+jobs:
+  exact-pointer-certificates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax18-physical-observer-selection-20261019/P11_AX18_pointer_source_audit.py
+      - name: Check evidence boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/ax18-physical-observer-selection-20261019/P11_AX18_exact_results.json')
+          z=json.loads(p.read_text())
+          assert z['all_passed'] and z['exact_assertions_passed']==336
+          assert z['ideal_pointer_effect_algebra_dimension']==5
+          assert z['higher_dimension_ambiguous_completion'] is True
+          assert z['instrument_same_effects_but_distinct'] is True
+          assert z['H37_conditional_K_rank']==4
+          assert z['G2_source_observer_completeness']=='OPEN'
+          assert z['G3_F_generative_completeness']=='OPEN'
+          print('P11 AX18 336 finite assertions PASS; physical source/F-origin OPEN')
+          PY
