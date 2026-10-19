@@ -1,0 +1,40 @@
+name: P11 AX04 effect algebra and Markov closure exact audit
+on:
+  pull_request:
+    paths:
+      - 'research/p11/ax04-effect-generation-20261019/**'
+      - '.github/workflows/p11_ax04_effect_algebra.yml'
+  push:
+    branches:
+      - 'research/p11-ax04-effect-generation-20261019'
+    paths:
+      - 'research/p11/ax04-effect-generation-20261019/**'
+      - '.github/workflows/p11_ax04_effect_algebra.yml'
+permissions:
+  contents: read
+jobs:
+  exact-effect-closure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax04-effect-generation-20261019/P11_AX04_effect_generation_audit.py
+      - run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/ax04-effect-generation-20261019/P11_AX04_exact_results.json')
+          r=json.loads(p.read_text())
+          assert r['all_passed'] and r['checks_passed']==195
+          assert r['H37_effect_algebra_dimension']==5
+          assert r['H37_minimal_invariant_algebra_dimension']==25
+          assert r['H37_endpoint_effect_tower_dimensions']==[2,5,10,17,25]
+          assert r['H37_population_autonomy'] is False
+          assert r['p11_generative_completeness']=='OPEN'
+          assert r['observer_effect_origin']=='EXTERNALLY MARKED / OPEN FROM F'
+          print('P11–AX04 exact finite algebra PASS; physical observer origin OPEN')
+          PY
