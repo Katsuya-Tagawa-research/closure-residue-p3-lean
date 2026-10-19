@@ -1,0 +1,48 @@
+name: P11 H112 Original H75 Returned Record Full Causal Break Non-Markov Gate
+
+on:
+  push:
+    branches:
+      - research/p11-h112-source-record-return-causal-break-memory-20261019
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h112-record-return-causal-break:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H112 true source 24D old-record return and causal-break positive 256 over 625 response
+        run: python3 P3/P11H112ReturnedH75RecordCausalBreakNonMarkovExactCheck.py
+      - name: Preserve H111 original H75 correlated histories yet fresh-process quantum Markov
+        run: python3 P3/P11H111FreshCollisionChainCorrelatedRecordsMarkovExactCheck.py
+      - name: Preserve H110 original one-step minimal Stinespring and finite closed bath infinite time No-Go
+        run: python3 P3/P11H110H75MinimalDilationFiniteClosedMemoryNoGoExactCheck.py
+      - name: Preserve H109 original finite CPTP primitive mixing and trace-only P9 unitary-target intertwiner
+        run: python3 P3/P11H109H75PrimitiveMixingTraceOnlyUnitaryIntertwinerExactCheck.py
+      - name: Preserve H108 original P9 16D 48D Hamiltonian primary source comparison
+        run: python3 P3/P11H108P9PrimarySourceInvertibilityBridgeNoGoExactCheck.py
+      - name: Preserve H108 actual H75 positive separability effect
+        run: python3 P3/P11H108PositiveSeparableBoundConditionalLinkExactCheck.py
+      - name: Preserve H107 true original H75 site phase detector and typed P11 gate ledger
+        run: python3 P3/P11H107TypedP9P11GenerativeHandoffPositivePhaseReadoutExactCheck.py
+      - name: Preserve H106 local H75 source-only entanglement No-Go
+        run: python3 P3/P11H106LocalOnlySeparabilityVsLinkEntanglementExactCheck.py
+      - name: Preserve H105 true source H75 H75 compatible but independently posited two-cell link
+        run: python3 P3/P11H105TwoCellConditionalCoherentCanonicalTransportExactCheck.py
+      - name: Preserve H104 source observer versus holonomy nonselection
+        run: python3 P3/P11H104ObserverPreservingHolonomySourceGateExactCheck.py
+      - name: Preserve H103 source original coherent B and A spectrum obstructions
+        run: python3 P3/P11H103SourceEquivariantTransportCartanInterfaceExactCheck.py
+      - name: Preserve H102 conditional one KKS pair versus original real Hamiltonian control
+        run: python3 P3/P11H102RealControlLagrangianConditionalSU2ExactCheck.py
+      - name: Preserve H101 genuine H75 phase source data versus coarse flags
+        run: python3 P3/P11H101PhaseBlindFlagCanonicalProvenanceExactCheck.py
+      - name: Preserve H100 imported ADM conditional comparator
+        run: python3 P3/P9H100ConstraintNormalizationGenerativeProvenanceExactCheck.py
+      - name: Preserve H99 original H75 metric rank and spatial 2jet nonselection
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H90 sourced micro to Einstein gate ledger
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
