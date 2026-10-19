@@ -1,0 +1,50 @@
+name: P11 H113 H75 Classical Flag Feedback vs Coherent Memory and Energy Source Gates
+
+on:
+  push:
+    branches:
+      - research/p11-h113-classical-flag-feedback-energy-source-gates-20261019
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h113-flag-feedback-energy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H113 original H75 flag-classical memory feedback exact all M6, coherent control/energy conditional no-go
+        run: python3 P3/P11H113H75ClassicalFlagFeedbackEnergyGateExactCheck.py
+      - name: Preserve H112 original H75 old quantum history controlled B causal break with 256 over 625 witness
+        run: python3 P3/P11H112ReturnedH75RecordCausalBreakNonMarkovExactCheck.py
+      - name: Preserve H111 actual H75 fresh collision correlated records and Markov interventions
+        run: python3 P3/P11H111FreshCollisionChainCorrelatedRecordsMarkovExactCheck.py
+      - name: Preserve H110 minimal true source Stinespring and finite closed memory no-go
+        run: python3 P3/P11H110H75MinimalDilationFiniteClosedMemoryNoGoExactCheck.py
+      - name: Preserve H109 original H75 primitive mixing and nonfaithful trace-only unitary intertwiner theorem
+        run: python3 P3/P11H109H75PrimitiveMixingTraceOnlyUnitaryIntertwinerExactCheck.py
+      - name: Preserve H108 primary P9 16D 48D Hamiltonian source mismatch
+        run: python3 P3/P11H108P9PrimarySourceInvertibilityBridgeNoGoExactCheck.py
+      - name: Preserve H108 genuine H75 positive separability witness with universal bound
+        run: python3 P3/P11H108PositiveSeparableBoundConditionalLinkExactCheck.py
+      - name: Preserve H107 original H75 phase detector and seven P11 gates
+        run: python3 P3/P11H107TypedP9P11GenerativeHandoffPositivePhaseReadoutExactCheck.py
+      - name: Preserve H106 source-only locally controlled two-cell entanglement no-go
+        run: python3 P3/P11H106LocalOnlySeparabilityVsLinkEntanglementExactCheck.py
+      - name: Preserve H105 true two-cell Kraus-controlled link conditional KKS
+        run: python3 P3/P11H105TwoCellConditionalCoherentCanonicalTransportExactCheck.py
+      - name: Preserve H104 original fine observer and holonomy selection no-go
+        run: python3 P3/P11H104ObserverPreservingHolonomySourceGateExactCheck.py
+      - name: Preserve H103 true H75 B all-input source intertwiner
+        run: python3 P3/P11H103SourceEquivariantTransportCartanInterfaceExactCheck.py
+      - name: Preserve H102 native real SO3 Lagrangian and conditional SU2 KKS
+        run: python3 P3/P11H102RealControlLagrangianConditionalSU2ExactCheck.py
+      - name: Preserve H101 source positive phase readout and coarse-flag non-injectivity
+        run: python3 P3/P11H101PhaseBlindFlagCanonicalProvenanceExactCheck.py
+      - name: Preserve H100 conditional ADM field normalization and open physical scale
+        run: python3 P3/P9H100ConstraintNormalizationGenerativeProvenanceExactCheck.py
+      - name: Preserve H99 original source K4 selected metric rank3 curvature two-jet nonselection
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H90 physical F-to-Einstein exact/open proof obligation ledger
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
