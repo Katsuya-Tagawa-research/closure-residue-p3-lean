@@ -1,0 +1,42 @@
+name: P11 SPS H122 exact control-jet audit
+on:
+  pull_request:
+    paths:
+      - 'research/p11/sps-h122-20261019/**'
+      - '.github/workflows/p11_sps_h122.yml'
+  push:
+    branches:
+      - 'research/p11-sps-h122-native-control-jets-20261019'
+    paths:
+      - 'research/p11/sps-h122-20261019/**'
+      - '.github/workflows/p11_sps_h122.yml'
+permissions:
+  contents: read
+jobs:
+  exact-native-control-jet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/sps-h122-20261019/P3P11_SPS_H122_native_control_jet_audit.py
+      - name: Assert exact ranks and OPEN physical source boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          f=Path('research/p11/sps-h122-20261019/P3P11_SPS_H122_exact_results.json')
+          o=json.loads(f.read_text())
+          assert o['all_passed'] and o['exact_assertions_passed']==65
+          assert o['qubit_calibrated_control_rank']==3
+          assert o['qubit_full_observation_rank']==3
+          assert o['qubit_population_jet_rank']==0
+          assert o['h37_marked_jets_rank']==4
+          assert o['physical_native_control_catalogue']=='OPEN'
+          assert o['p6_physical_gate']=='OPEN'
+          assert o['p11_completeness']=='OPEN'
+          print('H122 finite-control-jet PASS; physics and completeness OPEN')
+          PY
