@@ -69,7 +69,7 @@ v=\frac35|1,0\rangle+\frac{27}{125}|1,1\rangle-\frac{36i}{125}|2,1\rangle,
 whereas the native branch is explicitly separable. The witness evaluates to
 \[
 \boxed{
-\operatorname{Tr}(W\sigma_{00}^{\rm native})=0,\quad
+\operatorname{Tr}(W\sigma_{00}^{\rm native})=\frac{81}{2500}>0,\quad
 \operatorname{Tr}(W\sigma_{00}^{\rm link})
 =-\frac{4671}{62500}<0.
 }
@@ -79,10 +79,10 @@ This is obtained by both the exact original 9D matrix trace and the independent 
 \(\frac12[\sigma^{T_2}_{44}+\sigma^{T_2}_{66}+\cdots]
 =\frac{729}{62500}-\frac{54}{625}
 =-4671/62500\).
-It implies the **actual positive original-source output probabilities**
+For the native product source, the nonzero original population of |1,1> gives the positive witness expectation 81/2500; it is not zero. This leads to the **actual positive original-source output probabilities**
 \[
 \boxed{
-\Pr(E\mid{\rm native})=\frac{153}{1250},\quad
+\Pr(E\mid{\rm native})=\frac9{100},\quad
 \Pr(E\mid{\rm link})=\frac{12321}{62500}.
 }
 \tag{H108-PHYSICAL}
@@ -90,7 +90,7 @@ It implies the **actual positive original-source output probabilities**
 For the same exact flag00 normalization \(p=153/625\),
 \[
 \boxed{
-\Pr(Q\mid00,\mathrm{native})=\frac12,\qquad
+\Pr(Q\mid00,\mathrm{native})=\frac{25}{68},\qquad
 \Pr(Q\mid00,\mathrm{link})=\frac{1369}{1700}>\frac12.
 }
 \tag{H108-VIOLATION}
