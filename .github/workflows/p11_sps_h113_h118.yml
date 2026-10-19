@@ -1,0 +1,25 @@
+name: P11 SPS H113-H118 finite audits
+on:
+  pull_request:
+    paths:
+      - 'research/p11/sps-h113-h118-20261019/**'
+      - '.github/workflows/p11_sps_h113_h118.yml'
+  push:
+    branches:
+      - 'research/p11-sps-h113-h118-primitive-provenance-20261019'
+    paths:
+      - 'research/p11/sps-h113-h118-20261019/**'
+      - '.github/workflows/p11_sps_h113_h118.yml'
+permissions:
+  contents: read
+jobs:
+  exact-finite-reproduction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/sps-h113-h118-20261019/audits/verify_sps_h113_h118.py
