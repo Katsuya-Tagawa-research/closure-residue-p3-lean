@@ -1,0 +1,38 @@
+name: P11 H108 Genuine H75 Positive Separability Witness and P9/P11 Source Gate
+
+on:
+  push:
+    branches:
+      - research/p11-h108-positive-separability-witness-operational-gate-20261019
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  h108-positive-separability:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: H108 genuine original H75 36D positive output separability witness universal bound and conditional H105 link violation
+        run: python3 P3/P11H108PositiveSeparableBoundConditionalLinkExactCheck.py
+      - name: Preserve H107 source-output positive phase-correlation effect and typed seven-gate ledger
+        run: python3 P3/P11H107TypedP9P11GenerativeHandoffPositivePhaseReadoutExactCheck.py
+      - name: Preserve H106 actual H75 local-only No-Go and conditional entangled branch NPT
+        run: python3 P3/P11H106LocalOnlySeparabilityVsLinkEntanglementExactCheck.py
+      - name: Preserve H105 true two-cell sixteen-Kraus source and conditional coherent KKS pair
+        run: python3 P3/P11H105TwoCellConditionalCoherentCanonicalTransportExactCheck.py
+      - name: Preserve H104 source observer normalizer and conditional K4 holonomy nonselection
+        run: python3 P3/P11H104ObserverPreservingHolonomySourceGateExactCheck.py
+      - name: Preserve H103 actual B CPTP intertwiner and A output spectrum No-Go
+        run: python3 P3/P11H103SourceEquivariantTransportCartanInterfaceExactCheck.py
+      - name: Preserve H102 original real SO3 Lagrangian and conditional SU2 positive phase readout
+        run: python3 P3/P11H102RealControlLagrangianConditionalSU2ExactCheck.py
+      - name: Preserve H101 positive source phase state and coarse readout non-injectivity
+        run: python3 P3/P11H101PhaseBlindFlagCanonicalProvenanceExactCheck.py
+      - name: Preserve H100 conditional ADM offshell normalization and open Newton Lambda
+        run: python3 P3/P9H100ConstraintNormalizationGenerativeProvenanceExactCheck.py
+      - name: Preserve H99 physical H75 selected K4 metric rank3 and spatial curvature 2jet nonselection
+        run: python3 P3/P9H99SourceMetricRankCurvatureJetNonselectionExactCheck.py
+      - name: Preserve H90 finite P9 P11 physical GR provenance ledger
+        run: python3 P3/P9H90GravityProvenanceIntegrationExactCheck.py
