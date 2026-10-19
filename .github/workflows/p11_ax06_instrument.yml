@@ -1,0 +1,44 @@
+name: P11 AX06 instrument and observer-accessibility audit
+on:
+  pull_request:
+    paths:
+      - 'research/p11/ax06-instrument-realizability-20261019/**'
+      - '.github/workflows/p11_ax06_instrument.yml'
+  push:
+    branches:
+      - 'research/p11-ax06-instrument-realizability-20261019'
+    paths:
+      - 'research/p11/ax06-instrument-realizability-20261019/**'
+      - '.github/workflows/p11_ax06_instrument.yml'
+permissions:
+  contents: read
+jobs:
+  exact-instrument-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax06-instrument-realizability-20261019/P11_AX06_instrument_realizability_audit.py
+      - name: Check algebraic evidence and OPEN source gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/ax06-instrument-realizability-20261019/P11_AX06_exact_results.json')
+          r=json.loads(p.read_text())
+          assert r['all_passed'] and r['exact_assertions_passed']==133
+          assert r['six_outcome_IC_POVM_effect_rank']==4
+          assert r['same_POVM_and_same_nonselective_channel_different_instruments']
+          assert r['qubit_Z_sequential_effect_ranks']==[1,2,2,2,2]
+          assert r['qubit_IC_sequential_effect_ranks']==[1,4,4,4]
+          assert r['full_qubit_instrument_tomography_linear_rank']==16
+          assert r['H37_two_step_repeated_endpoint_Luders_probability']=='1'
+          assert r['H37_two_step_repeated_endpoint_reset_probability']=='0'
+          assert r['F_derived_physical_observer_source']=='OPEN'
+          assert r['P11_generative_completeness']=='OPEN'
+          print('AX06 finite algebra PASS; physical source and F origin OPEN')
+          PY
