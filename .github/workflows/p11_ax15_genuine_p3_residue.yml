@@ -1,0 +1,40 @@
+name: P11 AX15 original P3 residue vs dynamical return
+on:
+  pull_request:
+    paths:
+      - 'research/p11/ax15-genuine-p3-residue-20261019/**'
+      - '.github/workflows/p11_ax15_genuine_p3_residue.yml'
+  push:
+    branches:
+      - 'research/p11-ax15-genuine-p3-residue-20261019'
+    paths:
+      - 'research/p11/ax15-genuine-p3-residue-20261019/**'
+      - '.github/workflows/p11_ax15_genuine_p3_residue.yml'
+permissions:
+  contents: read
+jobs:
+  exact-original-filtration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax15-genuine-p3-residue-20261019/P11_AX15_original_P3_residue_audit.py
+      - name: Scope exact evidence
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/p11/ax15-genuine-p3-residue-20261019/P11_AX15_exact_results.json')
+          a=json.loads(p.read_text())
+          assert a['all_passed'] and a['exact_assertions_passed']==94
+          assert a['model_A_K_rank']==1
+          assert a['model_B_K_rank']==0 and a['model_B_P3_R2_rank']==1
+          assert a['H37_dynamical_K_rank']==4
+          assert a['H37_original_P3_Rk'].startswith('NOT COMPUTED')
+          assert a['G2_source_completeness']=='OPEN' and a['G3_generativity']=='OPEN'
+          print('P11 AX15 P3 audit PASS; H37 P3 Rk remains OPEN')
+          PY
