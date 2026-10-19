@@ -1,0 +1,37 @@
+name: P11 SPS H123 native completeness exact audit
+on:
+  pull_request:
+    paths:
+      - 'research/p11/sps-h123-20261019/**'
+      - '.github/workflows/p11_sps_h123.yml'
+  push:
+    branches:
+      - 'research/p11-sps-h123-native-completeness-20261019'
+    paths:
+      - 'research/p11/sps-h123-20261019/**'
+      - '.github/workflows/p11_sps_h123.yml'
+permissions:
+  contents: read
+jobs:
+  exact-four-control-certificate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/sps-h123-20261019/P3P11_SPS_H123_native_completeness_audit.py
+      - run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('research/p11/sps-h123-20261019/P3P11_SPS_H123_exact_results.json').read_text())
+          assert data['all_passed'] and data['exact_assertions_passed']==50
+          assert data['rank']==4 and data['determinant']=='16'
+          assert data['unmarked_extra_inventory_dim']==5
+          assert data['hardware_native_exhaustiveness']=='OPEN'
+          assert data['P11_AX_ORIGIN']=='OPEN'
+          print('SPS-H123 exact finite audit PASS; physical provenance OPEN')
+          PY
