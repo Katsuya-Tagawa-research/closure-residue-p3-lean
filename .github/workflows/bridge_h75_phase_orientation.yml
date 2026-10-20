@@ -1,0 +1,25 @@
+name: H75 AX-OA phase orientation and source provenance exact gate
+on:
+  push:
+    branches:
+      - research/bridge-h75-phase-orientation-20261020
+    paths:
+      - 'research/bridge/h75-phase-orientation-20261020/**'
+      - '.github/workflows/bridge_h75_phase_orientation.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/h75-phase-orientation-20261020/**'
+      - '.github/workflows/bridge_h75_phase_orientation.yml'
+permissions:
+  contents: read
+jobs:
+  exact-phase-axes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/bridge/h75-phase-orientation-20261020/H75_Phase_CI_Compact_Check.py
