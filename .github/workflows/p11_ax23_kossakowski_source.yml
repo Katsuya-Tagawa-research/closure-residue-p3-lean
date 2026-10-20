@@ -1,0 +1,41 @@
+name: P11 AX23 noncircular GKSL source selection audit
+on:
+  push:
+    branches:
+      - research/p11-ax23-gksl-source-selection-20261020
+    paths:
+      - 'research/p11/ax23-gksl-source-selection-20261020/**'
+      - '.github/workflows/p11_ax23_kossakowski_source.yml'
+  pull_request:
+    paths:
+      - 'research/p11/ax23-gksl-source-selection-20261020/**'
+      - '.github/workflows/p11_ax23_kossakowski_source.yml'
+permissions:
+  contents: read
+jobs:
+  finite-exact-source-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax23-gksl-source-selection-20261020/P11_AX23_kossakowski_source_audit.py
+      - name: Verify AX23 limited exact witness and OPEN gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('research/p11/ax23-gksl-source-selection-20261020/P11_AX23_exact_results.json')
+          x = json.loads(p.read_text())
+          assert x['all_passed'] and x['exact_assertions_passed'] == 283
+          assert x['two_axis_mixed_bloch_rank'] == 3
+          assert x['H37_dephasing_observer_dimension'] == 5
+          assert x['single_hermitian_source_matches_H37_uniform_offdiag_decay'] is False
+          assert x['rotated_H37_pointer_MASA_intersection_dimension'] == 1
+          assert x['G2_exhaustive_physical_source'] == 'OPEN'
+          assert x['G3_F_non_circular_generator_selection'] == 'OPEN'
+          print('AX23 conditional math PASS, origin and physical provenance OPEN')
+          PY
