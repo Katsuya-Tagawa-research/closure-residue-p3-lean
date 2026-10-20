@@ -1,0 +1,25 @@
+name: Bridge H75 P11 AX-OA Three-World Source-Only Nonselection Exact Audit
+
+on:
+  push:
+    paths:
+      - 'research/bridge/h75-axoa-nonselection-20261020/**'
+      - '.github/workflows/bridge_h75_axoa_nonselection.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/h75-axoa-nonselection-20261020/**'
+      - '.github/workflows/bridge_h75_axoa_nonselection.yml'
+  workflow_dispatch:
+
+jobs:
+  three-world-source-nonselection:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact rational math dependency
+        run: python -m pip install sympy
+      - name: Check identical H75 source and nested AX-OA ranks
+        run: python research/bridge/h75-axoa-nonselection-20261020/H75_AXOA_Three_Worlds_Exact.py
