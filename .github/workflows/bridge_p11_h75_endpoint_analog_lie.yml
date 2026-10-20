@@ -1,0 +1,25 @@
+name: Bridge P11 H75 Endpoint versus Analog Lie-Rank Exact Audit
+
+on:
+  push:
+    paths:
+      - 'research/bridge/p11-axoa-control-lie-20261020/**'
+      - '.github/workflows/bridge_p11_h75_endpoint_analog_lie.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/p11-axoa-control-lie-20261020/**'
+      - '.github/workflows/bridge_p11_h75_endpoint_analog_lie.yml'
+  workflow_dispatch:
+
+jobs:
+  endpoint-analog-u6-exact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact linear algebra dependencies
+        run: python -m pip install numpy sympy
+      - name: Verify orthogonal endpoint obstruction and exact modular Lie certificate
+        run: python research/bridge/p11-axoa-control-lie-20261020/H75_Endpoint_Analog_Lie_Exact.py
