@@ -47,7 +47,7 @@ for n in (2,3,5):
 for n in (2,3,5):
  for q in (s.Rational(0),s.Rational(1,4),s.Rational(1,2),s.Rational(3,4),s.Rational(1),-s.Rational(1,8),-s.Rational(1,4),-s.Rational(1,2)):
   g=G(n,q)
-  eig=sorted([v for x,k in g.eigenvals().items() for _ in range(k)])
+  eig=sorted([x for x,k in g.eigenvals().items() for _ in range(k)])
   ideal=sorted([1-q]*(n-1)+[1+(n-1)*q])
   ck(eig==ideal,'permutation Schur spectrum')
   ck(all(x>=0 for x in eig)==(-s.Rational(1,n-1)<=q<=1),'complete positivity interval')
