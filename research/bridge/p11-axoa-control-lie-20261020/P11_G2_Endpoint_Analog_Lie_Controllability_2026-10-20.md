@@ -51,9 +51,9 @@ Only the **endpoints** are registered in the preceding H75 access catalog. The i
 \]
 The 36×36 coordinate matrix has determinant residue
 \[
-\boxed{\det V\equiv 754500\pmod{1000003}\ne0.}
+\boxed{\det V=150289495621632=2^{36}3^{7}\ne0,\quad\det V\equiv754500\pmod{1000003}.}
 \]
-Therefore \(\det V\ne0\) over \(\mathbb Z\), so the 36 brackets are independent over \(\mathbb R\); every bracket belongs to \(\mathfrak u(6)\), whose real dimension is 36. Equality follows. This is a finite exact modular certificate; float SVD, numerical Lie-rank heuristics or unavailable experimental calibration are not used to prove rank.
+The integer determinant has also been independently evaluated directly over \(\mathbb Z\). Therefore \(\det V\ne0\) over \(\mathbb Z\), so the 36 brackets are independent over \(\mathbb R\); every bracket belongs to \(\mathfrak u(6)\), whose real dimension is 36. Equality follows. This is a finite exact modular certificate; float SVD, numerical Lie-rank heuristics or unavailable experimental calibration are not used to prove rank.
 
 **Conditional controllability consequence:** Under **independently sourced** freely signed, tunable piecewise-constant control Hamiltonians proportional to \(iJ_W,iJ_F,iJ_B\), negligible/switchable drift, known carrier frame, and no unavoidable reset during pulses, the corresponding driftless system has reachable unitary group \(U(6)\) by the standard Lie-rank controllability theorem for compact connected groups. The group-theoretic statement is exact under these assumptions; pulse durations, amplitudes, cost, decoherence, imperfect switching and hardware feasibility are not provided by the source.
 
