@@ -89,7 +89,10 @@ for policy in (("A",),("B",),("A","B"),("B","A"),("B","A","B")):
     q=trace(rho)
     effect=I6
     for c in reversed(policy):effect=dual(branches[c][0],effect)
-    assert effect.H==effect and trace(effect*rho01)==q
+    # SymPy's raw Matrix equality is structural, not algebraically canonical.
+    # Check the Hermitian and Born-duality identities after exact simplification.
+    assert (effect-effect.H).applyfunc(s.simplify)==s.zeros(6), policy
+    assert s.simplify(trace(effect*rho01)-q)==0, policy
 
 # Strict distinction from a bounded exact event-time archive:
 # K=26 bounds the tail; a truncation with an overflow output has
