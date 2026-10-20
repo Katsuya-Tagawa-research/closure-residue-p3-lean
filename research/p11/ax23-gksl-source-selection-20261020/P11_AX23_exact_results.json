@@ -1,0 +1,28 @@
+{
+  "module": "P11–AX23 Non-Circular GKSL Source Law",
+  "exact_assertions_passed": 283,
+  "all_passed": true,
+  "two_level_extreme_rays_verified": 9,
+  "two_level_isotropic_C": "diag(1,1,1)",
+  "isotropic_bloch_eigenvalues": [
+    -4,
+    -4,
+    -4
+  ],
+  "two_axis_mixed_bloch_rank": 3,
+  "source_C_rank_one_noise_algebra_dimension": 2,
+  "mixed_noncommuting_noise_algebra_dimension": 1,
+  "H37_dephasing_observer_dimension": 5,
+  "H37_pointer_independent_noise_projectors": 5,
+  "single_hermitian_source_matches_H37_uniform_offdiag_decay": false,
+  "rotated_H37_pointer_MASA_intersection_dimension": 1,
+  "G1_fixed_source_predictions": "CONDITIONAL",
+  "G2_exhaustive_physical_source": "OPEN",
+  "G3_F_non_circular_generator_selection": "OPEN",
+  "qualifications": [
+    "GKS cone positivity and covariance do not select an extreme ray or a pointer direction.",
+    "Covariance classification follows standard representation theory, not finite audit alone.",
+    "Fixed microscopically identified noise covariance is an additional source datum.",
+    "No hardware or human-expert certification and no new Lean theorem."
+  ]
+}
