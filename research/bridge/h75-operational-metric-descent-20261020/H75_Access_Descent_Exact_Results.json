@@ -1,0 +1,35 @@
+{
+  "title": "H75 fixed-orbit counterpair: existing-operations AX-OA separation",
+  "date": "2026-10-20",
+  "exact_assertions_passed": 52,
+  "state_pair_same_U3_times_U3_orbit": true,
+  "Phi_micro_delta_exact_zero": true,
+  "one_step_preF_Phi_no_postCayley_site_readout_contrast_zero": true,
+  "postreset_Cayley_V_0_1third_F_first_site1_sigma_minus_rho": "-350208/2403125 - 12288*sqrt(57)/2403125",
+  "postreset_Cayley_V_0_1third_W_then_F_site1_sigma_minus_rho": "86016*sqrt(57)/60078125 + 2451456/60078125",
+  "CPTP_and_positive_POVM": true,
+  "postreset_Cayley_y": "1/3",
+  "generic_V_0_y_site1_response_formula": "1024*y*(2*sqrt(57) + 57)*(y - 1)*(y + 1)/(96125*(y**2 + 1)**2)",
+  "exceptional_real_Cayley_parameters": [
+    0,
+    1,
+    -1
+  ],
+  "F_only_post_source_visible_real_12_coherence": "512*sqrt(57)/96125 + 14592/96125",
+  "state_probabilities": {
+    "F_rho": "12*sqrt(57)/3125 + 9607/28125",
+    "F_sigma": "4235911/21628125 - 612*sqrt(57)/480625",
+    "WF_rho": "204463/703125 - 84*sqrt(57)/78125",
+    "WF_sigma": "4284*sqrt(57)/12015625 + 179295151/540703125"
+  },
+  "site1_second_Phi_after_F_sigma_minus_rho": "-93632/1441875 - 22528*sqrt(57)/4325625",
+  "native_15_observables_collision": "REPORTED by independent source; not independently rederived",
+  "GT_K4_metric_difference": "REPORTED by independent source; not independently rederived",
+  "AX_OA_new_schedule_physical_executability": "OPEN",
+  "H75_pair_physical_preparation": "OPEN",
+  "global_operational_metric_descent": "OPEN",
+  "G2_physical_provenance": "OPEN",
+  "G3_F_generated_access": "OPEN",
+  "KKS_fixed_orbit_intermediate_preservation": "NOT ASSUMED; micro CPTP interventions may leave orbit",
+  "notes": "F feedback denotes flag-conditioned SWAP, not generative map F. All exact witnesses are conditional on these declared operators and this initial 6D basis."
+}

@@ -1,0 +1,47 @@
+name: Bridge H75 operational metric descent audit
+on:
+  push:
+    branches:
+      - research/bridge-h75-operational-metric-descent-20261020
+    paths:
+      - 'research/bridge/h75-operational-metric-descent-20261020/**'
+      - '.github/workflows/bridge_h75_metric_descent.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/h75-operational-metric-descent-20261020/**'
+      - '.github/workflows/bridge_h75_metric_descent.yml'
+permissions:
+  contents: read
+jobs:
+  exact-access-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - name: H75 fixed-orbit counterpair positive-POVM witness
+        run: python research/bridge/h75-operational-metric-descent-20261020/H75_Access_Descent_Exact_Audit.py
+      - name: Independent modular rank-18 certificate
+        run: python research/bridge/h75-operational-metric-descent-20261020/H75_Global_Access_Modular_Verify.py
+      - name: Check bounded-scope ledger
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('research/bridge/h75-operational-metric-descent-20261020')
+          a=json.loads((p/'H75_Access_Descent_Exact_Results.json').read_text())
+          b=json.loads((p/'H75_Global_Access_Exact_Results.json').read_text())
+          assert a['exact_assertions_passed']==52
+          assert b['exact_assertions_passed']==69
+          assert b['matrix_rank_exact']==18
+          assert b['nonzero_rational_determinant_mod_prime']==39156989
+          assert a['global_operational_metric_descent']=='OPEN'
+          assert b['pre_reset_long_control_word_physical_certification']=='OPEN'
+          assert b['native_15_observation_and_GT_metric_original_formulas']=='NOT INDEPENDENTLY RECOMPUTED'
+          assert a['G3_F_generated_access']=='OPEN'
+          assert b['G3_F_generated_access']=='OPEN'
+          print('CONDITIONAL finite access-dissent certificate PASS; G2/G3 still OPEN')
+          PY
