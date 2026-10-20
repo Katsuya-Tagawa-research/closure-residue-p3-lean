@@ -1,0 +1,25 @@
+name: Bridge H75 AX-OA Pre-Reset Depth Exact Audit
+
+on:
+  push:
+    paths:
+      - 'research/bridge/h75-access-depth-20261020/**'
+      - '.github/workflows/bridge_h75_access_depth.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/h75-access-depth-20261020/**'
+      - '.github/workflows/bridge_h75_access_depth.yml'
+  workflow_dispatch:
+
+jobs:
+  exact-flag-access-depth:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install SymPy
+        run: python -m pip install sympy
+      - name: Exact 781-word source blindness and rank threshold
+        run: python research/bridge/h75-access-depth-20261020/H75_AXOA_PreReset_Depth_Exact.py
