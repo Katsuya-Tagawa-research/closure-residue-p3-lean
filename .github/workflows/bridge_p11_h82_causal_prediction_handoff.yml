@@ -1,0 +1,29 @@
+name: Bridge P11 H82 Causal Prediction Certificate Integration
+
+on:
+  push:
+    paths:
+      - 'research/bridge/p11-causal-access-h82-handoff-20261021/**'
+      - '.github/workflows/bridge_p11_h82_causal_prediction_handoff.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/p11-causal-access-h82-handoff-20261021/**'
+      - '.github/workflows/bridge_p11_h82_causal_prediction_handoff.yml'
+  workflow_dispatch:
+
+jobs:
+  h82-causal-prediction-handoff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact symbolic mathematics dependency
+        run: python -m pip install sympy
+      - name: Verify inherited original-H75 finite adaptive prediction
+        run: python research/bridge/p11-adaptive-history-closure-tail-20261020/H75_Adaptive_Causal_History_Closure_Exact.py
+      - name: Verify inherited original-H75 joint CP uniform tail
+        run: python research/bridge/p11-causal-access-certificate-20261020/H75_Causal_Access_Certificate_Switching_Exact.py
+      - name: Verify H82 finite causal prefix and conditional accuracy certificate
+        run: python research/bridge/p11-causal-access-h82-handoff-20261021/H82_Causal_Prefix_Uniform_Tail_Exact.py
