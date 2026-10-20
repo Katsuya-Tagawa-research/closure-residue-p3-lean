@@ -31,6 +31,10 @@ Original H75 access NO-GOs remain: multiple operational access catalogs fit the 
 
 **(3) Not yet derived from F:** a non-circular \(\mathrm{GenAcc}_F\) map or rigorously defined family of physically allowed certificates; representation/gauge invariance and a hardware-faithful selection law despite the original source-fibre counterexamples; CP implementability of claimed minimal realization; common future-tail over the generated model family; required unique AX-OA axiom minimality (not implied by five-coordinate sensitivity); relation to frozen P6 and original P3 signed residue; full P11 Generative Completeness. Do not accept a merely declared access certificate as proof that F generated it.
 
+## OPEN gates — not established by this finite handoff
+
+**OPEN:** Intrinsic generation of physically faithful AX-OA from F; any claimed unique/minimal access selection law; a CP/CPTP implementation of the minimal linear predictive quotient; uniform event-history closure over an F-generated model family; frozen P6 physical observer provenance and original P3 signed-residue identification; P11 Generative Completeness. These remain independent proof obligations and are not discharged by finite-CI success.
+
 ## Explicit new P11 theorem target — the true open gate
 
 Given prior generative primitives F, construct \(\mathrm{GenAcc}_F\) and prove:
