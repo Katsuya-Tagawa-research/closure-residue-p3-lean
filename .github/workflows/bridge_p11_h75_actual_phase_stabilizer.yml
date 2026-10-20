@@ -1,0 +1,25 @@
+name: Bridge P11 H75 Actual Phase-Stabilizer No-Selection Exact Audit
+
+on:
+  push:
+    paths:
+      - 'research/bridge/p11-h75-source-phase-stabilizer-20261020/**'
+      - '.github/workflows/bridge_p11_h75_actual_phase_stabilizer.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/p11-h75-source-phase-stabilizer-20261020/**'
+      - '.github/workflows/bridge_p11_h75_actual_phase_stabilizer.yml'
+  workflow_dispatch:
+
+jobs:
+  actual-h75-phase-stabilizer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact symbolic dependency
+        run: python -m pip install sympy
+      - name: Recheck H75 genuine source symmetry and 18-input operational orbit
+        run: python research/bridge/p11-h75-source-phase-stabilizer-20261020/H75_Actual_Phase_Stabilizer_Exact.py
