@@ -137,6 +137,9 @@ def det_mod(rows,p):
 residue=det_mod(vectors,prime)
 assert residue==754500
 assert residue != 0
+exact_det = int(sp.Matrix(vectors).det(method="domain-ge"))
+assert exact_det == 150289495621632
+assert exact_det % prime == residue
 
 print("PASS exact: five original H75 registered endpoints belong to O(6)")
 print("PASS exact: original non-real H75 four-Kraus source retained")
