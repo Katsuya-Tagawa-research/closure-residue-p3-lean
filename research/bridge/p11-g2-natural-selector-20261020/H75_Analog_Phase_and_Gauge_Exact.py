@@ -61,7 +61,8 @@ assert rho.H==rho and sp.trace(rho)==1 and rho*rho==rho
 assert sp.simplify(Q.H-Q)==sp.zeros(6)
 assert sp.simplify(Q*Q-Q)==sp.zeros(6)
 assert sp.trace(Q)==2
-assert sp.simplify(half*psi-phi)==sp.zeros(6)
+# half*psi - phi is a 6x1 column vector, not a 6x6 operator.
+assert (half*psi-phi).applyfunc(sp.simplify)==sp.zeros(6,1)
 def p(U):
     return sp.simplify(sp.trace(Q*U*rho*U.H))
 assert p(half)==1
