@@ -1,0 +1,25 @@
+name: Bridge P11 Original H75 Finite Future-Tester Closure Exact Audit
+
+on:
+  push:
+    paths:
+      - 'research/bridge/p11-future-tester-closure-20261020/**'
+      - '.github/workflows/bridge_p11_h75_future_tester_closure.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/p11-future-tester-closure-20261020/**'
+      - '.github/workflows/bridge_p11_h75_future_tester_closure.yml'
+  workflow_dispatch:
+
+jobs:
+  h75-future-tester-closure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact symbolic dependency
+        run: python -m pip install sympy
+      - name: Verify finite future-tester closure and strict three-use physical witness
+        run: python research/bridge/p11-future-tester-closure-20261020/H75_Future_Tester_Closure_Exact.py
