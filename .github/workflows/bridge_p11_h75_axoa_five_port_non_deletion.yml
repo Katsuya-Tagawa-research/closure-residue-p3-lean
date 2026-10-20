@@ -1,0 +1,25 @@
+name: Bridge P11 H75 AX-OA Five-Port Non-Deletion Exact Audit
+
+on:
+  push:
+    paths:
+      - 'research/bridge/p11-h75-axoa-five-port-sensitivity-20261020/**'
+      - '.github/workflows/bridge_p11_h75_axoa_five_port_non_deletion.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/p11-h75-axoa-five-port-sensitivity-20261020/**'
+      - '.github/workflows/bridge_p11_h75_axoa_five_port_non_deletion.yml'
+  workflow_dispatch:
+
+jobs:
+  h75-five-port-exact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact symbolic mathematics dependency
+        run: python -m pip install sympy
+      - name: Verify original H75 five-port exact Born witnesses
+        run: python research/bridge/p11-h75-axoa-five-port-sensitivity-20261020/H75_AXOA_Five_Port_NonDeletion_Exact.py
