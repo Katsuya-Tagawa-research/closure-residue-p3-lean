@@ -1,0 +1,82 @@
+{
+  "schema": "p3-p11-bridge-exit-v1",
+  "date": "2026-10-21",
+  "verdict": "CONDITIONAL_FINITE_HANDOFF",
+  "baseline": {
+    "h82_pr": 101,
+    "h82_status": "DRAFT_UNMERGED",
+    "h82_notion": "https://app.notion.com/p/3fd736b71e2d8198a5d0f4a3260064c8?pvs=204",
+    "prior_bridge_pr": 184,
+    "independent_tail_branch": "audit/p11-uniform-history-tail-certificate-20261020",
+    "tail_audit_status": "UNNUMBERED_UNMERGED"
+  },
+  "conditional_finite_claims": [
+    {
+      "id": "linear_predictor",
+      "status": "EXACT_CONDITIONAL",
+      "test_ref": "H82 PR101"
+    },
+    {
+      "id": "h75_adaptive_future_rank",
+      "status": "EXACT_CONDITIONAL",
+      "rank_sequence": [
+        3,
+        7,
+        10,
+        12,
+        12
+      ],
+      "input_cut_real_dim": 36,
+      "quotient_real_dim": 12,
+      "kernel_real_dim": 24,
+      "source_image_rank": 9,
+      "test_ref": "PR182"
+    },
+    {
+      "id": "h75_CP_instrument",
+      "status": "EXACT_CONDITIONAL",
+      "test_ref": "PR181/183"
+    },
+    {
+      "id": "h75_joint_switching_tail",
+      "status": "EXACT_CONDITIONAL",
+      "b_numerator": 5,
+      "b_denominator": 6,
+      "epsilon_numerator": 1,
+      "epsilon_denominator": 100,
+      "cutoff_K": 26,
+      "test_ref": "PR183/184"
+    },
+    {
+      "id": "finite_history_tail_framework",
+      "status": "EXACT_CONDITIONAL",
+      "test_ref": "unnumbered OA-G39–G42 audit"
+    }
+  ],
+  "independent_assumptions": [
+    "physical source and legal preparations",
+    "selective instrument and classical outcome wire",
+    "coherent flag conditioned control and calibration",
+    "scheduler and memoryless source reuse",
+    "native readout and bounded loss semantics"
+  ],
+  "open_gates": [
+    "F-generated physically faithful AX-OA",
+    "AX-OA unique minimality",
+    "CP/CPTP realization of minimal linear predictor quotient",
+    "P6 native signed hidden-current provenance",
+    "P3 Closure–Residue equivalence",
+    "operational native GT–K4 metric descent",
+    "P7/P8 spacetime soldering",
+    "KKS to ADM DeWitt off-shell HDA Einstein dynamics",
+    "P11 Generative Completeness",
+    "P12 universal gravity"
+  ],
+  "disallowed_assertions": [
+    "generative_completeness_proved",
+    "einstein_dynamics_derived",
+    "p6_hardware_provenance_proved",
+    "unbounded_exact_archive_compressed",
+    "linear_quotient_is_CPTP_by_default"
+  ]
+}
