@@ -1,0 +1,25 @@
+name: Bridge P11 H75 Analog Phase and Natural Selector Exact Audit
+
+on:
+  push:
+    paths:
+      - 'research/bridge/p11-g2-natural-selector-20261020/**'
+      - '.github/workflows/bridge_p11_h75_phase_natural_selector.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/p11-g2-natural-selector-20261020/**'
+      - '.github/workflows/bridge_p11_h75_phase_natural_selector.yml'
+  workflow_dispatch:
+
+jobs:
+  phase-and-symmetry-exact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact symbolic dependency
+        run: python -m pip install sympy
+      - name: Verify H75 phase tester and finite gauge selector
+        run: python research/bridge/p11-g2-natural-selector-20261020/H75_Analog_Phase_and_Gauge_Exact.py
