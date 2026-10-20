@@ -1,0 +1,25 @@
+name: H75 AX-OA restricted minimal access and phase calibration
+on:
+  push:
+    branches:
+      - research/bridge-h75-minimal-access-certificate-20261020
+    paths:
+      - 'research/bridge/h75-minimal-access-20261020/**'
+      - '.github/workflows/bridge_h75_minimal_access.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/h75-minimal-access-20261020/**'
+      - '.github/workflows/bridge_h75_minimal_access.yml'
+permissions:
+  contents: read
+jobs:
+  exact-subcatalog-and-phase:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/bridge/h75-minimal-access-20261020/H75_Minimal_Access_CI_Check.py
