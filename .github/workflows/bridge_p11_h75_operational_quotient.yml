@@ -1,0 +1,25 @@
+name: Bridge P11 H75 Operational Quotient Descent and Source-Fibre Exact Audit
+
+on:
+  push:
+    paths:
+      - 'research/bridge/p11-operational-quotient-nonselection-20261020/**'
+      - '.github/workflows/bridge_p11_h75_operational_quotient.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/p11-operational-quotient-nonselection-20261020/**'
+      - '.github/workflows/bridge_p11_h75_operational_quotient.yml'
+  workflow_dispatch:
+
+jobs:
+  h75-quotient-source-fibre:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact mathematics dependency
+        run: python -m pip install sympy
+      - name: Exact quotient invariance and access-rank no-go verification
+        run: python research/bridge/p11-operational-quotient-nonselection-20261020/H75_Operational_Quotient_Nonselection_Exact.py
