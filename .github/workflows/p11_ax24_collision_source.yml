@@ -1,0 +1,42 @@
+name: P11 AX24 finite collision source and provenance exact audit
+on:
+  push:
+    branches:
+      - research/p11-ax24-collision-dilation-20261020
+    paths:
+      - 'research/p11/ax24-collision-dilation-20261020/**'
+      - '.github/workflows/p11_ax24_collision_source.yml'
+  pull_request:
+    paths:
+      - 'research/p11/ax24-collision-dilation-20261020/**'
+      - '.github/workflows/p11_ax24_collision_source.yml'
+permissions:
+  contents: read
+jobs:
+  exact-finite-collision:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install sympy==1.14.0
+      - run: python research/p11/ax24-collision-dilation-20261020/P11_AX24_collision_source_audit.py
+      - name: Check conditionally verified finite claims and OPEN source gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=Path('research/p11/ax24-collision-dilation-20261020/P11_AX24_exact_results.json')
+          z=json.loads(d.read_text())
+          assert z['all_passed'] and z['exact_assertions_passed']==263
+          assert z['minimum_pure_stinespring_environment_dimension_at_0_q_1']==5
+          assert z['H37_dephasing_superoperator_rank']==20
+          assert z['H37_Strang_cubic_defect_rank']==11
+          assert z['bounded_H_SE_dissipative_derivative_first_order']==0
+          assert z['requires_fresh_ancillas']
+          assert z['G2_native_source_inventory']=='OPEN'
+          assert z['G3_F_origin_of_environment_and_scaling']=='OPEN'
+          print('AX24 conditional finite-unitary construction PASS; physical and F origin OPEN')
+          PY
