@@ -1,0 +1,31 @@
+name: Bridge P11 H82 Exit Audit and P9 P11 Dual Handoff
+
+on:
+  push:
+    paths:
+      - 'research/bridge/p11-h82-exit-audit-20261021/**'
+      - '.github/workflows/bridge_p11_h82_exit_audit.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/p11-h82-exit-audit-20261021/**'
+      - '.github/workflows/bridge_p11_h82_exit_audit.yml'
+  workflow_dispatch:
+
+jobs:
+  h82-exit-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact finite symbolic dependency
+        run: python -m pip install sympy
+      - name: Verify inherited original H75 adaptive finite closure
+        run: python research/bridge/p11-adaptive-history-closure-tail-20261020/H75_Adaptive_Causal_History_Closure_Exact.py
+      - name: Verify inherited H75 adaptive A B joint CP tail
+        run: python research/bridge/p11-causal-access-certificate-20261020/H75_Causal_Access_Certificate_Switching_Exact.py
+      - name: Verify inherited H82 causal prefix and conditional tail
+        run: python research/bridge/p11-causal-access-h82-handoff-20261021/H82_Causal_Prefix_Uniform_Tail_Exact.py
+      - name: Verify H82 P9 P11 exit classification and exact finite invariants
+        run: python research/bridge/p11-h82-exit-audit-20261021/verify_bridge_exit_manifest.py
