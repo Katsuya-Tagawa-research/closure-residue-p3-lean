@@ -1,0 +1,25 @@
+name: Bridge P11 H75 Two-Use Causal Tester and Erasure Exact Audit
+
+on:
+  push:
+    paths:
+      - 'research/bridge/p11-two-use-causal-tester-20261020/**'
+      - '.github/workflows/bridge_p11_h75_two_use_causal_tester.yml'
+  pull_request:
+    paths:
+      - 'research/bridge/p11-two-use-causal-tester-20261020/**'
+      - '.github/workflows/bridge_p11_h75_two_use_causal_tester.yml'
+  workflow_dispatch:
+
+jobs:
+  h75-two-use-causal-tester:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact symbolic dependency
+        run: python -m pip install sympy
+      - name: Verify two-use causal activation and true source-cut erasure
+        run: python research/bridge/p11-two-use-causal-tester-20261020/H75_Two_Use_Causal_Tester_Exact.py
